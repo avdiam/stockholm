@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nobel Prize Museum — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-accent: linear-gradient(135deg, #E07B39 0%, #9B59B6 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── Top bar ── */
+    .topbar {
+      max-width: 820px; margin: 0 auto; padding: 18px 20px 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-display); font-size: 13px; font-weight: 600;
+      color: var(--accent-color); text-decoration: none;
+      padding: 8px 14px; border-radius: 50px;
+      background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22);
+      transition: all 0.2s ease;
+    }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag {
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--sweden-yellow);
+      padding: 7px 13px; border-radius: 50px;
+      background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; overflow: hidden;
+      border-radius: 22px; margin-top: 8px;
+      padding: 44px 34px 38px;
+      background:
+        linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%),
+        var(--gradient-sweden);
+      border: 1px solid rgba(212,175,55,0.25);
+      box-shadow: var(--shadow-lg);
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -40%; right: -20%;
+      width: 70%; height: 180%;
+      background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-kicker {
+      font-family: var(--font-display); font-size: 12px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px; position: relative;
+    }
+    .hero h1 {
+      font-family: var(--font-serif); font-weight: 600;
+      font-size: clamp(34px, 7vw, 52px); line-height: 1.05;
+      color: #fff; letter-spacing: -0.5px; margin-bottom: 14px;
+      position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .hero-sub {
+      font-size: 15.5px; color: #e8eef6; max-width: 56ch;
+      position: relative; line-height: 1.6;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px;
+      position: relative; font-size: 13px; color: #dbe6f2;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+
+    /* ── Section scaffolding ── */
+    section { margin-top: 30px; }
+    .eyebrow {
+      font-family: var(--font-display); font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent-color); margin-bottom: 10px;
+    }
+    h2 {
+      font-family: var(--font-serif); font-weight: 600;
+      font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+    h3 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 17px; color: #fff; margin-bottom: 6px;
+    }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+
+    .panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 18px; padding: 26px 26px;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ── Figures / photos ── */
+    figure {
+      margin: 0; border-radius: 18px; overflow: hidden;
+      border: 1px solid var(--border-color);
+      background: rgba(255,255,255,0.02);
+      box-shadow: var(--shadow-md);
+    }
+    figure img {
+      display: block; width: 100%; height: auto;
+      aspect-ratio: 16 / 9; object-fit: cover;
+      background: #0d1424;
+    }
+    figure img.tall { aspect-ratio: 3 / 2; }
+    figcaption {
+      font-size: 11.5px; color: var(--text-muted);
+      padding: 9px 14px; line-height: 1.45;
+      display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+    }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+
+    /* ── Facts grid ── */
+    .facts {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px; margin-top: -6px;
+    }
+    .fact {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 16px 16px;
+    }
+    .fact .lbl {
+      font-family: var(--font-display); font-size: 10.5px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px;
+    }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+
+    /* ── Audio guide CTA ── */
+    .audio-cta {
+      display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+      background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%);
+      border: 1.5px solid rgba(212,175,55,0.35);
+      border-radius: 18px; padding: 22px 24px;
+    }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: var(--bg-dark); text-decoration: none;
+      padding: 13px 22px; border-radius: 50px;
+      background: var(--gradient-gold);
+      box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6);
+      transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap;
+    }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+
+    /* ── Callout ── */
+    .callout {
+      border-left: 3px solid var(--sweden-yellow);
+      background: rgba(254,204,0,0.06);
+      border-radius: 0 14px 14px 0; padding: 18px 20px;
+    }
+    .callout h3 { font-size: 15px; color: var(--sweden-yellow); margin-bottom: 6px; }
+    .callout p { font-size: 14px; margin: 0; }
+
+    /* ── Highlights ── */
+    .highlights { display: grid; gap: 14px; }
+    .hl {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border-color);
+      border-radius: 14px; padding: 18px 20px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+
+    /* ── Route timeline ── */
+    .route { position: relative; padding-left: 28px; }
+    .route::before {
+      content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px;
+      width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1));
+    }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before {
+      content: ''; position: absolute; left: -28px; top: 3px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg-dark); border: 2.5px solid var(--accent-color);
+    }
+    .stop .time {
+      font-family: var(--font-display); font-weight: 700; font-size: 13px;
+      color: var(--accent-color); letter-spacing: 0.5px;
+    }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+
+    /* ── Verdict ── */
+    .verdict {
+      background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(56,189,248,0.06));
+      border: 1px solid rgba(16,185,129,0.22);
+    }
+    ul.ticks { list-style: none; margin: 6px 0 0; }
+    ul.ticks li { position: relative; padding-left: 26px; margin-bottom: 9px; font-size: 14.5px; color: #d7dce4; }
+    ul.ticks li::before { content: '✓'; position: absolute; left: 0; color: #34d399; font-weight: 800; }
+
+    /* ── Sources / footer ── */
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--font-display); font-weight: 700; font-size: 15px;
+      color: #fff; text-decoration: none;
+      padding: 14px 28px; border-radius: 50px;
+      background: var(--gradient-sweden);
+      box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7);
+      transition: transform 0.2s ease;
+    }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+
+    @media (max-width: 560px) {
+      .hero { padding: 34px 22px 30px; }
+      .panel { padding: 22px 18px; }
+      .audio-cta { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Top bar ── -->
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 1 · Fri Jun 26</span>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ── Hero ── -->
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · Optional Stop</div>
+      <h1>Nobel Prize Museum</h1>
+      <p class="hero-sub">A compact <strong>story museum</strong> in the old Stock Exchange on Stortorget — the history of the Nobel Prizes told through the personal objects, films, and voices of the laureates themselves.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Nobel+Prize+Museum%2C+Stortorget+2%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff;">Stortorget 2, Gamla Stan ↗</a></span>
+        <span><span class="ic">🕗</span> Friday until 21:00</span>
+        <span><span class="ic">🎟️</span> 160 SEK (~€15) · under-18 free</span>
+      </div>
+    </header>
+
+    <!-- ── Photo ── -->
+    <section>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Nobelmuseet_-_Stortorget_-_Gamla_stan_-_Stockholm_-_October_2015_-_Holmstad_A.JPG/960px-Nobelmuseet_-_Stortorget_-_Gamla_stan_-_Stockholm_-_October_2015_-_Holmstad_A.JPG"
+             alt="The Nobel Prize Museum in the Börshuset on Stortorget, Gamla Stan" loading="lazy">
+        <figcaption>
+          <span class="cap">The Nobel Prize Museum in the Börshuset, on Stortorget square.</span>
+          <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Nobelmuseet_-_Stortorget_-_Gamla_stan_-_Stockholm_-_October_2015_-_Holmstad_A.JPG" target="_blank" rel="noopener">© Øyvind Holmstad, CC BY-SA 4.0</a></span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ── At a glance ── -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact">
+          <div class="lbl">🎟️ Admission</div>
+          <div class="val">160 SEK (~€15) adult<small>Students/seniors 120 SEK (~€11) · Under-18 free</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕗 June Hours</div>
+          <div class="val">Fri 10:00–21:00<small>All other June days 10:00–18:00 · last entry 15 min before close</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">📍 Location</div>
+          <div class="val"><a href="https://www.google.com/maps/search/?api=1&query=Nobel+Prize+Museum%2C+Stortorget+2%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff; text-decoration:none; border-bottom:1px dotted var(--accent-color);">Stortorget 2 ↗</a><small>Börshuset, Gamla Stan main square · open in Google Maps</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">💳 Tickets</div>
+          <div class="val">At the door only<small>Card only — no cash, no online sales</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">⏱️ Visit Length</div>
+          <div class="val">45–75 minutes<small>Enough to see everything unrushed</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🗣️ Guided Tour</div>
+          <div class="val">Included free<small>English 11:15 · 13:15 · 15:15 (+ Fri 19:15)</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Audio guide CTA ── -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">🎧</div>
+        <div class="txt">
+          <h3>Free phone audio guide</h3>
+          <p>Runs in your browser — no app needed. 8+ languages including English, plus a dedicated <strong>children's version</strong> for your son. Bring earbuds.</p>
+        </div>
+        <a class="audio-btn" href="https://audio.nobelprizemuseum.se/" target="_blank" rel="noopener">Open audio guide →</a>
+      </div>
+    </section>
+
+    <!-- ── Intro ── -->
+    <section class="panel">
+      <div class="eyebrow">What Kind of Place Is This?</div>
+      <h2>Inspiring stories, told through objects</h2>
+      <p>The Nobel Prize Museum tells the history of the Nobel Prizes through the personal objects, films, and voices of the laureates themselves. It is not an art gallery or a grand historic house — it is compact, thoughtfully curated, and rewards curiosity broadly. The Literature and Peace stories are as compelling as the science ones, and the objects make abstract achievements feel human.</p>
+      <p>It sits in the <strong>old Stock Exchange building (Börshuset)</strong>, built 1773 — one of the finest Baroque facades in Stockholm, and free to admire from the square whether or not you go in.</p>
+    </section>
+
+    <!-- ── Friday timing callout ── -->
+    <section>
+      <div class="callout">
+        <h3>⭐ Why Friday is the right window</h3>
+        <p>Friday (Day 1) is the <strong>only day the museum stays open until 21:00</strong>. You're already at Stortorget at 17:35, and dinner isn't until 19:20 — a natural 30–60 minute detour with no backtracking. On Day 5 (Tuesday) the museum closes at 18:00 with no free or discounted entry, so this is the week's best slot. If the travel day has worn everyone out, skip the interior — the square and the evening walk are the priority.</p>
+      </div>
+      <figure style="margin-top:16px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Stortorget_panorama_2011.jpg/960px-Stortorget_panorama_2011.jpg"
+             alt="Stortorget square in Gamla Stan with its colourful merchant houses" loading="lazy">
+        <figcaption>
+          <span class="cap">Stortorget — Gamla Stan's main square, free to enjoy whether or not you go inside.</span>
+          <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Stortorget_panorama_2011.jpg" target="_blank" rel="noopener">© Holger Ellgaard, CC BY-SA 3.0</a></span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ── What you'll see ── -->
+    <section>
+      <div class="eyebrow">What You'll See</div>
+      <h2>Highlights</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🪑</span> The Ceiling Conveyor</h3>
+          <p>The museum's most distinctive sight: chairs from the Nobel banquet constantly cycle overhead on a dry-cleaning-style conveyor, each tagged with a laureate's name. Hundreds of chairs, slowly circling. It sounds gimmicky; in person it's unexpectedly moving — all those names passing above you.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🏅</span> "These Things Changed the World"</h3>
+          <p>The permanent exhibition — over 200 artefacts from Nobel laureates: notebooks, instruments, manuscripts, letters, and tools, across all six categories (Physics, Chemistry, Medicine, Literature, Peace, Economics). Deliberately personal rather than technical: a novelist's draft page, a scientist's worn lab notebook, a peace activist's handmade badge.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🖥️</span> Interactive Screens</h3>
+          <p>Browse every Nobel laureate since 1901 by year, country, category, gender, nationality, or age at the time of the prize. Good for a curious kid and for adults hunting a specific name.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🎬</span> The Film</h3>
+          <p>A short introductory film on Alfred Nobel and the prizes, looping in the cinema — worth 15 minutes if you arrive as one is starting.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🍦</span> Bistro Nobel</h3>
+          <p>The café serves the <strong>Nobel ice cream</strong> — a flavour created for the Nobel banquet, slightly different each year. A small thing, but a genuine treat if your son spots it.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🧒</span> Children's Room / Workshop</h3>
+          <p>Hands-on experiments, a quiz, and activities for younger visitors — handy if anyone needs a 10-minute break from the exhibitions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Verdict ── -->
+    <section class="panel verdict">
+      <div class="eyebrow">Is It Worth It?</div>
+      <h2>Yes — but calibrate to energy levels</h2>
+      <ul class="ticks">
+        <li>Two adults = 320 SEK (~€29) total (your son is free under 18).</li>
+        <li>45–75 minutes sees everything without rushing.</li>
+        <li>The ceiling conveyor, personal objects, and interactive screens all land well with mixed-age groups.</li>
+        <li>The Börshuset exterior on Stortorget is free and worth a moment regardless.</li>
+      </ul>
+      <p style="margin-top:14px;">The one honest caveat: some visitors feel the content is thin relative to the price. Go in expecting <strong>inspiring stories told through objects</strong>, not a sprawling gallery, and it delivers.</p>
+    </section>
+
+    <!-- ── Route ── -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route (If You Go)</div>
+      <h2>A 30–60 min flow into the evening walk</h2>
+      <div class="route">
+        <div class="stop">
+          <div class="time">17:35 — Arrive at Stortorget</div>
+          <div class="what">Photograph the square first (~5 min) — one of Stockholm's great spaces — and the Börshuset facade.</div>
+        </div>
+        <div class="stop">
+          <div class="time">17:40 — Enter the museum</div>
+          <div class="what">Buy at the desk (card only). Check the film times posted at the door.</div>
+        </div>
+        <div class="stop">
+          <div class="time">17:45 — The film</div>
+          <div class="what">~15 min if one is starting — or skip straight to the permanent exhibition.</div>
+        </div>
+        <div class="stop">
+          <div class="time">18:00 — Permanent exhibition & ceiling conveyor</div>
+          <div class="what">~25 min. Let the phone audio guide — or just the objects — lead the way.</div>
+        </div>
+        <div class="stop">
+          <div class="time">~18:25 — Exit to fika</div>
+          <div class="what">Two-minute walk to Café Schweizer, Västerlånggatan 9.</div>
+        </div>
+      </div>
+      <p style="margin-top:16px; font-size:13.5px; color:var(--text-muted);"><em>If you skip the museum entirely: photograph the Börshuset facade from the square — one of Stockholm's finest 18th-century buildings — and head to Café Schweizer at 18:00.</em></p>
+    </section>
+
+    <!-- ── Sources ── -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official site <strong>nobelprizemuseum.se</strong>: <a href="https://www.nobelprizemuseum.se/en/plan-your-visit/opening-hours/" target="_blank" rel="noopener">opening hours</a> (June 10:00–18:00 daily; Friday 10:00–21:00; last entry 15 min before close), <a href="https://www.nobelprizemuseum.se/en/plan-your-visit/admission/" target="_blank" rel="noopener">admission</a> (adult 160 SEK (~€15), student/senior 120 SEK (~€11), under-18 free; tickets at door, card only; guided tour included), and the <a href="https://audio.nobelprizemuseum.se/" target="_blank" rel="noopener">phone audio guide</a> (free, 8+ languages + children's version). Corroborated by Go City and Tours &amp; Tickets 2026 listings.</p>
+    </section>
+
+    <!-- ── Footer ── -->
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 1 Museum Guide</p>
+
+  </div>
+</body>
+</html>

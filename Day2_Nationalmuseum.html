@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nationalmuseum — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main); font-family: var(--font-body); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar { max-width: 820px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--accent-color); text-decoration: none; padding: 8px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); transition: all 0.2s ease; }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); padding: 7px 13px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25); }
+    .hero { position: relative; overflow: hidden; border-radius: 22px; margin-top: 8px; padding: 44px 34px 38px; background: linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%), var(--gradient-sweden); border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-lg); }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 180%; background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; position: relative; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(34px, 7vw, 52px); line-height: 1.05; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-sub { font-size: 15.5px; color: #e8eef6; max-width: 56ch; position: relative; line-height: 1.6; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; position: relative; font-size: 13px; color: #dbe6f2; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+    section { margin-top: 30px; }
+    .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 10px; }
+    h2 { font-family: var(--font-serif); font-weight: 600; font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 6px; }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+    .panel { background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 18px; padding: 26px 26px; box-shadow: var(--shadow-md); }
+    figure { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); box-shadow: var(--shadow-md); }
+    figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1424; }
+    figure.obj img { object-fit: contain; aspect-ratio: 4 / 3; background: radial-gradient(circle at 50% 35%, #1a2238 0%, #0c1322 100%); padding: 10px; }
+    figcaption { font-size: 11.5px; color: var(--text-muted); padding: 9px 14px; line-height: 1.45; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: -6px; }
+    .fact { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px 16px; }
+    .fact.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .fact .lbl { font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .audio-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%); border: 1.5px solid rgba(212,175,55,0.35); border-radius: 18px; padding: 22px 24px; }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--bg-dark); text-decoration: none; padding: 13px 22px; border-radius: 50px; background: var(--gradient-gold); box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+    .audio-btn.secondary { background: rgba(56,189,248,0.12); color: var(--accent-color); border: 1px solid rgba(56,189,248,0.3); box-shadow: none; }
+    .focus-list { list-style: none; counter-reset: f; display: grid; gap: 12px; margin-top: 4px; }
+    .focus-list li { counter-increment: f; position: relative; padding: 16px 18px 16px 58px; background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; font-size: 14.5px; color: #d7dce4; }
+    .focus-list li::before { content: counter(f); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 9px; background: var(--gradient-gold); color: var(--bg-dark); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .focus-list li strong { color: #fff; }
+    .focus-list li .mins { color: var(--gold); font-weight: 600; font-size: 12.5px; }
+    .skip-note { margin-top: 14px; font-size: 13.5px; color: #d7dce4; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px 16px; }
+    .skip-note strong { color: #fca5a5; }
+    .value-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 14px 16px; }
+    .value-note strong { color: #34d399; }
+    .highlights { display: grid; gap: 14px; }
+    .hl { background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 20px; transition: border-color 0.25s, transform 0.25s; }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl .look { color: var(--gold); font-weight: 600; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .zone { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); margin: 26px 0 4px; display: flex; align-items: center; gap: 8px; }
+    .zone::before { content: ''; width: 22px; height: 2px; background: var(--sweden-yellow); border-radius: 2px; }
+    .route { position: relative; padding-left: 28px; }
+    .route::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1)); }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before { content: ''; position: absolute; left: -28px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-dark); border: 2.5px solid var(--accent-color); }
+    .stop .time { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent-color); letter-spacing: 0.5px; }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 50px; background: var(--gradient-sweden); box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7); transition: transform 0.2s ease; }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+    @media (max-width: 560px) { .hero { padding: 34px 22px 30px; } .panel { padding: 22px 18px; } .audio-cta { padding: 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 2 · Sat Jun 27</span>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · The Day's Centerpiece</div>
+      <h1>Nationalmuseum</h1>
+      <p class="hero-sub">Sweden's national gallery of art &amp; design (reopened 2018). A <strong>chronological, top-down</strong> hang — Old Masters up top, 19th-century &amp; Impressionism below, Design on the ground floor. Tuned to your taste: <strong>Rembrandt, the French 18th century, and the Impressionists</strong>.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Nationalmuseum%2C+S%C3%B6dra+Blasieholmshamnen+2%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff;">Södra Blasieholmshamnen 2 ↗</a></span>
+        <span><span class="ic">🕗</span> Sat 11:00–17:00</span>
+        <span><span class="ic">🎟️</span> 160 SEK (~€15) · under-20 free</span>
+      </div>
+    </header>
+
+    <!-- Photos -->
+    <section>
+      <div class="photo-grid">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Nationalmuseum-Stockholm-2019-08.jpg/960px-Nationalmuseum-Stockholm-2019-08.jpg"
+               alt="Nationalmuseum building on Blasieholmen, Stockholm" loading="lazy">
+          <figcaption>
+            <span class="cap">The Nationalmuseum on Blasieholmen, facing the Royal Palace across the water.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Nationalmuseum-Stockholm-2019-08.jpg" target="_blank" rel="noopener">Djiboun — CC BY-SA 4.0</a></span>
+          </figcaption>
+        </figure>
+        <figure class="obj">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/La_Grenouill%C3%A8re_%28Auguste_Renoir%29_-_Nationalmuseum_-_19486.tif/lossy-page1-960px-La_Grenouill%C3%A8re_%28Auguste_Renoir%29_-_Nationalmuseum_-_19486.tif.jpg"
+               alt="Renoir, La Grenouillère (1869), Nationalmuseum" loading="lazy">
+          <figcaption>
+            <span class="cap">Renoir — <em>La Grenouillère</em> (1869), the museum's Impressionist star.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:La_Grenouill%C3%A8re_(Auguste_Renoir)_-_Nationalmuseum_-_19486.tif" target="_blank" rel="noopener">Nationalmuseum — Public domain</a></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact">
+          <div class="lbl">🎟️ Admission</div>
+          <div class="val">160 SEK (~€15) adult<small>Under-20 free · ground floor (shop, restaurant, courtyards) free to all</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🎫 Ticket Covers</div>
+          <div class="val">Collection + all temp shows<small>One ticket, incl. the Sergel exhibition. Book online or buy on site.</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕗 Saturday Hours</div>
+          <div class="val">11:00–17:00<small>Closes 17:00 sharp · galleries cleared ~16:45 · shop closes 15 min early</small></div>
+        </div>
+        <div class="fact warn">
+          <div class="lbl">💳 Payment</div>
+          <div class="val">Card or Swish only<small>⚠️ No cash accepted</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">📍 Location</div>
+          <div class="val"><a href="https://www.google.com/maps/search/?api=1&query=Nationalmuseum%2C+S%C3%B6dra+Blasieholmshamnen+2%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff; text-decoration:none; border-bottom:1px dotted var(--accent-color);">Södra Blasieholmshamnen 2 ↗</a><small>Blasieholmen · ~12-min walk from the Armoury · Google Maps</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">⏱️ Your Slot</div>
+          <div class="val">~1h45m visit<small>Lunch + galleries ~13:30–16:15; be out of upper galleries by ~16:50</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio CTA -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">🎧</div>
+        <div class="txt">
+          <h3>Free "Nationalmuseum Visitor Guide" app</h3>
+          <p>Download before you arrive (App Store / Google Play): an intro to the museum plus guides to selected temporary shows. Bring earbuds — free Wi-Fi on site. Floor maps are in the app too.</p>
+        </div>
+        <a class="audio-btn" href="https://www.nationalmuseum.se/en/visit/prepare-your-visit/nationalmuseum-visitor-guide-app" target="_blank" rel="noopener">Audio guide app →</a>
+        <a class="audio-btn secondary" href="https://www.nationalmuseum.se/en/visit/prepare-your-visit/find-your-way-around-the-museum" target="_blank" rel="noopener">Floor maps →</a>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="panel">
+      <div class="eyebrow">What Kind of Place Is This?</div>
+      <h2>A world-class collection, read like a timeline</h2>
+      <p>About 5,000 works hang <strong>chronologically along a timeline that climbs through the building</strong>: <strong>European Old Masters on the top floor</strong>, <strong>19th-century &amp; Impressionism on the floor below</strong>, and <strong>Design on the ground floor</strong>. For your taste the two strongest zones are the top floor (Rembrandt, the great French 18th-century rooms) and the level below (Renoir and the Swedish "Opponents"). It's big — plan to beeline the headliners rather than walk every gallery.</p>
+    </section>
+
+    <!-- Where to focus -->
+    <section class="panel">
+      <div class="eyebrow">Where to Focus</div>
+      <h2>~1h45m (entry ~14:30) — spend it like this</h2>
+      <ol class="focus-list">
+        <li><strong>Top floor — Old Masters first</strong> <span class="mins">~50 min · top priority</span><br>Rembrandt's <em>Claudius Civilis</em> &amp; <em>Kitchen Maid</em> → Rubens / El Greco → Cranach / Arcimboldo → the French 18th-c. rooms (Watteau, Chardin, Boucher) → Roslin's <em>Lady with the Veil</em>.</li>
+        <li><strong>Down one level — Impressionism &amp; 19th-c.</strong> <span class="mins">~60 min</span><br>Beeline to Renoir's <em>La Grenouillère</em>, then Degas / Manet / Gauguin → the Swedish Opponents (Zorn, Larsson, Liljefors).</li>
+        <li><strong>Optional wind-down (~16:30)</strong> <span class="mins">~15 min if time</span><br>The Sergel exhibition (floor 4) or the free ground-floor design galleries. <strong>Be out of the upper galleries by ~16:50.</strong></li>
+      </ol>
+      <div class="skip-note"><strong>If you're running short:</strong> drop the wind-down buffer — the Rembrandt / El Greco / Renoir / Zorn headliners still fit in ~95 minutes. Skip the Design ground floor (it's free, so you can dip in any time before close).</div>
+      <div class="value-note"><strong>With a kid:</strong> Arcimboldo's fruit-and-vegetable portraits up top are an easy crowd-pleaser, and the free <strong>"Colour!"</strong> children's exhibition is a good short bonus if energy allows.</div>
+    </section>
+
+    <!-- Highlights -->
+    <section>
+      <div class="eyebrow">Highlights — and What to Look At</div>
+      <h2>The headliners, by floor</h2>
+
+      <div class="zone">Top floor · European Old Masters (~1500–1800)</div>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🖼️</span> Rembrandt — <em>The Conspiracy of the Batavians under Claudius Civilis</em> (1661–62)</h3>
+          <p>The museum's single most important painting — a monumental surviving fragment of the huge canvas Rembrandt painted for Amsterdam's Town Hall and that was rejected and cut down. <span class="look">→ Look at how the light pools on the conspirators' swords meeting at the centre</span>; this is late-Rembrandt at his most radical and rough-brushed.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🕯️</span> Rembrandt — <em>The Kitchen Maid</em> (1651)</h3>
+          <p>An intimate chiaroscuro study and a family favourite. <span class="look">→ Note how she leans on the window-sill straight out toward you</span> — warmth and immediacy from almost nothing.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🥦</span> Arcimboldo — <em>Vertumnus</em> (1591) &amp; <em>The Jurist</em> (1566)</h3>
+          <p>The composite "fruit-and-vegetable" portraits — instant kid crowd-pleasers. <span class="look">→ Step close, then back: the faces dissolve into produce and reassemble.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🎀</span> French 18th-century rooms — Watteau, Chardin, Boucher</h3>
+          <p>A world-class holding: Watteau's <em>The Love Lesson</em>, Chardin's quiet still lifes, Boucher's <em>The Triumph of Venus</em> (1740). <span class="look">→ Slow down here</span> — this suite is one of the museum's real strengths.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">👰</span> Roslin — <em>The Lady with the Veil</em> (1768)</h3>
+          <p>Often called the museum's most beloved painting (the artist's wife). <span class="look">→ Look at the black lace veil over her face</span> — the virtuoso passage everyone remembers. El Greco's <em>Apostles Peter and Paul</em> and Rubens' <em>Bacchus and Ariadne</em> are nearby.</p>
+        </div>
+      </div>
+
+      <div class="zone">Floor below · 19th-century &amp; Impressionism</div>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🌊</span> Renoir — <em>La Grenouillère</em> (1869)</h3>
+          <p>The Impressionist star of the museum — Renoir's shimmering riverside bathing scene, painted side-by-side with Monet at the spot that effectively launched Impressionism. <span class="look">→ Get close to see the broken, dabbed brushwork on the water, then step back to watch it cohere.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🎨</span> Degas, Manet, Gauguin &amp; Delacroix</h3>
+          <p>All represented (specific canvases rotate — confirm on the day's floor map). Delacroix's <em>The Lion Hunt</em> (1855) is on the Romantic stretch en route.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🇸🇪</span> The Swedish "Opponents" — don't skip</h3>
+          <p>A genuine strength: <strong>Zorn</strong> — <em>Midsummer Dance</em> (1897); <strong>Carl Larsson</strong> — the mural-scale <em>Midwinter Sacrifice</em> (1915); plus Liljefors (wildlife), Prince Eugen, Josephson's <em>The Water Sprite</em> and Hanna Pauli's <em>Breakfast Time</em>. <span class="look">→ Larsson's huge canvas is unmissable; Zorn's light is the thing to look for.</span></p>
+        </div>
+      </div>
+
+      <div class="zone">Bonus · Temporary exhibitions (in the ticket)</div>
+      <div class="highlights">
+        <div class="hl">
+          <h3><span class="hi">🗿</span> "Fantasy and Reality — The Art of Johan Tobias Sergel"</h3>
+          <p>19 Feb – 10 Aug 2026, <strong>floor 4</strong>. Sweden's master Neoclassical sculptor — ~400 works incl. terracotta sketches and rarely-shown drawings. Very on-theme if you have spare minutes.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🧒</span> "Colour! — for children and their curious grown-ups"</h3>
+          <p>A hands-on children's exhibition about colour — a good short family bonus.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🏺</span> "Wilhelm Kåge &amp; Shōji Hamada"</h3>
+          <p>Swedish/Japanese studio ceramics — a small design-floor detour for the design-curious.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Route -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route</div>
+      <h2>Fitted to the ~13:30–16:15 slot</h2>
+      <div class="route">
+        <div class="stop"><div class="time">~13:30 — Lunch on the ground floor</div><div class="what">Eat first (restaurant/café on the free ground floor), grab paper floor maps, leave coats in the cloakroom.</div></div>
+        <div class="stop"><div class="time">~14:30 — Top floor, Old Masters (~50 min)</div><div class="what">Rembrandt room → Rubens/El Greco → Cranach/Arcimboldo → French 18th-c. (Watteau, Chardin, Boucher) → Roslin's <em>Lady with the Veil</em>.</div></div>
+        <div class="stop"><div class="time">~15:20 — Down one level (~60 min)</div><div class="what">Beeline to Renoir's <em>La Grenouillère</em>, then Degas/Manet/Gauguin → Swedish Opponents (Zorn, Larsson, Liljefors).</div></div>
+        <div class="stop"><div class="time">~16:30 — Optional wind-down</div><div class="what">Sergel exhibition (floor 4) or free design galleries / "Colour!" with a kid. <strong>Out of upper galleries by ~16:50; building closes 17:00.</strong></div></div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official site <strong>nationalmuseum.se</strong>: <a href="https://www.nationalmuseum.se/en/visit/opening-hours" target="_blank" rel="noopener">opening hours</a> (Sat 11:00–17:00; Mon closed; Thu to 20:00; closed Midsummer 19–20 Jun), <a href="https://www.nationalmuseum.se/en/visit/admission-fees-and-tickets" target="_blank" rel="noopener">admission &amp; tickets</a> (adult 160 SEK (~€15), under-20 free, one ticket covers temporary exhibitions, card/Swish only), the <a href="https://www.nationalmuseum.se/en/visit/prepare-your-visit/nationalmuseum-visitor-guide-app" target="_blank" rel="noopener">visitor guide app</a>, <a href="https://www.nationalmuseum.se/en/visit/prepare-your-visit/find-your-way-around-the-museum" target="_blank" rel="noopener">find your way around the museum</a> (floor maps), and the <a href="https://www.nationalmuseum.se/en/exhibitions/fantasy-and-reality-the-art-of-johan-tobias-sergel" target="_blank" rel="noopener">Sergel exhibition page</a> (19 Feb – 10 Aug 2026, floor 4). Named works corroborated by collection.nationalmuseum.se, Wikipedia, Britannica and Google Arts &amp; Culture — <strong>specific room placements rotate, so confirm with the floor map on the day.</strong></p>
+    </section>
+
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 2 Museum Guide</p>
+
+  </div>
+</body>
+</html>

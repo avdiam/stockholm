@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Royal Armoury (Livrustkammaren) — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main); font-family: var(--font-body); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar { max-width: 820px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--accent-color); text-decoration: none; padding: 8px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); transition: all 0.2s ease; }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); padding: 7px 13px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25); }
+    .hero { position: relative; overflow: hidden; border-radius: 22px; margin-top: 8px; padding: 44px 34px 38px; background: linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%), var(--gradient-sweden); border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-lg); }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 180%; background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; position: relative; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(34px, 7vw, 52px); line-height: 1.05; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-sub { font-size: 15.5px; color: #e8eef6; max-width: 56ch; position: relative; line-height: 1.6; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; position: relative; font-size: 13px; color: #dbe6f2; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+    section { margin-top: 30px; }
+    .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 10px; }
+    h2 { font-family: var(--font-serif); font-weight: 600; font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 6px; }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+    .panel { background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 18px; padding: 26px 26px; box-shadow: var(--shadow-md); }
+    figure { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); box-shadow: var(--shadow-md); }
+    figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1424; }
+    figure.obj img { object-fit: contain; aspect-ratio: 4 / 3; background: radial-gradient(circle at 50% 35%, #1a2238 0%, #0c1322 100%); padding: 10px; }
+    figcaption { font-size: 11.5px; color: var(--text-muted); padding: 9px 14px; line-height: 1.45; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: -6px; }
+    .fact { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px 16px; }
+    .fact.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .fact .lbl { font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .audio-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%); border: 1.5px solid rgba(212,175,55,0.35); border-radius: 18px; padding: 22px 24px; }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--bg-dark); text-decoration: none; padding: 13px 22px; border-radius: 50px; background: var(--gradient-gold); box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+    .focus-list { list-style: none; counter-reset: f; display: grid; gap: 12px; margin-top: 4px; }
+    .focus-list li { counter-increment: f; position: relative; padding: 16px 18px 16px 58px; background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; font-size: 14.5px; color: #d7dce4; }
+    .focus-list li::before { content: counter(f); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 9px; background: var(--gradient-gold); color: var(--bg-dark); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .focus-list li strong { color: #fff; }
+    .focus-list li .mins { color: var(--gold); font-weight: 600; font-size: 12.5px; }
+    .skip-note { margin-top: 14px; font-size: 13.5px; color: #d7dce4; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px 16px; }
+    .skip-note strong { color: #fca5a5; }
+    .value-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 14px 16px; }
+    .value-note strong { color: #34d399; }
+    .highlights { display: grid; gap: 14px; }
+    .hl { background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 20px; transition: border-color 0.25s, transform 0.25s; }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl .look { color: var(--gold); font-weight: 600; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .route { position: relative; padding-left: 28px; }
+    .route::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1)); }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before { content: ''; position: absolute; left: -28px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-dark); border: 2.5px solid var(--accent-color); }
+    .stop .time { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent-color); letter-spacing: 0.5px; }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 50px; background: var(--gradient-sweden); box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7); transition: transform 0.2s ease; }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+    @media (max-width: 560px) { .hero { padding: 34px 22px 30px; } .panel { padding: 22px 18px; } .audio-cta { padding: 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 2 · Sat Jun 27</span>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · Late Morning</div>
+      <h1>Royal Armoury</h1>
+      <p class="hero-sub"><em>Livrustkammaren</em> — Sweden's oldest museum (1628), in the palace cellar. World-class <strong>Renaissance parade armour</strong> and a handful of history-charged royal objects: a king's battle horse, the clothes he died in.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Livrustkammaren%2C+Slottsbacken+3%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff;">Slottsbacken 3 ↗</a></span>
+        <span><span class="ic">🕗</span> June daily 10:00–17:00</span>
+        <span><span class="ic">🎟️</span> 180 SEK (~€17) · under-18 free</span>
+      </div>
+    </header>
+
+    <!-- Photos -->
+    <section>
+      <div class="photo-grid">
+        <figure class="obj">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Erik_XIV_rustning_och_sk%C3%B6ld_fr%C3%A5n_1562_i_manieristisk_stil_-_Livrustkammaren_-_31016.tif/lossy-page1-960px-Erik_XIV_rustning_och_sk%C3%B6ld_fr%C3%A5n_1562_i_manieristisk_stil_-_Livrustkammaren_-_31016.tif.jpg"
+               alt="Erik XIV's Mannerist parade armour and shield, 1562" loading="lazy">
+          <figcaption>
+            <span class="cap">Erik XIV's parade armour & shield (1562) — the Renaissance star object.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Erik_XIV_rustning_och_sk%C3%B6ld_fr%C3%A5n_1562_i_manieristisk_stil_-_Livrustkammaren_-_31016.tif" target="_blank" rel="noopener">Livrustkammaren / Göran Schmidt — Public domain</a></span>
+          </figcaption>
+        </figure>
+        <figure class="obj">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Streiff_-_Livrustkammaren_-_24363.tif/lossy-page1-960px-Streiff_-_Livrustkammaren_-_24363.tif.jpg"
+               alt="Streiff, Gustav II Adolf's preserved battle horse from Lützen (1632)" loading="lazy">
+          <figcaption>
+            <span class="cap">Streiff — Gustav II Adolf's battle horse from Lützen (1632), ~400 years old.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Streiff_-_Livrustkammaren_-_24363.tif" target="_blank" rel="noopener">Livrustkammaren — Public domain</a></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact warn">
+          <div class="lbl">🎟️ Admission</div>
+          <div class="val">180 SEK (~€17) regular<small>Incl. seniors & students · under-18 free. ⚠️ No longer free entry — family ≈ 360 SEK (~€33).</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕗 June Hours</div>
+          <div class="val">Daily 10:00–17:00<small>Closed only Midsummer (19–20 Jun) — the 27th is fine</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🎫 Your Ticket</div>
+          <div class="val">Booked<small>Valid 11:00–17:00 — flexible entry</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">📍 Location</div>
+          <div class="val"><a href="https://www.google.com/maps/search/?api=1&query=Livrustkammaren%2C+Slottsbacken+3%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff; text-decoration:none; border-bottom:1px dotted var(--accent-color);">Slottsbacken 3 ↗</a><small>Own entrance, palace south cellar · Google Maps</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🏛️ Founded</div>
+          <div class="val">1628<small>Sweden's oldest museum</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">⏱️ Your Slot</div>
+          <div class="val">~45 minutes<small>12:15–13:05, then walk to the Nationalmuseum</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio CTA -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">🎧</div>
+        <div class="txt">
+          <h3>Audio guide in several languages</h3>
+          <p>The museum offers an audio guide in multiple languages — pick it up at the entrance. Bring earbuds.</p>
+        </div>
+        <a class="audio-btn" href="https://livrustkammaren.se/en/" target="_blank" rel="noopener">Official site →</a>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="panel">
+      <div class="eyebrow">What Kind of Place Is This?</div>
+      <h2>A dense little royal treasury</h2>
+      <p>A royal store of <strong>ceremonial armour, court costume, weapons, and carriages</strong> spanning 500 years of Swedish monarchy. For your taste, the draw is the <strong>Renaissance parade armour</strong> — among the finest preserved anywhere — and a handful of objects so charged with history they're unforgettable (a king's battle horse; the clothes he died in). It's small and dense: you're here for a dozen star objects, not endless galleries.</p>
+    </section>
+
+    <!-- Where to focus -->
+    <section class="panel">
+      <div class="eyebrow">Where to Focus</div>
+      <h2>~45 minutes (12:15–13:05) — spend it like this</h2>
+      <ol class="focus-list">
+        <li><strong>Erik XIV's parade armour & shield (1562)</strong> <span class="mins">~15 min · top priority</span><br>The Renaissance treasure; the single best thing here.</li>
+        <li><strong>Karl IX's armour</strong> <span class="mins">~5 min</span><br>Same Arboga-forged / Antwerp-decorated pedigree, right nearby.</li>
+        <li><strong>The horse Streiff</strong> <span class="mins">~5 min</span><br>The museum's iconic object; great with a kid.</li>
+        <li><strong>Gustav II Adolf's Lützen clothing + Gustav III's masquerade costume</strong> <span class="mins">~10 min</span><br>The most history-charged objects.</li>
+        <li><strong>Karl XII's coat, Christina's mantle, Sofia Magdalena's gown, the carriages</strong> <span class="mins">~10 min if time allows</span></li>
+      </ol>
+      <div class="skip-note"><strong>If you're running short:</strong> the five gilded <strong>carriages</strong> are one staircase down in the Carriage Hall — skip those first; most walking for the least Renaissance payoff.</div>
+      <div class="value-note"><strong>Value note:</strong> now that entry is 180 SEK (~€17)/adult, a rushed 20-min visit would be poor value — the ~45-min slot (freed by trimming the Palace to 90 min and moving the Solsångaren/Kungsträdgården stroll to Day 3) makes the 360 SEK (~€33) worthwhile.</div>
+    </section>
+
+    <!-- Highlights -->
+    <section>
+      <div class="eyebrow">Highlights — and What to Look At</div>
+      <h2>The dozen things to see</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🛡️</span> Erik XIV's parade armour & shield (1562)</h3>
+          <p><em>The</em> Renaissance treasure. Iron forged in Arboga, Sweden; sent to <strong>Antwerp</strong> to be embossed, chased, etched and gilt by goldsmith Eliseus Libaerts after designs by the French Mannerist engraver Étienne Delaune. Purely ceremonial — designed to dazzle. <span class="look">→ Look closely at the shield's embossed mythological scenes and the etched-and-gilt detailing</span> — this is goldsmith's work, not a soldier's kit.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">⚔️</span> Karl IX's armour</h3>
+          <p>Etched-and-embossed steel with applied gold; same Arboga-forged / Antwerp-decorated pedigree. <span class="look">→ Compare its decoration with Erik XIV's</span> to see the house style a generation on.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🐎</span> The horse Streiff</h3>
+          <p>Gustav II Adolf's actual battle steed from Lützen (1632), where the king was killed. ~400 years old; one of very few preserved royal warhorses anywhere — the museum's iconic object.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🩸</span> Gustav II Adolf's Lützen clothing</h3>
+          <p>The bloodstained garments he wore when he fell; preserving them is literally why the museum exists. <span class="look">→ See this and Streiff as a pair</span> — together they tell the Lützen story.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🎭</span> Gustav III's masquerade costume</h3>
+          <p>Worn the night he was shot at a masked ball (1792). <span class="look">→ The assassin Anckarström's mask and pistols are displayed here too.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">👑</span> Royal robes & Karl XII's coat</h3>
+          <p>Queen Christina's purple-velvet coronation mantle (Paris-made), Sofia Magdalena's silver-brocade wedding dress (1766, 3-metre train), and Karl XII's coat and hat — <span class="look">→ Look for the visible bullet hole</span> from his death (1718).</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🛻</span> Five gilded royal carriages</h3>
+          <p>One staircase down in the Carriage Hall (incl. the Coronation Carriage). Lowest priority for your taste — see them only if time allows.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Route -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route</div>
+      <h2>Fitted to the ~12:15–13:05 slot</h2>
+      <div class="route">
+        <div class="stop"><div class="time">12:15 — (optional) the guard, then down to the Armoury</div><div class="what">A few minutes of the Changing of the Guard in the courtyard, then the Armoury's own entrance at Slottsbacken 3.</div></div>
+        <div class="stop"><div class="time">12:20 — The Renaissance core (~20 min)</div><div class="what">Erik XIV's parade armour & shield, then Karl IX's armour.</div></div>
+        <div class="stop"><div class="time">12:40 — The Lützen pair (~10 min)</div><div class="what">Streiff + Gustav II Adolf's bloodstained Lützen clothing.</div></div>
+        <div class="stop"><div class="time">12:50 — History & costume (~10 min)</div><div class="what">Gustav III's masquerade costume + Anckarström's pistols, then a quick pass of Karl XII's coat and the royal gowns.</div></div>
+        <div class="stop"><div class="time">~13:05 — Out to lunch</div><div class="what">~15-min waterfront walk to the Nationalmuseum for lunch at 13:30.</div></div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official site <strong>livrustkammaren.se</strong>: <a href="https://livrustkammaren.se/en/the-royal-armoury/visit/admissions-and-tickets/" target="_blank" rel="noopener">admission & tickets</a> (180 SEK (~€17) regular incl. seniors/students; under-18 free) and <a href="https://livrustkammaren.se/en/visit/hours-admission" target="_blank" rel="noopener">opening hours</a> (June daily 10:00–17:00; closed Midsummer 19–20 June). Address Slottsbacken 3 from the official visit page; star objects (Erik XIV's parade armour, Streiff, the Lützen clothing) corroborated by Wikipedia and Google Arts &amp; Culture.</p>
+    </section>
+
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 2 Museum Guide</p>
+
+  </div>
+</body>
+</html>

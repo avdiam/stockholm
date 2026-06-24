@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 1 — Stockholm Route (OSM)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#1a2a3a;padding:14px;min-height:100vh}
+h1{text-align:center;font-size:19px;font-weight:800;color:#1F3864;letter-spacing:.5px;margin-bottom:3px}
+.subtitle{text-align:center;font-size:12px;color:#666;margin-bottom:14px}
+.layout{display:flex;gap:12px;max-width:1100px;margin:0 auto;height:85vh}
+
+/* MAP */
+.map-panel{flex:1.3;background:white;border-radius:14px;padding:12px;position:relative;border:1.5px solid #aac8e4;display:flex;flex-direction:column}
+.map-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+#map{flex:1;width:100%;border-radius:8px;border:1px solid #ccc;z-index:1}
+
+/* TIMELINE */
+.tl-panel{flex:0.6;display:flex;flex-direction:column;gap:0;overflow:hidden}
+.tl-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+.tl-scroll{display:flex;flex-direction:column;gap:4px;overflow-y:auto;padding-right:4px}
+.tl-item{display:flex;gap:7px;background:white;border-radius:8px;padding:8px 10px;border-left:4px solid #ccc;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tl-item:hover{transform:translateX(2px);box-shadow:2px 3px 10px rgba(0,0,0,.1)}
+.tl-item.active{box-shadow:0 0 0 2.5px #E07B39;transform:translateX(2px)}
+.tl-em{font-size:15px;min-width:20px;line-height:1.6}
+.tl-body{flex:1}
+.tl-name{font-size:11.5px;font-weight:700;color:#1a2a3a}
+.tl-time{font-size:9.5px;color:#888;margin-top:1px;font-weight:600}
+.tl-desc{font-size:10px;color:#555;margin-top:3px;line-height:1.4}
+
+.cat-hotel{border-color:#C9A84C}
+.cat-food {border-color:#E07B39}
+.cat-sight{border-color:#5BAD6F}
+.cat-music{border-color:#9B59B6}
+.cat-transit{border-color:#2E75B6}
+
+/* Leaflet Customization */
+.leaflet-popup-content-wrapper { border-radius: 8px; font-family: sans-serif; font-size: 11px; }
+.marker-pin {
+  width: 24px; height: 24px; border-radius: 50% 50% 50% 0; background: #c30b0b;
+  position: absolute; transform: rotate(-45deg); left: 50%; top: 50%; margin: -15px 0 0 -15px;
+  border: 2px solid white; display: flex; align-items: center; justify-content: center;
+}
+.marker-pin i { transform: rotate(45deg); font-style: normal; font-size: 12px; }
+
+@media (max-width: 800px) {
+  .layout { flex-direction: column; height: auto; }
+  .map-panel { height: 400px; }
+  .tl-panel { height: 500px; }
+}
+</style>
+</head>
+<body>
+<h1>🇸🇪 Day 1 — The Charm of Gamla Stan</h1>
+<div class="subtitle">Friday, June 26 &nbsp;·&nbsp; Live OpenStreetMap Route</div>
+
+<div class="layout">
+  <!-- ═══ MAP ═══ -->
+  <div class="map-panel">
+    <div class="map-lbl">📍 INTERACTIVE ROUTE MAP — STOCKHOLM</div>
+    <div id="map"></div>
+  </div>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <div class="tl-panel">
+    <div class="tl-lbl">🕐 TIMELINE — Click to focus on map</div>
+    <div class="tl-scroll" id="tl"></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const stops = [
+  {id:0, e:"✈️",  n:"Arrive Arlanda",           t:"12:55 – 14:55", c:"hotel",   lat: 59.6498, lng: 17.9238, d:"Pendeltåg to Odenplan ~40 min. Arrive at hotel ~13:35. Leave luggage at the hotel lobby/Reception and relax — Fuori di Pizza opens 15:00 on Fridays, so check in at 15:00 and head to lunch at 15:30. (Hungry earlier? Grab a quick snack near Odenplan — Fuori isn't open before 15:00.)"},
+  {id:1, e:"🏨",  n:"Check-in · ibis Styles Odenplan", t:"15:00 – 15:30", c:"hotel", lat: 59.3424, lng: 18.0468, d:"Västmannagatan 61 B. Freshen up after the flight."},
+  {id:2, e:"🍕",  n:"Fuori di Pizza",             t:"15:30 – 16:15", c:"food",    lat: 59.3424, lng: 18.0396, d:"Karlbergsvägen 35 · 5 min walk from hotel. ⚠️ Opens 15:00 on Fridays — this is the lunch slot, no earlier seating. Tiny spot (one indoor table): expect takeaway or a short wait, and leave promptly — it's a ~10-min walk back to Odenplan for the metro. Great post-flight refuel."},
+  {id:3, e:"🚇",  n:"Metro → Gamla Stan",         t:"16:15 – 16:45", c:"transit", lat: 59.3228, lng: 18.0673, d:"Green Line from Odenplan. Heading into the Old Town heart."},
+  {id:4, e:"🎵",  n:"Sound Pollution (vinyl!)",   t:"16:45 – 17:35", c:"music",   lat: 59.3247, lng: 18.0683, d:"Stora Nygatan 18. Legendary metal/punk/vinyl shop. Closes 18:00!"},
+  {id:5, e:"📸",  n:"Stortorget",                 t:"17:35 – 18:00", c:"sight",   lat: 59.3250, lng: 18.0708, d:"Colorful main square. Nobel Prize Museum is located here."},
+  {id:6, e:"☕",  n:"Café Schweizer (fika)",      t:"18:00 – 18:20", c:"food",    lat: 59.3261, lng: 18.0688, d:"Västerlånggatan 9. Classic Old Town café for a quick coffee."},
+  {id:7, e:"🏛️", n:"Riksdagshuset (pass-by)",     t:"18:20 – 18:25", c:"sight",   lat: 59.3276, lng: 18.0684, d:"Walk through the impressive arches of the Parliament building — a 5-min stroll, no need to linger."},
+  {id:8, e:"🌅",  n:"Evert Taubes Terrass",       t:"18:25 – 18:45", c:"sight",   lat: 59.3251, lng: 18.0618, d:"Panoramic waterfront views of Lake Mälaren & City Hall. Pass by Riddarholmen Church."},
+  {id:9, e:"⛪",  n:"Tyska Kyrkan",               t:"18:45 – 19:00", c:"sight",   lat: 59.3241, lng: 18.0718, d:"The German Church — exterior & 96m spire only at this hour (interior open to visitors Tue–Sun 12:00–16:00, closed by evening). Gamla Stan's tallest tower; admire the baroque facade on the walk through."},
+  {id:10,e:"🏚️", n:"Trotzigs Gränd & Järnpojken", t:"19:00 – 19:20", c:"sight",   lat: 59.3229, lng: 18.0727, d:"Mårten Trotzigs Gränd — Stockholm's narrowest alley (90cm!). Järnpojken (Iron Boy) tiny statue nearby."},
+  {id:11,e:"🍽️", n:"Stockholms Gästabud",        t:"19:20 – 20:45", c:"food",    lat: 59.3257, lng: 18.0740, d:"Traditional Swedish cuisine at Österlånggatan 7. Mention: 'Inga nötter, ingen fisk'."},
+  {id:12,e:"🚇",  n:"Return to Odenplan",         t:"~21:00",        c:"transit", lat: 59.3424, lng: 18.0468, d:"Day 1 done! Rest up for tomorrow."},
+];
+
+const cc = {hotel:'cat-hotel',food:'cat-food',sight:'cat-sight',music:'cat-music',transit:'cat-transit',};
+const colors = {hotel:'#C9A84C',food:'#E07B39',sight:'#5BAD6F',music:'#9B59B6',transit:'#2E75B6'};
+
+// Initialize Map
+const map = L.map('map').setView([59.325, 18.07], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+const markers = {};
+const tl = document.getElementById('tl');
+
+stops.forEach(s => {
+  // Add to Timeline
+  const d = document.createElement('div');
+  d.className = 'tl-item ' + cc[s.c];
+  d.dataset.id = s.id;
+  d.innerHTML = `<div class="tl-em">${s.e}</div>
+    <div class="tl-body">
+      <div class="tl-name">${s.n}</div>
+      <div class="tl-time">${s.t}</div>
+      <div class="tl-desc">${s.d}</div>
+    </div>`;
+  tl.appendChild(d);
+
+  // Add Marker
+  const marker = L.marker([s.lat, s.lng], {
+    icon: L.divIcon({
+      className: 'custom-div-icon',
+      html: `<div style="background-color:${colors[s.c]};" class="marker-pin"><i>${s.e}</i></div>`,
+      iconSize: [30, 42],
+      iconAnchor: [15, 42]
+    })
+  }).addTo(map);
+  
+  marker.bindPopup(`<b>${s.e} ${s.n}</b><br>${s.t}<br><br>${s.d}`);
+  markers[s.id] = marker;
+
+  d.addEventListener('click', () => {
+    setActive(s.id);
+  });
+  
+  marker.on('click', () => {
+    document.querySelector(`.tl-item[data-id="${s.id}"]`).scrollIntoView({behavior:'smooth', block:'center'});
+    setActive(s.id, false);
+  });
+});
+
+function setActive(id, moveMap = true) {
+  document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.tl-item[data-id="${id}"]`);
+  if(el) el.classList.add('active');
+
+  const s = stops.find(x => x.id === id);
+  if(moveMap) {
+    map.flyTo([s.lat, s.lng], 16, { duration: 1.5 });
+  }
+  markers[id].openPopup();
+}
+
+// Draw Route Lines
+const walkPoints = stops.filter(s => s.id >= 4 && s.id <= 11).map(s => [s.lat, s.lng]);
+L.polyline(walkPoints, {color: '#E07B39', weight: 4, dashArray: '5, 10', opacity: 0.7}).addTo(map);
+
+const transit1 = [[59.6498, 17.9238], [59.3424, 18.0468]];
+L.polyline(transit1, {color: '#2E75B6', weight: 3, opacity: 0.5}).addTo(map);
+
+const transit2 = [[59.3424, 18.0468], [59.3228, 18.0673]];
+L.polyline(transit2, {color: '#009B3A', weight: 3, opacity: 0.5}).addTo(map);
+
+// Fit bounds initially to the Gamla Stan area
+map.fitBounds(L.latLngBounds(walkPoints).pad(0.2));
+
+</script>
+</body>
+</html>

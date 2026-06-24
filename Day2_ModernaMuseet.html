@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moderna Museet — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main); font-family: var(--font-body); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar { max-width: 820px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--accent-color); text-decoration: none; padding: 8px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); transition: all 0.2s ease; }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); padding: 7px 13px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25); }
+    .hero { position: relative; overflow: hidden; border-radius: 22px; margin-top: 8px; padding: 44px 34px 38px; background: linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%), var(--gradient-sweden); border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-lg); }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 180%; background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; position: relative; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(34px, 7vw, 52px); line-height: 1.05; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-sub { font-size: 15.5px; color: #e8eef6; max-width: 56ch; position: relative; line-height: 1.6; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; position: relative; font-size: 13px; color: #dbe6f2; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+    section { margin-top: 30px; }
+    .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 10px; }
+    h2 { font-family: var(--font-serif); font-weight: 600; font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 6px; }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+    .panel { background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 18px; padding: 26px 26px; box-shadow: var(--shadow-md); }
+    figure { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); box-shadow: var(--shadow-md); }
+    figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1424; }
+    figure.obj img { object-fit: contain; aspect-ratio: 4 / 3; background: radial-gradient(circle at 50% 35%, #1a2238 0%, #0c1322 100%); padding: 10px; }
+    figcaption { font-size: 11.5px; color: var(--text-muted); padding: 9px 14px; line-height: 1.45; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: -6px; }
+    .fact { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px 16px; }
+    .fact.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .fact.good { border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.06); }
+    .fact .lbl { font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .audio-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%); border: 1.5px solid rgba(212,175,55,0.35); border-radius: 18px; padding: 22px 24px; }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--bg-dark); text-decoration: none; padding: 13px 22px; border-radius: 50px; background: var(--gradient-gold); box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+    .focus-list { list-style: none; counter-reset: f; display: grid; gap: 12px; margin-top: 4px; }
+    .focus-list li { counter-increment: f; position: relative; padding: 16px 18px 16px 58px; background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; font-size: 14.5px; color: #d7dce4; }
+    .focus-list li::before { content: counter(f); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 9px; background: var(--gradient-gold); color: var(--bg-dark); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .focus-list li strong { color: #fff; }
+    .focus-list li .mins { color: var(--gold); font-weight: 600; font-size: 12.5px; }
+    .skip-note { margin-top: 14px; font-size: 13.5px; color: #d7dce4; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px 16px; }
+    .skip-note strong { color: #fca5a5; }
+    .value-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 14px 16px; }
+    .value-note strong { color: #34d399; }
+    .warn-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.28); border-radius: 12px; padding: 14px 16px; }
+    .warn-note strong { color: #fbbf24; }
+    .highlights { display: grid; gap: 14px; }
+    .hl { background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 20px; transition: border-color 0.25s, transform 0.25s; }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl .look { color: var(--gold); font-weight: 600; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .tag { font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; }
+    .tag.green { color: #6ee7b7; background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.35); }
+    .tag.amber { color: #fbbf24; background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.35); }
+    .zone { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); margin: 26px 0 4px; display: flex; align-items: center; gap: 8px; }
+    .zone::before { content: ''; width: 22px; height: 2px; background: var(--sweden-yellow); border-radius: 2px; }
+    .route { position: relative; padding-left: 28px; }
+    .route::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1)); }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before { content: ''; position: absolute; left: -28px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-dark); border: 2.5px solid var(--accent-color); }
+    .stop .time { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent-color); letter-spacing: 0.5px; }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 50px; background: var(--gradient-sweden); box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7); transition: transform 0.2s ease; }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+    @media (max-width: 560px) { .hero { padding: 34px 22px 30px; } .panel { padding: 22px 18px; } .audio-cta { padding: 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 2 · Sat Jun 27</span>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · Late Afternoon</div>
+      <h1>Moderna Museet</h1>
+      <p class="hero-sub">One of Europe's finest modernist collections, on Skeppsholmen island. For your taste: a confirmed <strong>Dalí</strong> crown jewel, the goat (<strong>Rauschenberg's <em>Monogram</em></strong>), and outdoor <strong>Picasso &amp; Niki de Saint Phalle</strong> that are free and always on view. ⚠️ The indoor collection is <strong>no longer free</strong> — one general-admission ticket (~170 SEK, 160 online) covers it; under-18 free.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Moderna+Museet%2C+Exercisplan+4%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff;">Exercisplan 4, Skeppsholmen ↗</a></span>
+        <span><span class="ic">🕗</span> Sat 10:00–18:00</span>
+        <span><span class="ic">🎟️</span> ~170 SEK adult (160 online) · under-18 free</span>
+      </div>
+    </header>
+
+    <!-- Photos -->
+    <section>
+      <div class="photo-grid">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Niki_de_Saint_Phalle_Paradiset.JPG/960px-Niki_de_Saint_Phalle_Paradiset.JPG"
+               alt="Niki de Saint Phalle & Jean Tinguely, Le Paradis fantastique, outdoor sculptures at Moderna Museet" loading="lazy">
+          <figcaption>
+            <span class="cap">Niki de Saint Phalle &amp; Tinguely — <em>Le Paradis fantastique</em> (1966), outdoors &amp; always free.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Niki_de_Saint_Phalle_Paradiset.JPG" target="_blank" rel="noopener">Bengt Oberger — CC BY 3.0</a></span>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pablo_Picasso_Frukost_i_det_grona_detalj.JPG/960px-Pablo_Picasso_Frukost_i_det_grona_detalj.JPG"
+               alt="Picasso, Déjeuner sur l'herbe, sandblasted concrete sculpture group at Moderna Museet" loading="lazy">
+          <figcaption>
+            <span class="cap">Picasso — <em>Déjeuner sur l'herbe</em> (1962, concrete), on the lawn; the guaranteed must-see Picasso.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Pablo_Picasso_Frukost_i_det_grona_detalj.JPG" target="_blank" rel="noopener">Bengt Oberger — CC BY 3.0</a></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact warn">
+          <div class="lbl">🎟️ Admission</div>
+          <div class="val">~170 SEK adult<small>160 SEK online. One general-admission ticket covers the collection + temporary shows (collection no longer free). Under-18 free · outdoor sculpture park always free.</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕗 Saturday Hours</div>
+          <div class="val">10:00–18:00<small>Mon closed · Tue to 20:00 · galleries clear a few min before close</small></div>
+        </div>
+        <div class="fact warn">
+          <div class="lbl">🔄 Rotation Risk</div>
+          <div class="val">Much is off-view<small>⚠️ Picasso's <em>Guitar Player</em> &amp; Matisse's <em>Apollon</em> are not on display (June 2026). Verify on the day.</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">📍 Location</div>
+          <div class="val"><a href="https://www.google.com/maps/search/?api=1&query=Moderna+Museet%2C+Exercisplan+4%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff; text-decoration:none; border-bottom:1px dotted var(--accent-color);">Exercisplan 4 ↗</a><small>Skeppsholmen · ~5-min walk from Café Blom · Google Maps</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🎧 Guide</div>
+          <div class="val">Web guide, no app<small>guide.modernamuseet.se · EN/SE audio · QR codes by works</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">⏱️ Your Slot</div>
+          <div class="val">~17:05–18:00<small>The 18:00 close gates the visit — out by ~17:50 for Ferry 82 (last ~18:36)</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio CTA -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">🎧</div>
+        <div class="txt">
+          <h3>Free web guide — no download</h3>
+          <p>Open <strong>guide.modernamuseet.se</strong> in your browser: audio in English &amp; Swedish, with QR codes beside selected works. Bring earbuds. Paper floor maps are at the front desk.</p>
+        </div>
+        <a class="audio-btn" href="https://guide.modernamuseet.se/stockholm/en/" target="_blank" rel="noopener">Open the guide →</a>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="panel">
+      <div class="eyebrow">What Kind of Place Is This?</div>
+      <h2>A modernist collection that rotates hard</h2>
+      <p>Moderna holds a world-class modern collection — anchored by a superb Surrealism and Duchamp holding — much of it gathered in the 1963 "Museum of Our Wishes" campaign. <strong>The catch:</strong> the collection rotates heavily, so any given painting may be in storage. The way to make a short late-afternoon visit reliably satisfying is to <strong>anchor it on the always-accessible outdoor works plus the confirmed-indoor Dalí and Monogram</strong>, and treat the rest as a bonus you confirm at the desk.</p>
+    </section>
+
+    <!-- Where to focus -->
+    <section class="panel">
+      <div class="eyebrow">Where to Focus</div>
+      <h2>~45–55 min (17:05–18:00) — spend it like this</h2>
+      <ol class="focus-list">
+        <li><strong>Dalí — <em>The Enigma of William Tell</em> (1933)</strong> <span class="mins">~10 min · top priority</span><br>Confirmed on view in the Surrealism room ("A Meeting of Opposites") — the single most important painting in the building.</li>
+        <li><strong>Rauschenberg — <em>Monogram</em> (1955–59)</strong> <span class="mins">~8 min</span><br>The goat with a tyre; confirmed in <strong>Study Gallery 08</strong>. The museum's emblem.</li>
+        <li><strong>The outdoor anchors</strong> <span class="mins">~10 min · free, always there</span><br>Picasso's concrete <em>Déjeuner sur l'herbe</em>, Niki de Saint Phalle &amp; Tinguely's <em>Le Paradis fantastique</em>, and Calder's <em>The Four Elements</em> — catch these on the way out.</li>
+        <li><strong>Bonus indoor (if on view)</strong> <span class="mins">~10 min if time</span><br>Duchamp's <em>Bicycle Wheel</em>, Miró, Léger, Brancusi, Oppenheim's fur cup — ask the desk which are up.</li>
+      </ol>
+      <div class="warn-note"><strong>Verify first:</strong> Picasso's <em>Joueur de guitare</em> and Matisse's <em>Apollon</em> are both flagged <em>not on display</em> as of June 2026 — don't promise a kid the cut-out collage. Ask at the desk: <em>"Is Study Gallery 08 open, and is anything from Picasso/Matisse on view today?"</em></div>
+      <div class="value-note"><strong>The reassuring part:</strong> even if every rotating painting is out, the outdoor Picasso, Niki de Saint Phalle and Calder are free and always there — so the visit can't be a wash. Great with a kid.</div>
+    </section>
+
+    <!-- Highlights -->
+    <section>
+      <div class="eyebrow">Highlights — and What to Look At</div>
+      <h2>The headliners</h2>
+
+      <div class="zone">Guaranteed · confirmed on view June 2026</div>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🎯</span> Dalí — <em>The Enigma of William Tell</em> (1933) <span class="tag green">On view</span></h3>
+          <p>The crown-jewel Surrealist painting — huge (201.5 × 346 cm); Dalí cast his own father and Lenin as Tell. Nearly never leaves the museum; likely the most important Dalí outside Spain/the US. <span class="look">→ Look at the elongated buttock propped on a crutch</span> — Dalí's deliberate provocation aimed at his father. In the "A Meeting of Opposites" Surrealism room.</p>
+        </div>
+        <div class="hl feature">
+          <h3><span class="hi">🐐</span> Rauschenberg — <em>Monogram</em> (1955–59) <span class="tag green">Study Gallery 08</span></h3>
+          <p>A stuffed Angora goat girdled by a car tyre, standing on a painted board — the "combine" that fuses painting and sculpture, and the emblem of the whole museum. <span class="look">→ Walk around it</span>; it's meant to be seen in the round.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🌿</span> Picasso — <em>Déjeuner sur l'herbe</em> (1962, concrete) <span class="tag green">Outdoors</span></h3>
+          <p>A monumental sandblasted concrete sculpture group on the lawn (executed by Carl Nesjar). <strong>Outdoors, always free, always on view — the guaranteed must-see Picasso.</strong></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🎠</span> Niki de Saint Phalle &amp; Tinguely — <em>Le Paradis fantastique</em> (1966) <span class="tag green">Outdoors</span></h3>
+          <p>Colourful bulbous figures playing against Tinguely's black machines — outdoors, free, always there. A big family favourite. Calder's <em>The Four Elements</em> (1961) standing mobile is outdoors too.</p>
+        </div>
+      </div>
+
+      <div class="zone">Bonus indoor · confirm at the desk</div>
+      <div class="highlights">
+        <div class="hl">
+          <h3><span class="hi">🚲</span> Duchamp — <em>Bicycle Wheel</em> (1913/1960) + Rotoreliefs</h3>
+          <p>Part of the best Duchamp holding outside Philadelphia. <span class="look">→ The original readymade idea</span>, paired with his spinning optical discs.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">☕</span> Meret Oppenheim — <em>Object</em> / fur cup &amp; saucer (1936)</h3>
+          <p>The fur-covered teacup — Surrealism's most famous object. Verify which version is up.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🖼️</span> Brancusi, Miró, Léger, Mondrian, de Chirico</h3>
+          <p>Brancusi's <em>Newborn II</em>, Miró's <em>Red Figure</em>, Léger's <em>The Staircase</em>, a Mondrian <em>Composition</em>, a de Chirico metaphysical cityscape — a strong early-modernist roll-call, rotation permitting.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🚫</span> Off-view as of June 2026 <span class="tag amber">Check</span></h3>
+          <p>Picasso's <em>Joueur de guitare</em> (1916, the flagship Cubist canvas) and Matisse's <em>Apollon</em> (1953, the big cut-out collage) are both flagged <em>not on display</em>. Don't count on them. Note: there's no Picasso "Spring" here, and the famous Munch oils / <em>The Scream</em> are in Oslo — Moderna's Munch is mainly prints.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Route -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route</div>
+      <h2>Fitted to the 17:05–18:00 slot</h2>
+      <div class="route">
+        <div class="stop"><div class="time">17:05 — At the desk</div><div class="what">Grab a floor map and ask: "Are Study Gallery 08 (Monogram) and the Surrealism room (Dalí) open, and is anything from Picasso/Matisse on view today?"</div></div>
+        <div class="stop"><div class="time">17:07 — Monogram, Study Gallery 08 (~8–10 min)</div><div class="what">The goat first — it's the emblem and a sure thing.</div></div>
+        <div class="stop"><div class="time">17:17 — Surrealism + Dalí's William Tell (~10 min)</div><div class="what">The crown jewel, plus the surrounding Surrealism room (Ernst, Man Ray, Miró, de Chirico).</div></div>
+        <div class="stop"><div class="time">17:27 — Bonus indoor, if on view (~10 min)</div><div class="what">Duchamp, Oppenheim, Léger/Brancusi/Miró — whatever the desk confirmed is up.</div></div>
+        <div class="stop"><div class="time">~17:45 — Begin exit; outdoors on the way</div><div class="what">Rooms close before 18:00. Catch Picasso's concrete <em>Déjeuner</em>, <em>Le Paradis fantastique</em> and Calder outside — free &amp; always there. <strong>Out by ~17:50 for Ferry 82 (last ~18:36).</strong></div></div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official <a href="https://www.modernamuseet.se/stockholm/en/visit-the-museum/" target="_blank" rel="noopener">visit page</a> (Sat 10:00–18:00, Tue to 20:00, Mon closed; general admission ~170 SEK/adult, 160 online, covering collection + temporary shows, under-18 free, free Fridays 18:00–20:00 [season ended 12 Jun 2026]), the collection database <a href="https://sis.modernamuseet.se/" target="_blank" rel="noopener">sis.modernamuseet.se</a> (on-view status re-checked: <em>Monogram</em> on view in Study Gallery 08; <em>Joueur de guitare</em> and <em>Apollon</em> not on display), and the web guide <a href="https://guide.modernamuseet.se/stockholm/en/" target="_blank" rel="noopener">guide.modernamuseet.se</a>. Named works corroborated by Britannica, Wikipedia and Google Arts &amp; Culture. <strong>Specific room placements at Moderna rotate — confirm with the floor map / web guide on the day.</strong></p>
+    </section>
+
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 2 Museum Guide</p>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stockholm City Hall — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main); font-family: var(--font-body); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar { max-width: 820px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--accent-color); text-decoration: none; padding: 8px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); transition: all 0.2s ease; }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); padding: 7px 13px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25); }
+    .hero { position: relative; overflow: hidden; border-radius: 22px; margin-top: 8px; padding: 44px 34px 38px; background: linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%), var(--gradient-sweden); border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-lg); }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 180%; background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; position: relative; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(34px, 7vw, 52px); line-height: 1.05; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-sub { font-size: 15.5px; color: #e8eef6; max-width: 56ch; position: relative; line-height: 1.6; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; position: relative; font-size: 13px; color: #dbe6f2; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+    section { margin-top: 30px; }
+    .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 10px; }
+    h2 { font-family: var(--font-serif); font-weight: 600; font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 6px; }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+    .panel { background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 18px; padding: 26px 26px; box-shadow: var(--shadow-md); }
+    figure { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); box-shadow: var(--shadow-md); }
+    figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1424; }
+    figure.tall img { aspect-ratio: 3 / 4; }
+    figcaption { font-size: 11.5px; color: var(--text-muted); padding: 9px 14px; line-height: 1.45; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: -6px; }
+    .fact { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px 16px; }
+    .fact.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .fact.good { border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.06); }
+    .fact .lbl { font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .audio-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%); border: 1.5px solid rgba(212,175,55,0.35); border-radius: 18px; padding: 22px 24px; }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--bg-dark); text-decoration: none; padding: 13px 22px; border-radius: 50px; background: var(--gradient-gold); box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+    .audio-btn.secondary { background: rgba(56,189,248,0.12); color: var(--accent-color); border: 1px solid rgba(56,189,248,0.3); box-shadow: none; }
+    .focus-list { list-style: none; counter-reset: f; display: grid; gap: 12px; margin-top: 4px; }
+    .focus-list li { counter-increment: f; position: relative; padding: 16px 18px 16px 58px; background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; font-size: 14.5px; color: #d7dce4; }
+    .focus-list li::before { content: counter(f); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 9px; background: var(--gradient-gold); color: var(--bg-dark); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .focus-list li strong { color: #fff; }
+    .focus-list li .mins { color: var(--gold); font-weight: 600; font-size: 12.5px; }
+    .skip-note { margin-top: 14px; font-size: 13.5px; color: #d7dce4; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px 16px; }
+    .skip-note strong { color: #fca5a5; }
+    .value-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 14px 16px; }
+    .value-note strong { color: #34d399; }
+    .highlights { display: grid; gap: 14px; }
+    .hl { background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 20px; transition: border-color 0.25s, transform 0.25s; }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl .look { color: var(--gold); font-weight: 600; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .zone { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); margin: 26px 0 4px; display: flex; align-items: center; gap: 8px; }
+    .zone::before { content: ''; width: 22px; height: 2px; background: var(--sweden-yellow); border-radius: 2px; }
+    .route { position: relative; padding-left: 28px; }
+    .route::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1)); }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before { content: ''; position: absolute; left: -28px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-dark); border: 2.5px solid var(--accent-color); }
+    .stop .time { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent-color); letter-spacing: 0.5px; }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 50px; background: var(--gradient-sweden); box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7); transition: transform 0.2s ease; }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+    @media (max-width: 560px) { .hero { padding: 34px 22px 30px; } .panel { padding: 22px 18px; } .audio-cta { padding: 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 4 · Mon Jun 29</span>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · Morning</div>
+      <h1>Stockholm City Hall</h1>
+      <p class="hero-sub">Not a museum but a working <strong>seat of government</strong> — and the home of the <strong>Nobel Prize banquet</strong>. Eight million hand-laid bricks, a hall lined with <strong>18 million gold mosaic tiles</strong>, and a 106-metre tower with the finest view in central Stockholm. Two experiences in sequence: the 09:50 tower climb and the 11:00 guided tour — both booked, with an espresso break between.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Stockholm+City+Hall+Hantverkargatan+1" target="_blank" rel="noopener" style="color:#fff;">Hantverkargatan 1, Kungsholmen ↗</a></span>
+        <span><span class="ic">🕙</span> Tower 09:50 · Tour 11:00</span>
+        <span><span class="ic">🎟️</span> Tower + tour both booked</span>
+      </div>
+    </header>
+
+    <!-- Photos -->
+    <section>
+      <div class="photo-grid">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Stadshuset_2009c.jpg/960px-Stadshuset_2009c.jpg"
+               alt="Stockholm City Hall and its tower seen from the water" loading="lazy">
+          <figcaption>
+            <span class="cap">The City Hall and its 106 m tower on the Riddarfjärden waterfront — one of Stockholm's defining silhouettes.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Stadshuset_2009c.jpg" target="_blank" rel="noopener">Holger Ellgaard — CC BY-SA 3.0</a></span>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Gyllene_salen_%28Golden_Hall%29_and_mosaic_of_M%C3%A4lardrottningen_-_Stockholms_stadshus_%2824763561251%29.jpg/960px-Gyllene_salen_%28Golden_Hall%29_and_mosaic_of_M%C3%A4lardrottningen_-_Stockholms_stadshus_%2824763561251%29.jpg"
+               alt="The Golden Hall with the Queen of Lake Mälaren mosaic" loading="lazy">
+          <figcaption>
+            <span class="cap">The Golden Hall — 18 million tiles, with the colossal Queen of Lake Mälaren on the north wall.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Gyllene_salen_(Golden_Hall)_and_mosaic_of_M%C3%A4lardrottningen_-_Stockholms_stadshus_(24763561251).jpg" target="_blank" rel="noopener">Jorge Láscar — CC BY 2.0</a></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact good">
+          <div class="lbl">🎟️ Building Tour</div>
+          <div class="val">Pre-booked ✓<small>Adult 150 SEK (~€14) · seniors/students 130 · youth 7–18 60 · under-7 free</small></div>
+        </div>
+        <div class="fact good">
+          <div class="lbl">🗼 Tower</div>
+          <div class="val">Pre-booked ✓<small>Adult 100 SEK (~€9) · under-11 free · 27 per slot — sells out</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕙 Your Slots</div>
+          <div class="val">Tower 09:50 · Tour 11:00<small>Tower ~35–45 min, tour ~45 min · espresso break between</small></div>
+        </div>
+        <div class="fact warn">
+          <div class="lbl">⚠️ Tower Climb</div>
+          <div class="val">Lift + 365 steps<small>Narrow, steep top section · no overtaking · can queue</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🚇 Getting There</div>
+          <div class="val">Rådhuset (Blue Line)<small>3-min walk · cave-like red rock metro art at the station</small></div>
+        </div>
+        <div class="fact warn">
+          <div class="lbl">📅 Booking</div>
+          <div class="val">1 week ahead<small>Tickets for Jun 29 release Jun 22 — book the moment they open</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking CTA -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">🎟️</div>
+        <div class="txt">
+          <h3>Guided-tour-only interior + self-guided tower</h3>
+          <p>There's no audio guide — the building is seen only on the 11:00 English guided tour (your guide is the guide). Both are booked — the tower is rolling self-guided entry, the building tour is the 11:00 English slot.</p>
+        </div>
+        <a class="audio-btn" href="https://stadshuset.stockholm/en/tickets-to-city-hall/" target="_blank" rel="noopener">Book tickets →</a>
+        <a class="audio-btn secondary" href="https://stadshuset.stockholm/en/visit-stockholm-city-hall/city-hall-tower/" target="_blank" rel="noopener">Tower info →</a>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="panel">
+      <div class="eyebrow">The Short Answer</div>
+      <h2>The Nobel banquet hall, and Stockholm's best view.</h2>
+      <p>Architect <strong>Ragnar Östberg</strong> spent over 20 years building it (1911–1923), and it's the masterwork of Swedish National Romanticism — a deliberate blend of Viking heritage, Italian Renaissance, and Byzantine grandeur in eight million dark-red bricks on the Riddarfjärden waterfront. The City Council still meets here. You see the interior only on a guided tour, which walks the rooms where the <strong>Nobel Prize banquet</strong> is held each December, then you climb the tower for a 360° panorama at 106 m.</p>
+    </section>
+
+    <!-- Where to focus -->
+    <section class="panel">
+      <div class="eyebrow">Where to Focus</div>
+      <h2>Two experiences, ~09:50–11:45 — spend it like this</h2>
+      <ol class="focus-list">
+        <li><strong>The Golden Hall</strong> <span class="mins">tour · top priority</span><br>18 million gold mosaics. The single most arresting room — give it your full attention and your camera. Look for the Queen of Lake Mälaren on the north wall.</li>
+        <li><strong>The Blue Hall</strong> <span class="mins">tour · don't miss</span><br>The Nobel banquet hall — cathedral-scale bare brick (despite the name) and Scandinavia's largest organ. Picture 1,300 guests descending the staircase.</li>
+        <li><strong>The tower panorama (106 m)</strong> <span class="mins">~35 min · best view in the city</span><br>Lift to the midway museum, then 365 steps to the top. Gamla Stan, Södermalm, Djurgården and Lake Mälaren laid out below.</li>
+        <li><strong>The Council Chamber</strong> <span class="mins">tour · quick</span><br>The inverted-Viking-ship timber ceiling — the kid's favourite room on the tour.</li>
+        <li><strong>The Prince's Gallery</strong> <span class="mins">tour · the Day 5 link</span><br>Prince Eugen's wall-length fresco of Stockholm's shores — the same prince whose home you visit tomorrow at Waldemarsudde.</li>
+      </ol>
+      <div class="skip-note"><strong>No skipping on the tour</strong> — it's a fixed ~45-min route through all four rooms, you can't peel off. On the tower, the midway Tower Museum is the one thing to drop if anyone's flagging before the 365-step climb.</div>
+      <div class="value-note"><strong>For the kid:</strong> the Council Chamber's Viking-ship ceiling and the Tre Kronor at the very top of the tower are the big hits. Let him set the pace on the steps — the top section is steep and narrow.</div>
+    </section>
+
+    <!-- The building tour -->
+    <section>
+      <div class="eyebrow">The Building Tour — and What to Look At</div>
+      <h2>~45 min · 11:00–11:45 · four great rooms</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">✨</span> The Golden Hall (Gyllene Salen)</h3>
+          <p>Lined floor-to-ceiling with 18 million gold mosaic tiles by Einar Forseth, Byzantine-inspired. This is where Nobel guests dance after the banquet. <span class="look">→ Find the Queen of Lake Mälaren on the north wall</span> — a colossal golden figure representing Stockholm, receiving tribute from East and West. Then read the side panels: Viking and medieval scenes in gold-and-glass.</p>
+        </div>
+        <div class="hl feature">
+          <h3><span class="hi">🟥</span> The Blue Hall (Blå Hallen)</h3>
+          <p>Not blue — Östberg loved the bare red brick and left it. This is the <strong>Nobel banquet hall</strong>: 1,500 m², 22 m high, ~1,300 guests each December. <span class="look">→ Look to the far wall for Scandinavia's largest organ (10,270 pipes), then up at the loggia</span> where the royal family watches from above.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">⛵</span> The Council Chamber</h3>
+          <p>Where the City Council meets ~20 times a year. <span class="look">→ Look up: the ceiling is carved timber modelled on an inverted Viking ship hull</span> — dark and dramatic. Deliberately intimate after the two great halls.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🖼️</span> The Prince's Gallery</h3>
+          <p>A long gallery with a wall-length true fresco, <em>Stockholm's Shores</em>, by <strong>Prince Eugen</strong>. <span class="look">→ Note it's painted straight onto the plaster, colours still fresh</span> — and remember it: his private home and studio is your Day 5 visit at Waldemarsudde.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The tower -->
+    <section>
+      <div class="eyebrow">The Tower — Separate Ticket</div>
+      <h2>~35–45 min · 09:50–10:35 · 106 m</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🗼</span> The 360° panorama (106 m)</h3>
+          <p>Broadly the finest elevated view in central Stockholm — better than any street-level point. <span class="look">→ Orient by water: Gamla Stan and Södermalm to the east/south, Lake Mälaren opening to the west.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">👑</span> The Tre Kronor (Three Crowns)</h3>
+          <p>Sweden's national symbol crowns the very top of the tower; you pass them on the way to the platform. The kid's photo.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🧱</span> The midway Tower Museum</h3>
+          <p>Reached by lift at the midway level — covers the City Hall's construction and Östberg's design process, including the original tower models. Worth ~5 min before the final climb.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🪜</span> The 365-step ascent</h3>
+          <p>From the midway museum it's stairs the rest of the way — narrow, winding, increasingly steep, no overtaking. <span class="look">→ Pace it; the top platform can queue if several groups arrive together.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2026 callout -->
+    <section class="panel">
+      <div class="eyebrow">Booked · 2026</div>
+      <h2>Both booked ✅ — tower 09:50, building tour 11:00</h2>
+      <p>Both City Hall tickets are booked (3 tickets each): the <strong>09:50</strong> tower slot and the <strong>11:00</strong> English building tour — ticket PDFs in your TICKETS folder. Just arrive <strong>5 minutes before</strong> each. Do the tower first, take an espresso break in Stadshusparken, then the tour — same site, ~2 min apart, no rush. The tower is open <strong>May–September only</strong>.</p>
+    </section>
+
+    <!-- Route -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route</div>
+      <h2>Fitted to the 09:50–11:45 block</h2>
+      <div class="route">
+        <div class="stop"><div class="time">09:45 — Arrive</div><div class="what">Rådhuset metro → City Hall (3 min). Glance at the red-rock cave art in the station on the way up. Be at the tower entrance 5 min before your 09:50 slot.</div></div>
+        <div class="stop"><div class="time">09:50 — Tower (~35–45 min)</div><div class="what">Lift to midway + Tower Museum (~5 min), then 365 steps past the Tre Kronor to the 360° platform at 106 m. Take your time.</div></div>
+        <div class="stop"><div class="time">10:35 — Espresso break</div><div class="what">Coffee at the City Hall café or relax in Stadshusparken with waterfront views over Riddarfjärden — no rush before the tour.</div></div>
+        <div class="stop"><div class="time">11:00 — Building tour (~45 min)</div><div class="what">Blue Hall → Golden Hall → Council Chamber → Prince's Gallery. Linger longest in the Golden Hall for photos.</div></div>
+        <div class="stop"><div class="time">11:45 — Exit</div><div class="what">Rådhuset metro (2 min) → Red Line to Tekniska Högskolan for the KTH campus visit.</div></div>
+      </div>
+    </section>
+
+    <!-- Practical -->
+    <section class="panel">
+      <div class="eyebrow">Practical Notes</div>
+      <div class="highlights">
+        <div class="hl">
+          <h3><span class="hi">💳</span> Tickets &amp; payment</h3>
+          <p>Building tour adult <strong>150 SEK (~€14)</strong> (seniors/students 130, youth 7–18 60, under-7 free); tower adult <strong>100 SEK (~€9)</strong> (under-11 free). Card payment. Book at stadshuset.stockholm via the entryevent.se shop.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">📸</span> Photography</h3>
+          <p>Permitted throughout the tour and tower. The Golden Hall mosaics photograph well — it's worth lingering there.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🚇</span> Metro art bonus</h3>
+          <p>Rådhuset (Blue Line, below City Hall) has dramatic cave-like red rock walls. Later in the day, Tekniska Högskolan (Red Line, by KTH) has copper-and-stone reliefs, and T-Centralen the famous blue cornflowers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official site <strong>stadshuset.stockholm</strong>: <a href="https://stadshuset.stockholm/en/visit-stockholm-city-hall/guided-tours/" target="_blank" rel="noopener">Guided tours</a> (English every 30 min 09:30–16:00 in late June; ~45 min; Blue Hall, Golden Hall, Council Chamber, Prince's Gallery; adult 150 SEK (~€14) / senior-student 130 / youth 7–18 60 / under-7 free), <a href="https://stadshuset.stockholm/en/visit-stockholm-city-hall/city-hall-tower/" target="_blank" rel="noopener">City Hall Tower</a> (100 SEK (~€9) adult / under-11 free; 27 per slot; 106 m; ~365 steps; slots 09:00 / 09:50 / 10:40 / 11:30 …; May–Sept), and <a href="https://stadshuset.stockholm/en/tickets-to-city-hall/" target="_blank" rel="noopener">Tickets</a> (released one week ahead; same-day at the City Hall Shop, Hantverkargatan 1, from 08:30). Building history corroborated by Wikipedia and VisitStockholm. <strong>Tour times and slot availability vary — confirm when booking.</strong></p>
+    </section>
+
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 4 Museum Guide</p>
+
+  </div>
+</body>
+</html>

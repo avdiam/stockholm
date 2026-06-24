@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skansen — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main); font-family: var(--font-body); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar { max-width: 820px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--accent-color); text-decoration: none; padding: 8px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); transition: all 0.2s ease; }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); padding: 7px 13px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25); }
+    .hero { position: relative; overflow: hidden; border-radius: 22px; margin-top: 8px; padding: 44px 34px 38px; background: linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%), var(--gradient-sweden); border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-lg); }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 180%; background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; position: relative; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(34px, 7vw, 52px); line-height: 1.05; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-sub { font-size: 15.5px; color: #e8eef6; max-width: 56ch; position: relative; line-height: 1.6; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; position: relative; font-size: 13px; color: #dbe6f2; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+    section { margin-top: 30px; }
+    .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 10px; }
+    h2 { font-family: var(--font-serif); font-weight: 600; font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 6px; }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+    .panel { background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 18px; padding: 26px 26px; box-shadow: var(--shadow-md); }
+    figure { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); box-shadow: var(--shadow-md); }
+    figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1424; }
+    figure.tall img { aspect-ratio: 3 / 4; }
+    figcaption { font-size: 11.5px; color: var(--text-muted); padding: 9px 14px; line-height: 1.45; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: -6px; }
+    .fact { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px 16px; }
+    .fact.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .fact.good { border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.06); }
+    .fact .lbl { font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .audio-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%); border: 1.5px solid rgba(212,175,55,0.35); border-radius: 18px; padding: 22px 24px; }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--bg-dark); text-decoration: none; padding: 13px 22px; border-radius: 50px; background: var(--gradient-gold); box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+    .audio-btn.secondary { background: rgba(56,189,248,0.12); color: var(--accent-color); border: 1px solid rgba(56,189,248,0.3); box-shadow: none; }
+    .focus-list { list-style: none; counter-reset: f; display: grid; gap: 12px; margin-top: 4px; }
+    .focus-list li { counter-increment: f; position: relative; padding: 16px 18px 16px 58px; background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; font-size: 14.5px; color: #d7dce4; }
+    .focus-list li::before { content: counter(f); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 9px; background: var(--gradient-gold); color: var(--bg-dark); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .focus-list li strong { color: #fff; }
+    .focus-list li .mins { color: var(--gold); font-weight: 600; font-size: 12.5px; }
+    .skip-note { margin-top: 14px; font-size: 13.5px; color: #d7dce4; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px 16px; }
+    .skip-note strong { color: #fca5a5; }
+    .value-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 14px 16px; }
+    .value-note strong { color: #34d399; }
+    .highlights { display: grid; gap: 14px; }
+    .hl { background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 20px; transition: border-color 0.25s, transform 0.25s; }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl .look { color: var(--gold); font-weight: 600; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .zone { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); margin: 26px 0 4px; display: flex; align-items: center; gap: 8px; }
+    .zone::before { content: ''; width: 22px; height: 2px; background: var(--sweden-yellow); border-radius: 2px; }
+    .route { position: relative; padding-left: 28px; }
+    .route::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1)); }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before { content: ''; position: absolute; left: -28px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-dark); border: 2.5px solid var(--accent-color); }
+    .stop .time { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent-color); letter-spacing: 0.5px; }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 50px; background: var(--gradient-sweden); box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7); transition: transform 0.2s ease; }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+    @media (max-width: 560px) { .hero { padding: 34px 22px 30px; } .panel { padding: 22px 18px; } .audio-cta { padding: 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 5 · Tue Jun 30</span>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · Morning</div>
+      <h1>Skansen</h1>
+      <p class="hero-sub">The <strong>world's oldest open-air museum</strong> (1891) and a Nordic zoo on the same 75 acres of Djurgården: 150+ historic buildings with costumed interpreters, plus <strong>brown bears, moose, wolverines and lynx</strong> you'll see almost nowhere else in Europe. Too big for two hours — this guide spends your 10:00–12:00 window on what matters.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Skansen+Djurg%C3%A5rdsv%C3%A4gen+Stockholm" target="_blank" rel="noopener" style="color:#fff;">Djurgårdsslätten 49–51, Djurgården ↗</a></span>
+        <span><span class="ic">🕙</span> Jun–Aug daily 10:00–18:00</span>
+        <span><span class="ic">🎟️</span> Pre-booked · 0–15 free</span>
+      </div>
+    </header>
+
+    <!-- Photos -->
+    <section>
+      <div class="photo-grid">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Skansen_Free_Air_Museum%2C_Stockholm_01.jpg/960px-Skansen_Free_Air_Museum%2C_Stockholm_01.jpg"
+               alt="An old timber house at Skansen open-air museum" loading="lazy">
+          <figcaption>
+            <span class="cap">A relocated timber house at Skansen — you walk the site like a landscape, not a gallery.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Skansen_Free_Air_Museum,_Stockholm_01.jpg" target="_blank" rel="noopener">Øyvind Holmstad — CC BY-SA 4.0</a></span>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Skogaholm_Manor_%28Skansen%2C_Stockholm%29.jpg/960px-Skogaholm_Manor_%28Skansen%2C_Stockholm%29.jpg"
+               alt="Skogaholm Manor, a relocated 18th-century manor house at Skansen" loading="lazy">
+          <figcaption>
+            <span class="cap">Skogaholm Manor — one of the grander relocated houses, an 18th-century Carolean estate.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Skogaholm_Manor_(Skansen,_Stockholm).jpg" target="_blank" rel="noopener">Chme82 — CC BY-SA 4.0</a></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact good">
+          <div class="lbl">🎟️ Admission</div>
+          <div class="val">Pre-booked ✓<small>Adult (16+) ~185–245 SEK (~€17–22) online (summer) · gate higher</small></div>
+        </div>
+        <div class="fact warn">
+          <div class="lbl">⚠️ Free Age</div>
+          <div class="val">0–15 free<small>Cutoff is 15 — no youth tier. At 16–17 your son pays full adult price here</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕙 Hours (Jun 30)</div>
+          <div class="val">10:00–18:00<small>Jun–Aug daily · you're in at opening, before the ~11:00 rush</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">⏱️ Your Slot</div>
+          <div class="val">10:00–12:00<small>Zoo first (animals active early), then craftsmen + Gubbhyllan</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🚌 Getting There</div>
+          <div class="val">Bus 67 direct<small>From Odenplan (~20 min) · or Tram 7 / Ferry 82 to Djurgården</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🦭 Check the Board</div>
+          <div class="val">Seal feeding<small>Set times posted at the entrance — reroute if it's in your window</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- App CTA -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">📱</div>
+        <div class="txt">
+          <h3>The Skansen app is your guide &amp; map</h3>
+          <p>Free GPS-supported map with themed walks plus animal and house info — download before you arrive (no audio tour, but the app is the equivalent here). A large printed map is at the entrance too.</p>
+        </div>
+        <a class="audio-btn" href="https://www.skansen.se/en/plan-your-visit/map/" target="_blank" rel="noopener">Map →</a>
+        <a class="audio-btn secondary" href="https://www.skansen.se/en/plan-your-visit/" target="_blank" rel="noopener">Plan your visit →</a>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="panel">
+      <div class="eyebrow">The Short Answer</div>
+      <h2>A whole vanished Sweden, plus the animals to match.</h2>
+      <p>Founded by Artur Hazelius in 1891 to preserve a rural Swedish way of life that was vanishing, Skansen relocated over 150 real buildings — farmsteads, a church, a whole 19th-century town quarter — from across the country and staffed them with interpreters in period dress. Wrapped around them is a zoo of native Nordic species. It's outdoors, hilly and big; the trick is to go straight to the zoo at opening while the animals are active, then loop through the craftsmen's quarter to Gubbhyllan, and not try to "finish" the park.</p>
+    </section>
+
+    <!-- Where to focus -->
+    <section class="panel">
+      <div class="eyebrow">Where to Focus</div>
+      <h2>~2h (10:00–12:00) — spend it like this</h2>
+      <ol class="focus-list">
+        <li><strong>The Nordic Zoo — go first</strong> <span class="mins">~35 min · top priority</span><br>Animals are active right at 10:00 opening. Brown bears and moose are the headline; wolverines, lynx and wolves if they're visible. This is the heart of the morning.</li>
+        <li><strong>The Craftsmen's Quarter</strong> <span class="mins">~15 min · don't miss</span><br>Glassblowers, potters, bakers working in period workshops. Watch the glassblowing; buy something warm from the bakery.</li>
+        <li><strong>Gubbhyllan brunch</strong> <span class="mins">~45 min · ~11:00</span><br>Skansen's from-scratch restaurant (homemade sausages, own-roasted coffee). Arrive on the early side — terrace fills fast in June.</li>
+        <li><strong>Moragården farmstead</strong> <span class="mins">~10 min · the original idea</span><br>The oldest complex on site (buildings from the 1300s) — what the whole museum was built to save. On the way back toward the exit.</li>
+        <li><strong>Children's Zoo / Sami camp</strong> <span class="mins">if time</span><br>Hands-on farm animals, or the Sami dwellings with reindeer-culture context — pick one if the morning's running well.</li>
+      </ol>
+      <div class="skip-note"><strong>If the bears or moose grip you, let it breathe</strong> — drop Moragården and the historic town. The zoo is the priority. <strong>Skip</strong> the aquarium entirely (separate ticket, not worth it in a 2-hour window).</div>
+      <div class="value-note"><strong>For the kid:</strong> the moose at close range and the Children's Zoo petting area are the big wins. The glassblowing demo in the craftsmen's quarter usually lands well too.</div>
+    </section>
+
+    <!-- The zoo -->
+    <section>
+      <div class="eyebrow">The Nordic Zoo — and What to Look For</div>
+      <h2>Native species you won't see elsewhere</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🐻</span> Brown bears</h3>
+          <p>Skansen's most iconic animals, in a large naturalistic enclosure. <span class="look">→ In summer mornings they're active — the image most visitors carry home. Enclosure is near the entrance, so it's your first stop.</span></p>
+        </div>
+        <div class="hl feature">
+          <h3><span class="hi">🫎</span> Moose (Älg)</h3>
+          <p>Sweden's national animal — and enormous up close. <span class="look">→ The scale of a bull moose is the moment photos never capture. Get the side-on view for size.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🦡</span> Wolverines &amp; lynx</h3>
+          <p>Both rarely seen in captivity outside Scandinavia. Wolverines are compact, muscular and restlessly energetic; the lynx is the elusive Nordic wildcat. Quick passes if they're out.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🐺</span> Wolves &amp; seals</h3>
+          <p>Wolves in a large forested enclosure, most active in the morning. Baltic grey seals and otters on the southern waterfront — <span class="look">→ seals are fed at set times; check the entrance board.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Historic buildings -->
+    <section>
+      <div class="eyebrow">The Historic Buildings — Key Stops</div>
+      <h2>What to seek out among 150+ houses</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🏚️</span> Moragården (Dalarna farmstead)</h3>
+          <p>The oldest and most atmospheric complex, with buildings from the <strong>1300s</strong>. <span class="look">→ This is what the whole museum was founded to preserve — main house, granaries and barns kept in period condition.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🔨</span> The Craftsmen's Quarter (Hantverksbyn)</h3>
+          <p>The most interactive area: glassblowers, potters, weavers, shoemakers and bakers at work. <span class="look">→ Watch the glassblowing; the bakery sells fresh bread and pastries.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🏘️</span> The 19th-century Town</h3>
+          <p>A reconstructed 1890s small town — pharmacy, schoolhouse, post office, bakery — with strong interpreters bringing the period to life.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">⛺</span> The Sami Camp</h3>
+          <p>Traditional Sami dwellings with context on Scandinavia's indigenous north — reindeer culture, dress and living practice. Respectfully presented.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2026 callout -->
+    <section class="panel">
+      <div class="eyebrow">Good to Know · 2026</div>
+      <h2>Free for under-16 — but not for a 16–17-year-old</h2>
+      <p>Skansen made <strong>children 0–15 free</strong> (book a complimentary ticket in advance), and dropped the reduced youth tier — so <strong>anyone 16 or over pays the full adult price</strong>. This is the one venue on your trip where being 16–17 means no discount (Vasa is 18-&amp;-under free, Nationalmuseum under-20, the others under-18/19). Buy online for the lower price; gate prices in peak summer run noticeably higher. The <strong>Skansen app</strong> doubles as your map and guide. Midsummer (Jun 23–25) was just before your visit — the festive decorations often linger into late June.</p>
+    </section>
+
+    <!-- Gubbhyllan -->
+    <section class="panel">
+      <div class="eyebrow">Lunch · Inside the Park</div>
+      <h2>Gubbhyllan — brunch around 11:00</h2>
+      <p>Skansen's from-scratch restaurant in a period building with a terrace: homemade sausages, pickles and ice cream, doughnuts to an old recipe, own-roasted coffee — a real cut above generic museum-café food. Open from 10:00. Arrive on the early side of 11:00 so the outdoor seating doesn't beat you, and it keeps the day on track for the 12:00 walk to Waldemarsudde. Flag the allergy: <strong>"Inga nötter, ingen fisk"</strong> — the kitchen is Swedish-traditional and the risk is lower than at international restaurants, but always say it.</p>
+    </section>
+
+    <!-- Route -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route</div>
+      <h2>Fitted to the 10:00–12:00 slot</h2>
+      <div class="route">
+        <div class="stop"><div class="time">10:00 — Enter, turn toward the zoo</div><div class="what">Don't linger at the map — the animals are most active now. Glance at the entrance board for seal-feeding times.</div></div>
+        <div class="stop"><div class="time">10:05 — Brown bears (~10 min)</div><div class="what">Near the entrance. The signature sight.</div></div>
+        <div class="stop"><div class="time">10:15 — Moose (~10 min)</div><div class="what">Close-range scale — the moment for photos.</div></div>
+        <div class="stop"><div class="time">10:25 — Wolverines + lynx + wolves (~15 min)</div><div class="what">Quick passes if they're visible.</div></div>
+        <div class="stop"><div class="time">10:40 — Walk to the historic section (~10 min)</div><div class="what">Across the park toward the craftsmen's quarter.</div></div>
+        <div class="stop"><div class="time">10:50 — Craftsmen's Quarter (~15 min)</div><div class="what">Glassblowing; grab something from the bakery.</div></div>
+        <div class="stop"><div class="time">11:05 — Gubbhyllan brunch (~45 min)</div><div class="what">Flag the allergy. Sit on the terrace if the weather's good.</div></div>
+        <div class="stop"><div class="time">11:50 — Moragården (~10 min)</div><div class="what">The 1300s farmstead, on the way back toward the exit.</div></div>
+        <div class="stop"><div class="time">12:00 — Exit</div><div class="what">Walk south ~15 min on Prins Eugens Väg to Waldemarsudde.</div></div>
+      </div>
+    </section>
+
+    <!-- Practical -->
+    <section class="panel">
+      <div class="eyebrow">Practical Notes</div>
+      <div class="highlights">
+        <div class="hl">
+          <h3><span class="hi">👟</span> Shoes &amp; weather</h3>
+          <p>Hilly, entirely outdoors, cobblestones in the historic section — comfortable shoes. Late June is warm (18–22°C) but can turn fast; pack a light layer.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">⏰</span> Beat the crowds</h3>
+          <p>Skansen fills from ~11:00. Being in at 10:00 opening is a genuine advantage, especially at the animal enclosures.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🐠</span> Skip the aquarium</h3>
+          <p>Skansen's aquarium (tropical fish, reptiles, monkeys) needs a separate ticket — not worth the detour in a 2-hour window.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official site <strong>skansen.se</strong>: <a href="https://www.skansen.se/en/plan-your-visit/opening-hours-and-prices/" target="_blank" rel="noopener">Opening hours &amp; prices</a> (Jun–Aug daily 10:00–18:00; adults 16+ ~185–245 SEK (~€17–22) online in summer, gate higher; children 0–15 free with pre-booked complimentary ticket — no youth tier), <a href="https://www.skansen.se/en/plan-your-visit/map/" target="_blank" rel="noopener">Map</a> and the <a href="https://www.skansen.se/en/plan-your-visit/" target="_blank" rel="noopener">Skansen app / plan your visit</a>, and the <a href="https://www.skansen.se/en/see-and-do/food-and-beverages/gubbhyllan/" target="_blank" rel="noopener">Gubbhyllan restaurant page</a>. Animals, historic buildings and Midsummer context corroborated by Wikipedia (Skansen) and VisitSweden. <strong>Animal visibility and seal-feeding times vary — check the entrance board on the day.</strong></p>
+    </section>
+
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 5 Museum Guide</p>
+
+  </div>
+</body>
+</html>

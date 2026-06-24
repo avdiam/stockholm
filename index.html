@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🇸🇪 Stockholm 2026 — Travel Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --bg-card-hover: rgba(26, 38, 68, 0.85);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(46, 117, 182, 0.3);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      
+      --gradient-primary: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      --gradient-accent: linear-gradient(135deg, #E07B39 0%, #9B59B6 100%);
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --accent-color: #38bdf8;
+      
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 10% 20%, rgba(30, 60, 114, 0.2) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(155, 89, 182, 0.15) 0px, transparent 50%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 0 60px 0;
+    }
+
+    /* ═══ HEADER ═══ */
+    header {
+      text-align: center;
+      padding: 22px 20px;
+      background: var(--gradient-sweden);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(254, 204, 0, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .flag-banner {
+      font-size: 30px;
+      margin-bottom: 4px;
+      display: inline-block;
+      animation: wave 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes wave {
+      0% { transform: rotate(-5deg) scale(1); }
+      100% { transform: rotate(5deg) scale(1.1); }
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 4px;
+    }
+
+    .dates {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--sweden-yellow);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hotel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+    }
+    
+    .hotel-badge a {
+      color: var(--sweden-yellow);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .hotel-badge a:hover {
+      text-decoration: underline;
+    }
+
+    /* ═══ PORTAL GRID ═══ */
+    .portal-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+
+    @media (max-width: 992px) {
+      .portal-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+    }
+
+    .panel-title span {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Glassmorphism Panel Container */
+    .glass-panel {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      transition: border-color 0.3s;
+    }
+    
+    .glass-panel:hover {
+      border-color: var(--border-accent);
+    }
+
+    /* ═══ DAY-BY-DAY LIST ═══ */
+    .days-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .day-card {
+      display: flex;
+      gap: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 14px;
+      padding: 16px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-card:hover {
+      transform: translateY(-2px);
+      background: var(--bg-card-hover);
+      border-color: rgba(56, 189, 248, 0.25);
+      box-shadow: 0 8px 24px -10px rgba(56, 189, 248, 0.3);
+    }
+
+    .day-num-box {
+      min-width: 65px;
+      height: 65px;
+      border-radius: 12px;
+      background: rgba(30, 60, 114, 0.4);
+      border: 1.5px solid var(--accent-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--font-display);
+    }
+
+    .day-num-box .num {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .day-num-box .lbl {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+
+    .day-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .day-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+      font-family: var(--font-display);
+    }
+
+    .day-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .day-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-display);
+    }
+
+    .btn-map {
+      background: rgba(16, 185, 129, 0.1);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-map:hover {
+      background: #10b981;
+      color: var(--bg-dark);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-card {
+      background: rgba(155, 89, 182, 0.1);
+      color: #d8b4fe;
+      border: 1px solid rgba(155, 89, 182, 0.3);
+    }
+
+    .btn-card:hover {
+      background: #9b59b6;
+      color: white;
+      box-shadow: 0 0 12px rgba(155, 89, 182, 0.4);
+    }
+
+    .btn-guide {
+      background: rgba(212, 175, 55, 0.1);
+      color: #f0c75e;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+
+    .btn-guide:hover {
+      background: #d4af37;
+      color: var(--bg-dark);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+    }
+
+    /* ═══ SIDEBAR PANELS ═══ */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    /* Allergy Card */
+    .allergy-panel {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(224, 123, 57, 0.1) 100%);
+      border: 1.5px solid rgba(239, 68, 68, 0.25);
+    }
+    
+    .allergy-title {
+      color: #fca5a5;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    .allergy-box {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      position: relative;
+      border: 1px solid rgba(239, 68, 68, 0.1);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .allergy-box:hover {
+      background: rgba(0, 0, 0, 0.45);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .allergy-phrase {
+      font-family: var(--font-display);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.3px;
+    }
+
+    .allergy-trans {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .copy-hint {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      color: var(--accent-color);
+      opacity: 0.6;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .copied-toast {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #10b981;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1000;
+    }
+
+    .copied-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Booking Checklist */
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: #e5e7eb;
+    }
+    
+    .checklist-item.done {
+      color: var(--text-muted);
+    }
+
+    .check-box {
+      font-size: 15px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .check-text {
+      flex: 1;
+    }
+
+    .check-text strong {
+      color: white;
+    }
+    
+    .checklist-item.done .check-text strong {
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .badge-booking {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .badge-confirmed {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    
+    .badge-action {
+      background: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    /* Vinyl Shops */
+    .vinyl-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+    .vinyl-item:last-child {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .vinyl-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .vinyl-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: white;
+      font-family: var(--font-display);
+    }
+
+    .vinyl-genre {
+      font-size: 9.5px;
+      background: rgba(155, 89, 182, 0.15);
+      color: #d8b4fe;
+      border: 1px solid rgba(155, 89, 182, 0.3);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .vinyl-hours, .vinyl-address, .vinyl-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .vinyl-address {
+      font-style: italic;
+      color: #93c5fd;
+    }
+    
+    .vinyl-note strong {
+      color: #fb7185;
+    }
+
+    /* Emergency & Quick Info Footer */
+    .quick-info-footer {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .info-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .info-icon {
+      font-size: 24px;
+      min-width: 40px;
+      height: 40px;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-color);
+    }
+
+    .info-content h4 {
+      font-family: var(--font-display);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .info-content p {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .info-content a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    .info-content a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- ═══ HEADER ═══ -->
+    <header>
+      <span class="flag-banner">🇸🇪</span>
+      <h1>STOCKHOLM 2026</h1>
+      <div class="dates">June 26 – July 1, 2026 &nbsp;·&nbsp; Family Travel Portal</div>
+      <div class="hotel-badge">
+        <span>🏨 Hotel:</span>
+        <a href="https://maps.google.com/?q=Vastmannagatan+61+B,+113+25+Stockholm" target="_blank">
+          ibis Styles Odenplan &nbsp;·&nbsp; Västmannagatan 61 B
+        </a>
+      </div>
+    </header>
+
+    <!-- ═══ PORTAL GRID ═══ -->
+    <div class="portal-layout">
+      
+      <!-- ═══ LEFT PANEL: DAYS MAP SELECTOR ═══ -->
+      <section class="glass-panel">
+        <h2 class="panel-title">🗺️ Interactive <span>Day-by-Day Route Maps</span></h2>
+        
+        <div class="days-list">
+          
+          <!-- Day 1 -->
+          <div class="day-card">
+            <div class="day-num-box">
+              <span class="num">01</span>
+              <span class="lbl">Fri</span>
+            </div>
+            <div class="day-details">
+              <h3 class="day-title">Day 1 — The Charm of Gamla Stan</h3>
+              <p class="day-desc">Arrival & check-in, lunch at Fuori di Pizza, vinyl records at Sound Pollution (must visit before 18:00!), and a scenic evening walking loop through Stortorget and Gamla Stan alleys, ending with dinner at Stockholms Gästabud.</p>
+              <div class="day-buttons">
+                <a href="Day 1 Map (Standalone).html" class="btn btn-map">🗺️ Map</a>
+                <a href="Day 1 Card.html" class="btn btn-card">📄 Travel Card</a>
+                <a href="Day1_NobelPrizeMuseum.html" class="btn btn-guide">📖 Nobel Museum Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 2 -->
+          <div class="day-card">
+            <div class="day-num-box">
+              <span class="num">02</span>
+              <span class="lbl">Sat</span>
+            </div>
+            <div class="day-details">
+              <h3 class="day-title">Day 2 — Royal History, Art &amp; Södermalm Views</h3>
+              <p class="day-desc">Morning Royal Palace guided tour (10:30) + the Royal Armoury (Erik XIV's parade armour &amp; the horse Streiff), lunch/visit at Nationalmuseum (Old Masters), fika at Café Blom on Skeppsholmen, and a spectacular sunset walk along Södermalm's high-cliffs (Skinnarviksberget &amp; Monteliusvägen).</p>
+              <div class="day-buttons">
+                <a href="Day 2 Map (Standalone).html" class="btn btn-map">🗺️ Map</a>
+                <a href="Day 2 Card.html" class="btn btn-card">📄 Travel Card</a>
+                <a href="Day2_RoyalPalace.html" class="btn btn-guide">📖 Royal Palace Guide</a>
+                <a href="Day2_RoyalArmoury.html" class="btn btn-guide">📖 Royal Armoury Guide</a>
+                <a href="Day2_Nationalmuseum.html" class="btn btn-guide">📖 Nationalmuseum Guide</a>
+                <a href="Day2_ModernaMuseet.html" class="btn btn-guide">📖 Moderna Museet Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 3 -->
+          <div class="day-card">
+            <div class="day-num-box">
+              <span class="num">03</span>
+              <span class="lbl">Sun</span>
+            </div>
+            <div class="day-details">
+              <h3 class="day-title">Day 3 — Maritime History &amp; A Perfect Circle</h3>
+              <p class="day-desc">⚠️ Sunday breakfast opens 08:00 — quick bite, then depart Odenplan 08:15. Early Vasa Museum (beat the crowds), Strandvägen promenade, Hallwyl Museum (self-guided — the English tour is Saturdays only), a stroll through Kungsträdgården &amp; its cave-art metro station (moved from Day 2), lunch at Vapiano (Santorini is closed Sun lunch), hotel rest, then ferry over to Gröna Lund for the A Perfect Circle concert! Tram 7 home — the ferry stops early evening.</p>
+              <div class="day-buttons">
+                <a href="Day 3 Map (Standalone).html" class="btn btn-map">🗺️ Map</a>
+                <a href="Day 3 Card.html" class="btn btn-card">📄 Travel Card</a>
+                <a href="Day3_Vasa.html" class="btn btn-guide">📖 Vasa Museum Guide</a>
+                <a href="Day3_Hallwylska.html" class="btn btn-guide">📖 Hallwyl Museum Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 4 -->
+          <div class="day-card">
+            <div class="day-num-box">
+              <span class="num">04</span>
+              <span class="lbl">Mon</span>
+            </div>
+            <div class="day-details">
+              <h3 class="day-title">Day 4 — City Hall, KTH, Vinyl &amp; SOAD Concert</h3>
+              <p class="day-desc">City Hall Tower climb first (09:50 — booked ✅), then the City Hall building tour (11:00 — booked ✅), visit to KTH Royal Institute campus, vinyl hunt at Nostalgipalatset, Mediterranean lunch at Cravings (Mykonos is closed Mondays), hotel rest, then to Strawberry Arena in Solna for System of a Down — doors 18:30, with Queens of the Stone Age &amp; Acid Bath on the bill!</p>
+              <div class="day-buttons">
+                <a href="Day 4 Map (Standalone).html" class="btn btn-map">🗺️ Map</a>
+                <a href="Day 4 Card.html" class="btn btn-card">📄 Travel Card</a>
+                <a href="Day4_CityHall.html" class="btn btn-guide">📖 City Hall Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 5 -->
+          <div class="day-card">
+            <div class="day-num-box">
+              <span class="num">05</span>
+              <span class="lbl">Tue</span>
+            </div>
+            <div class="day-details">
+              <h3 class="day-title">Day 5 — Skansen, Djurgården &amp; Gamla Stan by Night</h3>
+              <p class="day-desc">Gentle post-concert morning at Skansen Open-Air Museum, coastal walk to Waldemarsudde gallery, fika at Café Ektorpet, fire-grilled dinner at Eld, then a ferry back for a golden-hour stroll through Gamla Stan (Stortorget and the lamplit Old Town alleys), a booked last-evening dinner at Tradition (19:45), and a final lamplit Gamla Stan farewell stroll under the late-June sky.</p>
+              <div class="day-buttons">
+                <a href="Day 5 Map (Standalone).html" class="btn btn-map">🗺️ Map</a>
+                <a href="Day 5 Card.html" class="btn btn-card">📄 Travel Card</a>
+                <a href="Day5_Skansen.html" class="btn btn-guide">📖 Skansen Guide</a>
+                <a href="Day5_Waldemarsudde.html" class="btn btn-guide">📖 Waldemarsudde Guide</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Day 6 -->
+          <div class="day-card">
+            <div class="day-num-box">
+              <span class="num">06</span>
+              <span class="lbl">Wed</span>
+            </div>
+            <div class="day-details">
+              <h3 class="day-title">Day 6 — Last Swedish Morning &amp; Departure</h3>
+              <p class="day-desc">Breakfast at the hotel, then coffee &amp; a sweet at Pom &amp; Flora (Odengatan 39), grab buns at Fabrique, stroll Observatorielunden hilltop, check-out, and board the Pendeltåg commuter rail to Arlanda Airport for the flight home.</p>
+              <div class="day-buttons">
+                <a href="Day 6 Map (Standalone).html" class="btn btn-map">🗺️ Map</a>
+                <a href="Day 6 Card.html" class="btn btn-card">📄 Travel Card</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ RIGHT PANEL: SIDEBAR ═══ -->
+      <aside class="sidebar">
+        
+        <!-- Allergy Translation Card -->
+        <div class="glass-panel allergy-panel">
+          <h3 class="allergy-title">🚨 Nut &amp; Fish Allergy Cheat Sheet</h3>
+          <p style="font-size: 11.5px; color: #fca5a5; margin-bottom: 12px; line-height: 1.4;">
+            Tap either translation box below to instantly copy it to your clipboard for displaying to waiters or restaurant staff.
+          </p>
+          
+          <div class="allergy-box" onclick="copyText('Jag är allergisk mot nötter och fisk.', this)">
+            <div class="allergy-phrase">"Jag är allergisk mot nötter och fisk"</div>
+            <div class="allergy-trans">I am allergic to nuts and fish.</div>
+            <span class="copy-hint">Copy</span>
+          </div>
+
+          <div class="allergy-box" onclick="copyText('Inga nötter, ingen fisk.', this)">
+            <div class="allergy-phrase">"Inga nötter, ingen fisk"</div>
+            <div class="allergy-trans">No nuts, no fish.</div>
+            <span class="copy-hint">Copy</span>
+          </div>
+        </div>
+
+        <!-- Booking Checklist -->
+        <div class="glass-panel">
+          <h3 class="panel-title">✅ Booking &amp; Tickets <span>Checklist</span></h3>
+          
+          <div class="checklist">
+            
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>Royal Palace Tour &amp; Royal Armoury</strong>
+                <div class="badge-booking badge-confirmed">Confirmed (Day 2)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>Vasa Museum</strong>
+                <div class="badge-booking badge-confirmed">Confirmed (Day 3)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>Hallwyl Museum</strong>
+                <div class="badge-booking badge-confirmed">Confirmed (Day 3)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>A Perfect Circle Concert</strong>
+                <div class="badge-booking badge-confirmed">Gröna Lund (Day 3)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>System of a Down Concert</strong>
+                <div class="badge-booking badge-confirmed">Strawberry Arena (Day 4)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>Skansen Open-Air Museum</strong>
+                <div class="badge-booking badge-confirmed">Confirmed (Day 5)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>Waldemarsudde Gallery</strong>
+                <div class="badge-booking badge-confirmed">Open Ticket (Day 5)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>City Hall Tour &amp; Tower</strong>
+                <div class="badge-booking badge-confirmed">Confirmed (Day 4)</div>
+              </div>
+            </div>
+
+            <div class="checklist-item">
+              <span class="check-box">⬜</span>
+              <div class="check-text">
+                <strong>Nationalmuseum Entry</strong>
+                <div class="badge-booking badge-pending">Walk-in</div>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                  Under-20 free, adults ~160 SEK (~€15). Buy at door.
+                </div>
+              </div>
+            </div>
+
+            <div class="checklist-item">
+              <span class="check-box">⬜</span>
+              <div class="check-text">
+                <strong>SL 7-Day Transit Card</strong>
+                <div class="badge-booking badge-pending">Buy at Arlanda</div>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                  Pressbyrån or SL Center. Covers metro, bus, tram, ferry 82.
+                </div>
+              </div>
+            </div>
+
+            <div class="checklist-item">
+              <span class="check-box">⬜</span>
+              <div class="check-text">
+                <strong>Arlanda Rail Supplement</strong>
+                <div class="badge-booking badge-pending">Required</div>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                  ~120 SEK (~€11)/adult each way, on top of the SL Card (2026). <strong>Under-18 travels free (no fee for son)</strong>.
+                </div>
+              </div>
+            </div>
+
+            <div class="checklist-item">
+              <span class="check-box">⬜</span>
+              <div class="check-text">
+                <strong>Restaurant Reservations</strong>
+                <div class="badge-booking badge-pending">To Book</div>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                  ✅ Maestro (D2, 20:30) &amp; Tradition (D5, 19:45) booked. Optional: Grekiska G&amp;B (D4). Eld (D5) = walk-in. ⚠️ Gästabud is drop-in only — no booking.
+                </div>
+              </div>
+            </div>
+
+            <div class="checklist-item done">
+              <span class="check-box">🟢</span>
+              <div class="check-text">
+                <strong>Ear Protection</strong>
+                <div class="badge-booking badge-confirmed">Got Them</div>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                  For APC (Day 3) &amp; SOAD (Day 4) concerts.
+                </div>
+              </div>
+            </div>
+
+            <div class="checklist-item">
+              <span class="check-box">⬜</span>
+              <div class="check-text">
+                <strong>Travel Insurance</strong>
+                <div class="badge-booking badge-pending">Confirm</div>
+                <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                  Confirm family coverage before departure.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Vinyl Record Shops Directory -->
+        <div class="glass-panel">
+          <h3 class="panel-title">🎵 Stockholm <span>Vinyl Shop Guide</span></h3>
+          
+          <div class="vinyl-shops">
+            
+            <div class="vinyl-item">
+              <div class="vinyl-header">
+                <span class="vinyl-name">Sound Pollution</span>
+                <span class="vinyl-genre">Metal / Punk</span>
+              </div>
+              <div class="vinyl-address">Stora Nygatan 18, Gamla Stan</div>
+              <div class="vinyl-hours">Hours: Mon-Fri 11:00-18:00 · Sat 11:00-16:00 · Sun 12:00-16:00</div>
+              <div class="vinyl-note"><strong>Best Time:</strong> Day 1 (Fri) — Must go immediately after check-in, closes at 18:00!</div>
+            </div>
+
+            <div class="vinyl-item">
+              <div class="vinyl-header">
+                <span class="vinyl-name">Nostalgipalatset</span>
+                <span class="vinyl-genre">All Rock / Prog</span>
+              </div>
+              <div class="vinyl-address">S:t Eriksgatan 101, Vasastan</div>
+              <div class="vinyl-hours">Hours: Mon-Fri 11:00-19:00 · Sat 11:00-16:00</div>
+              <div class="vinyl-note"><strong>Best Time:</strong> Day 4 (Mon) — Visited after KTH, then on toward lunch at Cravings near Odenplan.</div>
+            </div>
+
+            <div class="vinyl-item">
+              <div class="vinyl-header">
+                <span class="vinyl-name">Pet Sounds</span>
+                <span class="vinyl-genre">Indie / Pop / Used</span>
+              </div>
+              <div class="vinyl-address">Skånegatan 53, Södermalm</div>
+              <div class="vinyl-hours">Hours: Mon-Fri 11:00-19:00 · Sat 11:00-17:00 · Sun 12:00-16:00</div>
+              <div class="vinyl-note"><strong>Status:</strong> Not scheduled (closes 17:00 on Saturdays, so Day 2 evening visit is not viable).</div>
+            </div>
+
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- ═══ QUICK INFO FOOTER ═══ -->
+    <footer class="quick-info-footer">
+      
+      <div class="info-card">
+        <div class="info-icon">🇸🇪</div>
+        <div class="info-content">
+          <h4>Language &amp; Cashless</h4>
+          <p>Sweden is almost 100% cashless. Bring debit/credit cards. Tap is everywhere.</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">💧</div>
+        <div class="info-content">
+          <h4>Tap Water</h4>
+          <p>TAP water is exceptionally clean &amp; safe. Bring refillable bottles.</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">📞</div>
+        <div class="info-content">
+          <h4>Emergency Contacts</h4>
+          <p>Call <strong>112</strong> for EU emergency services. Apoteket is the green pharmacy.</p>
+        </div>
+      </div>
+
+    </footer>
+
+  </div>
+
+  <!-- Toast Element -->
+  <div id="copied-toast" class="copied-toast">Copied phrase to clipboard! 📋</div>
+
+  <!-- JavaScript for Copy Helper -->
+  <script>
+    function copyText(text, element) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById("copied-toast");
+        toast.className = "copied-toast show";
+        setTimeout(() => {
+          toast.className = "copied-toast";
+        }, 2000);
+      }).catch(err => {
+        console.error('Could not copy text: ', err);
+      });
+    }
+  </script>
+
+</body>
+</html>

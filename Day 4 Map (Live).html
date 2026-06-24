@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 4 — Stockholm Route (Live Map)</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#1a2a3a;padding:14px;min-height:100vh}
+h1{text-align:center;font-size:19px;font-weight:800;color:#1F3864;letter-spacing:.5px;margin-bottom:3px}
+.subtitle{text-align:center;font-size:12px;color:#666;margin-bottom:5px}
+.note{text-align:center;font-size:11px;color:#0a4a7a;background:#d6eaf8;border-radius:6px;padding:5px 10px;margin-bottom:12px;max-width:720px;margin-left:auto;margin-right:auto}
+.layout{display:flex;gap:12px;max-width:1100px;margin:0 auto;height:85vh}
+
+/* Map Panel Styles */
+.map-panel{flex:1.3;background:white;border-radius:14px;padding:12px;border:1.5px solid #aac8e4;display:flex;flex-direction:column}
+.map-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+#map {flex:1; width:100%; border-radius:8px; border:1px solid #ccc; z-index: 1;}
+
+/* Timeline Styles */
+.tl-panel{flex:0.7;display:flex;flex-direction:column}
+.tl-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+.tl-scroll{display:flex;flex-direction:column;gap:4px;overflow-y:auto;padding-right:3px}
+.tl-item{display:flex;gap:7px;background:white;border-radius:8px;padding:8px 10px;border-left:4px solid #ccc;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tl-item:hover{transform:translateX(2px);box-shadow:2px 3px 10px rgba(0,0,0,.1)}
+.tl-item.active{box-shadow:0 0 0 2.5px #E07B39;transform:translateX(2px)}
+
+.phase-label{font-size:10px;font-weight:800;color:white;padding:3px 8px;border-radius:5px;margin:4px 0 2px;text-align:center}
+.ph0{background:#1F3864}
+.ph1{background:#2E86C1}
+.ph2{background:#E74C3C}
+.ph3{background:#C9A84C}
+.ph4{background:#8E44AD}
+
+.tl-em{font-size:15px;min-width:20px;line-height:1.6}
+.tl-body{flex:1}
+.tl-name{font-size:11.5px;font-weight:700;color:#1a2a3a}
+.tl-time{font-size:9.5px;color:#888;margin-top:1px;font-weight:600}
+.tl-desc{font-size:10px;color:#555;margin-top:3px;line-height:1.4}
+
+.cat-hotel{border-color:#C9A84C}
+.cat-food{border-color:#E07B39}
+.cat-sight{border-color:#5BAD6F}
+.cat-tower{border-color:#1F3864}
+.cat-vinyl{border-color:#9B59B6}
+.cat-transit{border-color:#2E75B6}
+.cat-concert{border-color:#8E44AD}
+.cat-rest{border-color:#C9A84C}
+
+/* Legend */
+.legend{display:flex;gap:9px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#444}
+.leg-dot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,0.1)}
+</style>
+</head>
+<body>
+
+<h1>🇸🇪 Day 4 — City Hall, KTH, Vinyl &amp; SOAD</h1>
+<div class="subtitle">Monday, June 29 &nbsp;·&nbsp; Live OpenStreetMap Integrated Route</div>
+<div class="note">📌 Click any stop in the timeline to pan the map. Tower (09:50) and building tour (11:00) are both booked ✅ — tower first, then the tour.</div>
+
+<div class="layout">
+  <div class="map-panel">
+    <div class="map-lbl">📍 LIVE ROUTE MAP — STOCKHOLM & SOLNA</div>
+    <div id="map"></div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#1F3864"></div>City Hall</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#2E86C1"></div>KTH</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#9B59B6"></div>Vinyl</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#8E44AD"></div>Concert</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E07B39"></div>Food</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#C9A84C"></div>Hotel</div>
+    </div>
+  </div>
+
+  <div class="tl-panel">
+    <div class="tl-lbl">🕐 TIMELINE</div>
+    <div class="tl-scroll" id="tl"></div>
+  </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// Data with Real Coordinates
+const stops=[
+  {id:0, lat: 59.3424, lng: 18.0468, e:"🏨", n:"Depart Odenplan",               t:"09:15",          c:"hotel",   ph:0, d:"Start point at ibis Styles Stockholm Odenplan (Västmannagatan 61 B). Metro to Rådhuset — be at the tower by 09:45."},
+  {id:1, lat: 59.3275, lng: 18.0548, e:"🗼", n:"City Hall Tower ✅",             t:"09:50 – 10:35",  c:"tower",   ph:0, d:"Booked 09:50 slot (arrive 5 min early). Tower FIRST today — lift halfway, 365 steps, Tower Museum, 360° view. Adult 100 SEK (~€9)."},
+  {id:2, lat: 59.3275, lng: 18.0548, e:"🏛️", n:"City Hall — Building Tour ✅",   t:"11:00 – 11:45",  c:"tower",   ph:0, d:"Espresso break in Stadshusparken after the tower, then the booked 11:00 English tour: Blue Hall & Golden Hall, ~45 min."},
+  {id:3, lat: 59.3473, lng: 18.0732, e:"🏛️", n:"KTH Royal Institute of Tech.",   t:"12:00 – 13:00",  c:"sight",   ph:1, d:"Campus highlights: Library, Clock Tower, and R1 Reactor Hall history."},
+  {id:4, lat: 59.3418, lng: 18.0378, e:"🎵", n:"Nostalgipalatset Vinyl",         t:"13:15 – 13:45",  c:"vinyl",   ph:2, d:"S:t Eriksgatan 101. Best vinyl shop in town. Open Mon 11:00–19:00. A focused 30-min dig to protect the post-lunch rest."},
+  {id:5, lat: 59.3448, lng: 18.0462, e:"🍽️", n:"Cravings Mediterranean (lunch)", t:"14:00 – 15:00",  c:"food",    ph:2, d:"Upplandsgatan 73, by Odenplan (~12-min walk from the shop). Mediterranean sharing plates (Mykonos is closed Mon). Say 'Inga nötter, ingen fisk'."},
+  {id:6, lat: 59.3424, lng: 18.0468, e:"🛏️", n:"Rest at Hotel",                 t:"15:15 – 17:00",  c:"rest",    ph:3, d:"Short walk back to hotel and recharge before the concert."},
+  {id:7, lat: 59.3695, lng: 18.0035, e:"🍽️", n:"Grekiska Grill & Bar",           t:"17:30 – 18:15",  c:"food",    ph:4, d:"Quick, light pre-show souvlaki in Solna (Arenastaden)."},
+  {id:8, lat: 59.3705, lng: 18.0003, e:"🤘", n:"SOAD at Strawberry Arena ✅",    t:"18:30+",         c:"concert", ph:4, d:"Doors 18:30. Acid Bath → Queens of the Stone Age → System of a Down. Head in promptly! Bring ear protection."}
+];
+
+const phases=[
+  {label:"① MORNING — City Hall & Tower",   cls:"ph0"},
+  {label:"② EAST — KTH Royal Institute",    cls:"ph1"},
+  {label:"③ VINYL + LUNCH near Odenplan",   cls:"ph2"},
+  {label:"④ REST at Hotel",                 cls:"ph3"},
+  {label:"⑤ NORTH — Solna & SOAD Concert", cls:"ph4"},
+];
+
+const colorMap = { hotel:'#C9A84C', food:'#E07B39', sight:'#5BAD6F', tower:'#1F3864', vinyl:'#9B59B6', transit:'#2E75B6', concert:'#8E44AD', rest:'#C9A84C' };
+
+// Initialize Map
+const map = L.map('map').setView([59.345, 18.045], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+const markers = {};
+
+// Build Timeline and Add Map Markers
+const tl = document.getElementById('tl');
+let curPh = -1;
+
+stops.forEach(s => {
+  // Add Phase Headers
+  if(s.ph !== curPh){
+    curPh = s.ph;
+    const p = document.createElement('div');
+    p.className = 'phase-label ' + phases[s.ph].cls;
+    p.textContent = phases[s.ph].label;
+    tl.appendChild(p);
+  }
+
+  // Add Timeline Item
+  const item = document.createElement('div');
+  item.className = `tl-item cat-${s.c}`;
+  item.dataset.id = s.id;
+  item.innerHTML = `<div class="tl-em">${s.e}</div><div class="tl-body"><div class="tl-name">${s.n}</div><div class="tl-time">${s.t}</div><div class="tl-desc">${s.d}</div></div>`;
+  tl.appendChild(item);
+
+  // Add Marker to Map
+  const marker = L.circleMarker([s.lat, s.lng], {
+    radius: 8,
+    fillColor: colorMap[s.c],
+    color: "#fff",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.9
+  }).addTo(map);
+
+  marker.bindPopup(`<b>${s.e} ${s.n}</b><br>${s.t}`);
+  markers[s.id] = marker;
+
+  // Click on Marker
+  marker.on('click', () => {
+    highlightItem(s.id);
+  });
+
+  // Click on Timeline Item
+  item.addEventListener('click', () => {
+    highlightItem(s.id);
+    map.panTo([s.lat, s.lng]);
+    marker.openPopup();
+  });
+});
+
+function highlightItem(id) {
+  document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('active'));
+  const el = document.querySelector(`.tl-item[data-id="${id}"]`);
+  if(el) {
+    el.classList.add('active');
+    el.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+// Draw Route Lines (Simplified Connections)
+const routeCoords = stops.map(s => [s.lat, s.lng]);
+L.polyline(routeCoords, {color: '#1F3864', weight: 2, dashArray: '5, 10', opacity: 0.5}).addTo(map);
+
+</script>
+</body>
+</html>

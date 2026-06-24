@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 6 — Last Morning & Departure</title>
+<!-- Leaflet CSS for the map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#1a2a3a;padding:14px;min-height:100vh}
+h1{text-align:center;font-size:19px;font-weight:800;color:#1F3864;letter-spacing:.5px;margin-bottom:3px}
+.subtitle{text-align:center;font-size:12px;color:#666;margin-bottom:5px}
+.note{text-align:center;font-size:11px;color:#3d0a5c;background:#ede0f5;border-radius:6px;padding:5px 10px;margin-bottom:12px;max-width:760px;margin-left:auto;margin-right:auto}
+.layout{display:flex;gap:12px;max-width:1100px;margin:0 auto;height:85vh}
+.map-panel{flex:1.3;background:#fff;border-radius:14px;padding:12px;border:1.5px solid #aac8e4;display:flex;flex-direction:column}
+.map-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+
+/* Map Container */
+#map {
+  flex: 1;
+  width: 100%;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.legend{display:flex;gap:9px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#444}
+.leg-dot{width:10px;height:10px;border-radius:50%;border:2px solid white;flex-shrink:0;box-shadow: 0 1px 3px rgba(0,0,0,0.2)}
+
+.tl-panel{flex:0.9;display:flex;flex-direction:column}
+.tl-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+.tl-scroll{display:flex;flex-direction:column;gap:4px;overflow-y:auto;padding-right:3px}
+.tl-item{display:flex;gap:7px;background:white;border-radius:8px;padding:8px 10px;border-left:4px solid #ccc;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tl-item:hover{transform:translateX(2px);box-shadow:2px 3px 10px rgba(0,0,0,.1)}
+.tl-item.active{box-shadow:0 0 0 2.5px #8E44AD;transform:translateX(2px)}
+.phase-label{font-size:10px;font-weight:800;color:white;padding:3px 8px;border-radius:5px;margin:4px 0 2px;text-align:center}
+.ph0{background:#E07B39}.ph1{background:#27AE60}.ph2{background:#8E44AD}
+.tl-em{font-size:15px;min-width:20px;line-height:1.6}
+.tl-body{flex:1}
+.tl-name{font-size:11.5px;font-weight:700;color:#1a2a3a}
+.tl-time{font-size:9.5px;color:#888;margin-top:1px;font-weight:600}
+.tl-desc{font-size:10px;color:#555;margin-top:3px;line-height:1.4}
+.cat-hotel{border-color:#C9A84C}.cat-food{border-color:#E07B39}.cat-stroll{border-color:#27AE60}
+.cat-transit{border-color:#8E44AD}.cat-depart{border-color:#1F3864}
+
+/* Custom Marker Styling */
+.custom-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .layout { flex-direction: column; height: auto; }
+  #map { height: 350px; flex: none; }
+  .tl-scroll { max-height: 500px; }
+}
+</style>
+</head>
+<body>
+<h1>🇸🇪 Day 6 — Last Swedish Morning &amp; Departure</h1>
+<div class="subtitle">Wednesday, July 1 &nbsp;·&nbsp; Hotel Breakfast → Pom &amp; Flora → Fabrique → Farewell Stroll → Check-out → Pendeltåg → Arlanda ✈️</div>
+<div class="note">🏠 <strong>Interactive Map:</strong> Zoom in on Odenplan for breakfast details or zoom out to see the route north to Arlanda Airport. Pins are synced with the timeline.</div>
+
+<div class="layout">
+  <div class="map-panel">
+    <div class="map-lbl">📍 INTERACTIVE ROUTE — Odenplan to Arlanda</div>
+    <div id="map"></div>
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#C9A84C"></div>Hotel</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E07B39"></div>Food</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#27AE60"></div>Stroll</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#8E44AD"></div>Transit</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#1F3864"></div>Arlanda ✈️</div>
+    </div>
+  </div>
+
+  <div class="tl-panel">
+    <div class="tl-lbl">🕐 TIMELINE — Click map pins or items</div>
+    <div class="tl-scroll" id="tl"></div>
+
+    <div style="margin-top:12px;background:linear-gradient(135deg,#1F3864,#2E75B6);border-radius:10px;padding:14px;color:white;text-align:center">
+      <div style="font-size:22px;margin-bottom:6px">🇸🇪</div>
+      <div style="font-size:13px;font-weight:800;letter-spacing:.5px;margin-bottom:5px">Hej då, Stockholm!</div>
+      <div style="font-size:10.5px;opacity:.9;line-height:1.6">
+        6 days · 2 concerts · 1 warship ·<br>
+        countless meatballs · 3 vinyl shops ·<br>
+        infinite memories.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// 1. Data Setup
+const phases=[
+  {label:"① BREAKFAST — Odenplan Neighbourhood",   cls:"ph0"},
+  {label:"② FAREWELL STROLL — Two options",        cls:"ph1"},
+  {label:"③ DEPARTURE — Pendeltåg to Arlanda",     cls:"ph2"},
+];
+
+const stops=[
+  {id:0, e:"🍳", n:"Breakfast at Hotel (ibis Styles)", t:"08:00 – 08:45", c:"hotel", ph:0, lat: 59.3424, lng: 18.0468, d:"Last morning. Included hotel buffet (opens 06:30 Wed) — a relaxed first course before heading out. Everything today is within 5 minutes' walk."},
+  {id:1, e:"☕", n:"Pom & Flora (coffee & a sweet)", t:"09:00 – 09:45", c:"food", ph:0, lat: 59.3447, lng: 18.0588, d:"Odengatan 39. Coffee with a pastry or a fresh bowl. Opens 07:00; first-come, first-served — no reservations."},
+  {id:2, e:"🥐", n:"Fabrique Bakery", t:"10:00 – 10:15", c:"food", ph:0, lat: 59.3423, lng: 18.0493, d:"Odengatan 77, right by Odenplan. Pick up cardamom buns for the road."},
+  {id:3, e:"🌿", n:"Observatorielunden Park", t:"10:15 – 10:45", c:"stroll", ph:1, lat: 59.3419, lng: 18.0545, d:"Beautiful hilltop greenery. Great spot for a final city view."},
+  {id:6, e:"🧳", n:"Check-out & Pack Up", t:"10:45 – 11:15", c:"hotel", ph:2, lat: 59.3424, lng: 18.0468, d:"Back to ibis Styles to check out. Final bag check — passports, chargers, souvenirs, vinyl records!"},
+  {id:4, e:"🚆", n:"Odenplan Station", t:"11:15 depart", c:"transit", ph:2, lat: 59.3429, lng: 18.0496, d:"Pendeltåg direction Uppsala C (~38 min), departs ~every 30 min. Aim for the 11:15 — next is ~30 min later."},
+  {id:5, e:"✈️", n:"Arlanda Airport", t:"~12:00 arrival", c:"depart", ph:2, lat: 59.6519, lng: 17.9186, d:"Flight departs at 13:50. Safe travels!"},
+];
+
+const colorMap = {hotel:'#C9A84C', food:'#E07B39', stroll:'#27AE60', transit:'#8E44AD', depart:'#1F3864'};
+
+// 2. Initialize Map
+const map = L.map('map').setView([59.343, 18.053], 15);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap'
+}).addTo(map);
+
+// 3. Populate Timeline & Add Markers
+const tl = document.getElementById('tl');
+const markers = {};
+let curPh = -1;
+
+stops.forEach(s => {
+  // Add Phase Header
+  if(s.ph !== curPh){
+    curPh = s.ph;
+    const p = document.createElement('div');
+    p.className = 'phase-label ' + phases[s.ph].cls;
+    p.textContent = phases[s.ph].label;
+    tl.appendChild(p);
+  }
+
+  // Create Timeline Item
+  const d = document.createElement('div');
+  const catClass = 'cat-' + s.c;
+  d.className = `tl-item ${catClass}`;
+  d.dataset.id = s.id;
+  d.innerHTML = `<div class="tl-em">${s.e}</div><div class="tl-body"><div class="tl-name">${s.n}</div><div class="tl-time">${s.t}</div><div class="tl-desc">${s.d}</div></div>`;
+  tl.appendChild(d);
+
+  // Add Map Marker
+  const customIcon = L.divIcon({
+    className: 'custom-div-icon',
+    html: `<div class="custom-marker" style="background-color:${colorMap[s.c]}; width:30px; height:30px; line-height:30px; text-align:center; border-radius:50%; border:2px solid #fff;">${s.e}</div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15]
+  });
+
+  const marker = L.marker([s.lat, s.lng], {icon: customIcon}).addTo(map)
+    .bindPopup(`<b>${s.n}</b><br>${s.t}<br>${s.d}`);
+
+  markers[s.id] = marker;
+
+  // Interactivity: Marker -> Timeline
+  marker.on('click', () => {
+    highlightTimeline(s.id);
+  });
+
+  // Interactivity: Timeline -> Marker
+  d.addEventListener('click', () => {
+    highlightTimeline(s.id);
+    map.flyTo([s.lat, s.lng], 16);
+    marker.openPopup();
+  });
+});
+
+function highlightTimeline(id) {
+  document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('active'));
+  const target = document.querySelector(`.tl-item[data-id="${id}"]`);
+  if(target) {
+    target.classList.add('active');
+    target.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+// Adjust view if Arlanda is clicked to show the long distance
+markers[5].on('click', () => map.fitBounds([[59.34, 18.05], [59.65, 17.91]]));
+
+</script>
+</body>
+</html>

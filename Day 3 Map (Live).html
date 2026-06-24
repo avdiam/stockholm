@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 3 — Stockholm Route</title>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#1a2a3a;padding:14px;min-height:100vh}
+h1{text-align:center;font-size:19px;font-weight:800;color:#1F3864;letter-spacing:.5px;margin-bottom:3px}
+.subtitle{text-align:center;font-size:12px;color:#666;margin-bottom:5px}
+.warning{text-align:center;font-size:11px;color:#8a4a00;background:#fff3cd;border-radius:6px;padding:5px 10px;margin-bottom:12px;max-width:700px;margin-left:auto;margin-right:auto}
+.layout{display:flex;gap:12px;max-width:1100px;margin:0 auto;height:85vh}
+
+/* Map Panel Styles */
+.map-panel{flex:1.3;background:#fff;border-radius:14px;padding:12px;border:1.5px solid #aac8e4;display:flex;flex-direction:column}
+.map-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+#map {flex: 1; border-radius: 8px; z-index: 1;}
+
+.legend{display:flex;gap:9px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#444}
+.leg-dot{width:10px;height:10px;border-radius:50%;border:2px solid white;box-shadow: 0 1px 3px rgba(0,0,0,0.2);flex-shrink:0}
+.leg-line{width:22px;height:3px;border-radius:2px;flex-shrink:0}
+
+/* Timeline Styles */
+.tl-panel{flex:0.7;display:flex;flex-direction:column}
+.tl-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+.tl-scroll{display:flex;flex-direction:column;gap:4px;overflow-y:auto;padding-right:3px}
+.tl-item{display:flex;gap:7px;background:white;border-radius:8px;padding:8px 10px;border-left:4px solid #ccc;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tl-item:hover{transform:translateX(2px);box-shadow:2px 3px 10px rgba(0,0,0,.1)}
+.tl-item.active{box-shadow:0 0 0 2.5px #E07B39;transform:translateX(2px)}
+
+.phase-label{font-size:10px;font-weight:800;color:white;padding:3px 8px;border-radius:5px;margin:4px 0 2px;text-align:center}
+.phase-am{background:#2E75B6}
+.phase-city{background:#5BAD6F}
+.phase-rest{background:#C9A84C}
+.phase-pm{background:#9B59B6}
+
+.tl-em{font-size:15px;min-width:20px;line-height:1.6}
+.tl-body{flex:1}
+.tl-name{font-size:11.5px;font-weight:700;color:#1a2a3a}
+.tl-time{font-size:9.5px;color:#888;margin-top:1px;font-weight:600}
+.tl-desc{font-size:10px;color:#555;margin-top:3px;line-height:1.4}
+
+.cat-hotel{border-color:#C9A84C}
+.cat-food{border-color:#E07B39}
+.cat-sight{border-color:#5BAD6F}
+.cat-museum{border-color:#3498DB}
+.cat-transit{border-color:#2E75B6}
+.cat-concert{border-color:#9B59B6}
+.cat-rest{border-color:#C9A84C}
+
+/* Leaflet Overrides */
+.leaflet-popup-content { font-size: 11px; line-height: 1.4; }
+.leaflet-popup-content b { color: #1F3864; }
+</style>
+</head>
+<body>
+
+<h1>🇸🇪 Day 3 — Maritime History &amp; A Perfect Circle</h1>
+<div class="subtitle">Sunday, June 28 &nbsp;·&nbsp; Vasa Museum → Strandvägen → Hallwylska → Rest → Gröna Lund → APC 🎸</div>
+<div class="warning">⚠️ Note: This day involves <strong>two trips to Djurgården</strong>. The afternoon hotel rest is essential!</div>
+
+<div class="layout">
+  <div class="map-panel">
+    <div class="map-lbl">📍 LIVE ROUTE MAP — STOCKHOLM CENTRAL & DJURGÅRDEN</div>
+    <div id="map"></div>
+    
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#C9A84C"></div>Hotel/Rest</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#3498DB"></div>Museum</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#9B59B6"></div>Concert</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E07B39"></div>Food</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#5BAD6F"></div>Sight/Walk</div>
+      <div class="leg-item"><div class="leg-line" style="background:#E07B39"></div>Walk</div>
+      <div class="leg-item"><div class="leg-line" style="background:#2E75B6; border-top: 2px dashed white"></div>Transit</div>
+    </div>
+  </div>
+
+  <div class="tl-panel">
+    <div class="tl-lbl">🕐 TIMELINE — Click to focus map</div>
+    <div class="tl-scroll" id="tl"></div>
+  </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// Data with Real Coordinates
+const stops = [
+  {id:0,  e:"🍳", n:"Breakfast & Transit",          t:"08:00 – 08:40", c:"transit", ph:0, ll:[59.3424, 18.0468], d:"Quick hotel breakfast at 08:00 (Sun opening). Depart Odenplan 08:15. Bus 67 directly to Vasamuseet."},
+  {id:1,  e:"⚓", n:"Vasa Museum",                 t:"08:40 – 10:30", c:"museum",  ph:0, ll:[59.3280, 18.0914], d:"The 17th-century warship, perfectly preserved. Open daily 08:30–18:00 in summer — arrive at opening to beat the crowds."},
+  {id:2,  e:"🌿", n:"Vasa Garden & Nordiska",      t:"10:30 – 11:00", c:"sight",   ph:0, ll:[59.3290, 18.0939], d:"Quiet garden behind museum and Nordiska Museet's Renaissance-inspired façade next door."},
+  {id:3,  e:"☕", n:"Bryggan (coffee)",             t:"11:00 – 11:10", c:"food",    ph:0, ll:[59.3295, 18.0910], d:"Quick espresso at the waterfront café by the ferry pier."},
+  {id:4,  e:"🚶", n:"Strandvägen Promenade",        t:"11:10 – 12:00", c:"sight",   ph:1, ll:[59.3325, 18.0820], d:"One of Europe's finest boulevards — wooden sailing boats along the quay. Dramaten's Art Nouveau façade at Nybroplan is the final flourish."},
+  {id:5,  e:"🎭", n:"Dramaten (Nybroplan)",        t:"~11:55",        c:"sight",   ph:1, ll:[59.3315, 18.0745], d:"Royal Dramatic Theatre — beautiful Art Nouveau façade. End of the Strandvägen walk."},
+  {id:6,  e:"🏛️",n:"Hallwylska Museet",           t:"12:00 – 13:30", c:"museum",  ph:1, ll:[59.3333, 18.0744], d:"Opulent 1900s aristocratic mansion (Hamngatan 4). No English tour on Sundays — go self-guided or grab the audio guide. A hidden gem."},
+  {id:7,  e:"🌳", n:"Kungsträdgården, Solsångaren & Cave Art", t:"13:30 – 14:05", c:"sight", ph:1, ll:[59.3308, 18.0717], d:"Moved here from Day 2. Stroll the park, photograph the Solsångaren statue & the Royal Opera's neo-Renaissance facade, then descend into the Kungsträdgården T-station (Blue Line) — a cave-like rock tunnel of sculptures & plants. Back up in ~5 min, zero cost."},
+  {id:8,  e:"🍽️",n:"Lunch at Vapiano",             t:"14:10 – 14:55", c:"food",    ph:1, ll:[59.3302, 18.0600], d:"Made-to-order pasta & pizza at Vasagatan 16 (open Sun 12:00) — pass Sergels Torg (glass obelisk & sunken plaza) en route. Allergen-aware — say 'Inga nötter, ingen fisk'. By Central Station for the metro back."},
+  {id:9,  e:"🛏️",n:"Rest at Hotel (Odenplan)",     t:"15:00 – 17:00", c:"rest",    ph:2, ll:[59.3424, 18.0468], d:"Essential 2-hour rest. Metro T-Centralen → Odenplan (~5 min). Recharge before the concert!"},
+  {id:10, e:"🚇", n:"Transit to Djurgården",       t:"17:00 – 17:30", c:"transit", ph:3, ll:[59.3201, 18.0718], d:"Metro to Slussen, then Ferry 82 (scenic, runs early evening) or Tram 7 toward Gröna Lund."},
+  {id:11, e:"🎢", n:"Gröna Lund",                  t:"17:30 – 19:00", c:"concert", ph:3, ll:[59.3233, 18.0963], d:"Classic amusement park (est. 1883). Eat inside — mention: 'Inga nötter, ingen fisk'."},
+  {id:12, e:"🎸", n:"A Perfect Circle!",           t:"20:00+",        c:"concert", ph:3, ll:[59.3235, 18.0970], d:"Maynard James Keenan live! Included with park admission. Bring ear protection. Return by Tram 7 (runs to ~01:00) — the ferry has stopped by then."},
+  {id:13, e:"🚊", n:"Tram 7 & Return",             t:"~23:00",        c:"transit", ph:3, ll:[59.3424, 18.0468], d:"After the show, Tram 7 from Gröna Lund → T-Centralen (runs to ~01:00 — the Ferry 82 has long stopped), then metro to Odenplan. Day 3 done!"},
+];
+
+const phases = [
+  {label:"① MORNING — Djurgården", cls:"phase-am"},
+  {label:"② CITY CENTER — Strandvägen", cls:"phase-city"},
+  {label:"③ REST — Back to Hotel", cls:"phase-rest"},
+  {label:"④ EVENING — Concert", cls:"phase-pm"},
+];
+
+const colors = {
+  hotel: '#C9A84C', food: '#E07B39', sight: '#5BAD6F', museum: '#3498DB', transit: '#2E75B6', concert: '#9B59B6', rest: '#C9A84C'
+};
+
+// Initialize Map
+const map = L.map('map').setView([59.333, 18.075], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+const markers = {};
+
+// Create Timeline and Markers
+const tl = document.getElementById('tl');
+let curPhase = -1;
+
+stops.forEach(s => {
+  // Add Phase Labels
+  if(s.ph !== curPhase){
+    curPhase = s.ph;
+    const ph = document.createElement('div');
+    ph.className = 'phase-label ' + phases[s.ph].cls;
+    ph.textContent = phases[s.ph].label;
+    tl.appendChild(ph);
+  }
+
+  // Create Timeline Item
+  const d = document.createElement('div');
+  d.className = `tl-item cat-${s.c}`;
+  d.dataset.id = s.id;
+  d.innerHTML = `
+    <div class="tl-em">${s.e}</div>
+    <div class="tl-body">
+      <div class="tl-name">${s.n}</div>
+      <div class="tl-time">${s.t}</div>
+      <div class="tl-desc">${s.d}</div>
+    </div>`;
+  tl.appendChild(d);
+
+  // Create Map Marker
+  const marker = L.circleMarker(s.ll, {
+    radius: 8,
+    fillColor: colors[s.c],
+    color: "#fff",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.9
+  }).addTo(map);
+
+  marker.bindTooltip(`<b>${s.e} ${s.n}</b><br>${s.t}`);
+  markers[s.id] = marker;
+
+  // Interactions
+  d.addEventListener('click', () => {
+    document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('active'));
+    d.classList.add('active');
+    map.flyTo(s.ll, 15);
+    marker.openTooltip();
+  });
+
+  marker.on('click', () => {
+    d.click();
+    d.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+});
+
+// Draw Route Lines (Simplified)
+const routeMorning = [stops[0].ll, [59.338, 18.075], stops[1].ll];
+L.polyline(routeMorning, {color: colors.transit, dashArray: '5, 10', weight: 3}).addTo(map);
+
+const routeWalk = [stops[1].ll, stops[2].ll, stops[3].ll, stops[4].ll, stops[5].ll, stops[6].ll, stops[7].ll, stops[8].ll];
+L.polyline(routeWalk, {color: colors.food, weight: 4, opacity: 0.6}).addTo(map);
+
+const routeEvening = [stops[9].ll, stops[10].ll, stops[11].ll];
+L.polyline(routeEvening, {color: colors.concert, dashArray: '5, 10', weight: 3}).addTo(map);
+
+</script>
+</body>
+</html>

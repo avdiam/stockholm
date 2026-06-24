@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hallwyl Museum (Hallwylska) — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main); font-family: var(--font-body); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar { max-width: 820px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--accent-color); text-decoration: none; padding: 8px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); transition: all 0.2s ease; }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); padding: 7px 13px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25); }
+    .hero { position: relative; overflow: hidden; border-radius: 22px; margin-top: 8px; padding: 44px 34px 38px; background: linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%), var(--gradient-sweden); border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-lg); }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 180%; background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; position: relative; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(34px, 7vw, 52px); line-height: 1.05; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-sub { font-size: 15.5px; color: #e8eef6; max-width: 56ch; position: relative; line-height: 1.6; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; position: relative; font-size: 13px; color: #dbe6f2; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+    section { margin-top: 30px; }
+    .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 10px; }
+    h2 { font-family: var(--font-serif); font-weight: 600; font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 6px; }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+    .panel { background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 18px; padding: 26px 26px; box-shadow: var(--shadow-md); }
+    figure { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); box-shadow: var(--shadow-md); }
+    figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1424; }
+    figcaption { font-size: 11.5px; color: var(--text-muted); padding: 9px 14px; line-height: 1.45; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: -6px; }
+    .fact { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px 16px; }
+    .fact.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .fact.good { border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.06); }
+    .fact .lbl { font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .audio-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%); border: 1.5px solid rgba(212,175,55,0.35); border-radius: 18px; padding: 22px 24px; }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--bg-dark); text-decoration: none; padding: 13px 22px; border-radius: 50px; background: var(--gradient-gold); box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+    .focus-list { list-style: none; counter-reset: f; display: grid; gap: 12px; margin-top: 4px; }
+    .focus-list li { counter-increment: f; position: relative; padding: 16px 18px 16px 58px; background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; font-size: 14.5px; color: #d7dce4; }
+    .focus-list li::before { content: counter(f); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 9px; background: var(--gradient-gold); color: var(--bg-dark); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .focus-list li strong { color: #fff; }
+    .focus-list li .mins { color: var(--gold); font-weight: 600; font-size: 12.5px; }
+    .skip-note { margin-top: 14px; font-size: 13.5px; color: #d7dce4; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px 16px; }
+    .skip-note strong { color: #fca5a5; }
+    .value-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 14px 16px; }
+    .value-note strong { color: #34d399; }
+    .warn-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.28); border-radius: 12px; padding: 14px 16px; }
+    .warn-note strong { color: #fbbf24; }
+    .highlights { display: grid; gap: 14px; }
+    .hl { background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 20px; transition: border-color 0.25s, transform 0.25s; }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl .look { color: var(--gold); font-weight: 600; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .zone { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); margin: 26px 0 4px; display: flex; align-items: center; gap: 8px; }
+    .zone::before { content: ''; width: 22px; height: 2px; background: var(--sweden-yellow); border-radius: 2px; }
+    .route { position: relative; padding-left: 28px; }
+    .route::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1)); }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before { content: ''; position: absolute; left: -28px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-dark); border: 2.5px solid var(--accent-color); }
+    .stop .time { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent-color); letter-spacing: 0.5px; }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 50px; background: var(--gradient-sweden); box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7); transition: transform 0.2s ease; }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+    @media (max-width: 560px) { .hero { padding: 34px 22px 30px; } .panel { padding: 22px 18px; } .audio-cta { padding: 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 3 · Sun Jun 28</span>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · Early Afternoon</div>
+      <h1>Hallwyl Museum</h1>
+      <p class="hero-sub"><em>Hallwylska museet</em> — a late-1890s city palace donated to Sweden exactly as it stood, with <strong>50,000 catalogued objects in their original positions</strong>. Not a gallery but a home frozen in amber, assembled by a woman who knew she was building a time capsule. After the Vasa's scale, an unexpectedly intimate counterpoint.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Hallwylska+museet%2C+Hamngatan+4%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff;">Hamngatan 4 ↗</a></span>
+        <span><span class="ic">🕗</span> Sun 11:00–17:00</span>
+        <span><span class="ic">🎟️</span> 150 SEK (~€14) · under-19 free</span>
+      </div>
+    </header>
+
+    <!-- Photos -->
+    <section>
+      <div class="photo-grid">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Interior_of_Hallwyl_House_-_Great_Drawing_Room_DSC7288.jpg/960px-Interior_of_Hallwyl_House_-_Great_Drawing_Room_DSC7288.jpg"
+               alt="The Great Drawing Room of the Hallwyl House" loading="lazy">
+          <figcaption>
+            <span class="cap">A grand interior — the rooms feel <em>inhabited</em>, every object where Wilhelmina placed it.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Interior_of_Hallwyl_House_-_Great_Drawing_Room_DSC7288.jpg" target="_blank" rel="noopener">Gusten Lindberg — Public domain</a></span>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Courtyard_of_the_Hallwyl_museum%2C_Stockholm%2C_Sweden..JPG/960px-Courtyard_of_the_Hallwyl_museum%2C_Stockholm%2C_Sweden..JPG"
+               alt="The courtyard of the Hallwyl Museum" loading="lazy">
+          <figcaption>
+            <span class="cap">The courtyard — open in summer; the inner facades read as a private world.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Courtyard_of_the_Hallwyl_museum,_Stockholm,_Sweden..JPG" target="_blank" rel="noopener">Svante.tirén — CC BY-SA 3.0</a></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact">
+          <div class="lbl">🎟️ Admission</div>
+          <div class="val">150 SEK (~€14) adult<small>Under-19 free · 200 SEK (~€18) if it includes a guided tour · card payment</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🎫 Ticket Covers</div>
+          <div class="val">2 of 5 floors<small>+ all temporary exhibitions · upper floors / picture gallery are guided-tour-only</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕗 Sunday Hours</div>
+          <div class="val">11:00–17:00<small>Weekend hours year-round · your 12:00–13:30 visit fits easily</small></div>
+        </div>
+        <div class="fact warn">
+          <div class="lbl">🗣️ Sunday Tour</div>
+          <div class="val">No English tour<small>⚠️ English tour is Saturdays 13:30 only — go self-guided with the audio guide</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">📍 Location</div>
+          <div class="val"><a href="https://www.google.com/maps/search/?api=1&query=Hallwylska+museet%2C+Hamngatan+4%2C+Stockholm" target="_blank" rel="noopener" style="color:#fff; text-decoration:none; border-bottom:1px dotted var(--accent-color);">Hamngatan 4 ↗</a><small>~5-min walk to Sergels Torg · no elevator · Google Maps</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">⏱️ Your Slot</div>
+          <div class="val">12:00–13:30<small>1h 30m · comfortable for the two self-guided floors</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio CTA -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">🎧</div>
+        <div class="txt">
+          <h3>Audio guide — your primary tool on Sunday</h3>
+          <p>In <strong>Swedish &amp; English</strong>, on your own phone (or borrow one at the entrance) — there's no English guided tour on Sundays. Let it lead for the first ~30 min, then switch off and roam. Bring earbuds.</p>
+        </div>
+        <a class="audio-btn" href="https://hallwylskamuseet.se/en/visit-us/" target="_blank" rel="noopener">Official visit info →</a>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="panel">
+      <div class="eyebrow">What Kind of Place Is This?</div>
+      <h2>A home, not a gallery</h2>
+      <p>It isn't organised by chronology or theme — it's organised like a house. You walk through rooms where a family ate, entertained, practised shooting, and stored their silver, and the objects are exactly where <strong>Wilhelmina von Hallwyl</strong> placed them. The palace is grand, but the rooms feel inhabited. It's one of Stockholm's lesser-visited gems, so on a Sunday midday in late June it should be quiet — a genuine contrast to the Vasa morning.</p>
+    </section>
+
+    <!-- The woman behind it -->
+    <section class="panel">
+      <div class="eyebrow">The Woman Behind It</div>
+      <h2>Wilhelmina von Hallwyl (1844–1930)</h2>
+      <p>Understand her first and the rooms make sense. Born into Sweden's wealthiest industrial family (timber, iron, sugar), she married Count Walther von Hallwyl in 1874 and built this palace at Hamngatan 4 in 1893–98, designed by <strong>Isak Gustaf Clason</strong> — the same architect as the Nordiska Museet you pass that morning.</p>
+      <p>She was an obsessive, methodical collector: Dutch paintings, Chinese porcelain, antique arms, silver, toys, textiles — and her children's milk teeth. Each item was catalogued with origin, price, date, and exact placement; the finished catalogue filled <strong>78 printed volumes</strong>. She <strong>donated the entire estate to the state in 1920</strong> and always intended it as a public museum — in her words, to preserve "an image of our time." That self-awareness is what makes it strange and fascinating: a genuine home <em>and</em> a deliberately built time capsule. She was also an advocate for women's rights — worth keeping in mind as you move through.</p>
+    </section>
+
+    <!-- Where to focus -->
+    <section class="panel">
+      <div class="eyebrow">Where to Focus</div>
+      <h2>~1h 30m (12:00–13:30) — spend it like this</h2>
+      <ol class="focus-list">
+        <li><strong>The Armoury</strong> <span class="mins">~15 min · top priority</span><br>The compass-star ceiling (oak &amp; maple inlaid with ebony &amp; walnut) — the single best piece of craftsmanship you can see self-guided.</li>
+        <li><strong>The Kitchen</strong> <span class="mins">~15 min</span><br>Fully preserved and stocked — the room historic houses usually strip out. One of the most evocative spaces.</li>
+        <li><strong>The Dining Room &amp; silver</strong> <span class="mins">~15 min</span><br>The table is set; the Hallwyl silver is one of Sweden's finest private holdings.</li>
+        <li><strong>Smoking / Gun Room + the personal curiosities</strong> <span class="mins">~15 min</span><br>The Count's dark-panelled male side, and the ground-floor oddities — including the catalogued children's teeth.</li>
+        <li><strong>The courtyard</strong> <span class="mins">~5 min · summer bonus</span><br>Step out before or after — the inner facades read as a private world. A quiet pause before Sergels Torg.</li>
+      </ol>
+      <div class="warn-note"><strong>Sunday reality check:</strong> the top-floor <strong>picture gallery (≈160 Dutch &amp; Flemish paintings) is guided-tour-only, and there's no English tour on Sundays</strong> — so it's off the table today. Don't build expectations around it; the self-guided rooms below are the visit.</div>
+      <div class="value-note"><strong>For the kid:</strong> the Kitchen and the Armoury are the most engaging spaces — and the "children's milk teeth in the catalogue" detail reliably gets a reaction.</div>
+    </section>
+
+    <!-- Highlights -->
+    <section>
+      <div class="eyebrow">Highlights — and What to Look At</div>
+      <h2>The self-guided rooms</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🛡️</span> The Armoury</h3>
+          <p>Count Walther's arms collection — swords, pistols, rifles — lining a room that feels between a gentleman's study and a Renaissance cabinet of curiosities. <span class="look">→ Look up at the ceiling's compass-star inlay, then down: the same pattern is mirrored exactly on the floor.</span></p>
+        </div>
+        <div class="hl feature">
+          <h3><span class="hi">🍳</span> The Kitchen</h3>
+          <p>Original pots, pans, moulds and preserved foodstuffs, exactly as left. <span class="look">→ Note the scale and organisation</span> — a 19th-century aristocratic kitchen was a serious operation.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🍽️</span> The Dining Room</h3>
+          <p>Where the von Hallwyls received Stockholm society — table set, silver laid. <span class="look">→ Study the silver</span>: the set table is your most direct access to the Hallwyl silver collection without the guided tour.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🚬</span> The Smoking / Gun Room</h3>
+          <p>Dark panelling, leather, the Count's personal effects — the male side of the house, a sharp contrast to Wilhelmina's spaces.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🪥</span> Curiosities &amp; the catalogue</h3>
+          <p>Personal items, toys, oddities on the ground floor — including the famous catalogued <strong>children's milk teeth</strong>. The clearest window into Wilhelmina's all-encompassing method.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🖼️</span> The Picture Gallery <em>(guided-tour-only — not today)</em></h3>
+          <p>A top-lit 1905 attic gallery with ≈160 Dutch &amp; Flemish "Golden Age" paintings (Nicolaes Maes, Jan van Goyen, Aert van der Neer…), hung rail-to-ceiling by visual effect. Accessible only on the Saturday English tour — noted here for a future visit.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Route -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route</div>
+      <h2>Fitted to the 12:00–13:30 slot</h2>
+      <div class="route">
+        <div class="stop"><div class="time">12:00 — Entrance &amp; audio guide</div><div class="what">Pick up the audio guide; take a moment in the entrance hall — the architecture announces itself.</div></div>
+        <div class="stop"><div class="time">12:05 — Courtyard (5 min)</div><div class="what">Step out while fresh; see the inner facades and orient yourself.</div></div>
+        <div class="stop"><div class="time">12:10 — The Armoury (~15 min)</div><div class="what">The compass-star ceiling. Spend real time here.</div></div>
+        <div class="stop"><div class="time">12:25 — Dining Room &amp; silver (~15 min)</div><div class="what">The table setting, the silverware. Imagine a 1900 dinner party.</div></div>
+        <div class="stop"><div class="time">12:40 — Smoking / Gun Room (~10 min)</div><div class="what">The Count's side of the house.</div></div>
+        <div class="stop"><div class="time">12:50 — The Kitchen (~15 min)</div><div class="what">Fully stocked — one of the best rooms.</div></div>
+        <div class="stop"><div class="time">13:05 — Remaining rooms + curiosities (~10 min)</div><div class="what">Personal items, toys — the children's teeth live here.</div></div>
+        <div class="stop"><div class="time">13:15 — Free second pass (~10 min)</div><div class="what">Return to whichever rooms caught you most.</div></div>
+        <div class="stop"><div class="time">13:25 — Return guide, exit</div><div class="what">~5-min walk west to Sergels Torg for the 13:35 pass-through photo stop.</div></div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official site <strong>hallwylskamuseet.se</strong>: <a href="https://hallwylskamuseet.se/en/visit-us/admissions-and-tickets/" target="_blank" rel="noopener">admission &amp; tickets</a> (150 SEK (~€14) admission only / 200 SEK (~€18) incl. guided tour; under-19 free; two of five floors + temporary exhibitions on the standard ticket), <a href="https://hallwylskamuseet.se/en/visit-us/guided-tours/" target="_blank" rel="noopener">guided tours</a> (English tour Saturdays 13:30 only — none on Sundays; audio guide in Swedish &amp; English), and the <a href="https://hallwylskamuseet.se/besok/oppettider/" target="_blank" rel="noopener">opening hours page</a> (weekends 11:00–17:00 year-round; closed Midsummer 19–20 Jun). Picture-gallery / Dutch-Flemish collection detail from hallwylskamuseet.se and codart.nl; Wilhelmina's biography from Wikipedia.</p>
+    </section>
+
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 3 Museum Guide</p>
+
+  </div>
+</body>
+</html>

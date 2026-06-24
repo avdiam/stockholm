@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 5 — Stockholm Route</title>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#1a2a3a;padding:14px;min-height:100vh}
+h1{text-align:center;font-size:19px;font-weight:800;color:#1F3864;letter-spacing:.5px;margin-bottom:3px}
+.subtitle{text-align:center;font-size:12px;color:#666;margin-bottom:5px}
+.note{text-align:center;font-size:11px;color:#1a5c28;background:#d5f5e3;border-radius:6px;padding:5px 10px;margin-bottom:12px;max-width:760px;margin-left:auto;margin-right:auto}
+.layout{display:flex;gap:12px;max-width:1100px;margin:0 auto;height:85vh}
+.map-panel{flex:1.3;background:white;border-radius:14px;padding:12px;border:1.5px solid #aac8e4;display:flex;flex-direction:column}
+.map-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+/* Map Container */
+#map { flex: 1; width: 100%; border-radius: 8px; z-index: 1; }
+
+.legend{display:flex;gap:9px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#444}
+.leg-dot{width:10px;height:10px;border-radius:50%;border:2px solid white;flex-shrink:0}
+.leg-line{width:22px;height:3px;border-radius:2px;flex-shrink:0}
+.tl-panel{flex:0.85;display:flex;flex-direction:column}
+.tl-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+.tl-scroll{display:flex;flex-direction:column;gap:4px;overflow-y:auto;max-height:600px;padding-right:3px}
+.tl-item{display:flex;gap:7px;background:white;border-radius:8px;padding:8px 10px;border-left:4px solid #ccc;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.tl-item:hover{transform:translateX(2px);box-shadow:2px 3px 10px rgba(0,0,0,.1)}
+.tl-item.active{box-shadow:0 0 0 2.5px #E07B39;transform:translateX(2px)}
+.phase-label{font-size:10px;font-weight:800;color:white;padding:3px 8px;border-radius:5px;margin:4px 0 2px;text-align:center}
+.ph0{background:#2E86C1}.ph1{background:#27AE60}.ph2{background:#E07B39}.ph3{background:#1a2a3a}.ph4{background:#8E44AD}
+.tl-em{font-size:15px;min-width:20px;line-height:1.6}
+.tl-body{flex:1}
+.tl-name{font-size:11.5px;font-weight:700;color:#1a2a3a}
+.tl-time{font-size:9.5px;color:#888;margin-top:1px;font-weight:600}
+.tl-desc{font-size:10px;color:#555;margin-top:3px;line-height:1.4}
+.cat-hotel{border-color:#C9A84C}.cat-food{border-color:#E07B39}.cat-sight{border-color:#5BAD6F}
+.cat-museum{border-color:#27AE60}.cat-transit{border-color:#2E75B6}.cat-eve{border-color:#1a2a3a}.cat-opt{border-color:#8E44AD}
+</style>
+</head>
+<body>
+<h1>🇸🇪 Day 5 — Skansen, Djurgården &amp; Gamla Stan</h1>
+<div class="subtitle">Tuesday, June 30 &nbsp;·&nbsp; Live Map Route</div>
+<div class="note">🌿 <b>Interactive Map:</b> Click markers to see details. Blue lines represent ferries, Orange lines show the walking route on Djurgården.</div>
+
+<div class="layout">
+  <div class="map-panel">
+    <div class="map-lbl">📍 LIVE ROUTE MAP — STOCKHOLM</div>
+    <div id="map"></div>
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#C9A84C"></div>Hotel</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#27AE60"></div>Museum</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E07B39"></div>Food</div>
+      <div class="leg-line" style="background:#E07B39"></div><span>Walk</span>
+      <div class="leg-line" style="background:#2E75B6; border-top: 2px dashed #fff;"></div><span>Ferry</span>
+    </div>
+  </div>
+
+  <div class="tl-panel">
+    <div class="tl-lbl">🕐 TIMELINE</div>
+    <div class="tl-scroll" id="tl"></div>
+  </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const phases=[
+  {label:"① MORNING — Skansen", cls:"ph0"},
+  {label:"② DJURGÅRDEN — Art & Fika", cls:"ph1"},
+  {label:"③ DINNER — Restaurant Eld", cls:"ph2"},
+  {label:"④ EVENING — Gamla Stan", cls:"ph3"},
+  {label:"⑤ OPTIONAL", cls:"ph4"},
+];
+
+const stops=[
+  {id:0, lat:59.3424, lng:18.0468, e:"🏨", n:"Hotel Odenplan", t:"09:30", c:"hotel", ph:0, d:"Start from Odenplan. Take Bus 67 directly to Skansen (~20 min), or Metro + Ferry 82."},
+  {id:1, lat:59.3266, lng:18.1053, e:"🏞️", n:"Skansen", t:"10:00 – 12:00", c:"museum", ph:0, d:"World's oldest open-air museum & Nordic zoo. June hours 10:00–18:00; children 0–15 free (16+ pays adult)."},
+  {id:2, lat:59.3255, lng:18.1020, e:"🥞", n:"Gubbhyllan", t:"~11:00", c:"food", ph:0, d:"Traditional Swedish brunch inside Skansen."},
+  {id:3, lat:59.3202, lng:18.1146, e:"🎨", n:"Waldemarsudde", t:"12:20 – 14:15", c:"museum", ph:1, d:"Prince Eugen's art gallery & historic villa grounds. Tue 11:00–17:00; adult 170 SEK (~€16), under-19 free."},
+  {id:4, lat:59.3210, lng:18.1145, e:"☕", n:"Café Ektorpet", t:"14:15", c:"food", ph:1, d:"Quick fika and waffles in a garden setting."},
+  {id:5, lat:59.3269, lng:18.0935, e:"🍽️", n:"Restaurant Eld", t:"15:15 – 17:00", c:"food", ph:2, d:"Fire-grilled Nordic cuisine at the Viking Museum. Open Tue 11:00–18:00 (summer). Walk-in (off-peak 15:15) — if full, light bite en route + fuller dinner at Tradition."},
+  {id:6, lat:59.3245, lng:18.0960, e:"⛴️", n:"Ferry: Allmänna Gränd", t:"17:00", c:"transit", ph:3, d:"Ferry 82 back to Slussen. Covered by SL Card."},
+  {id:7, lat:59.3250, lng:18.0710, e:"🏰", n:"Gamla Stan (Golden Hour)", t:"17:30 – 19:45", c:"eve", ph:3, d:"Lamplit Old Town stroll — Stortorget & the alleys. Dinner's not until 19:45, so take it slow. The Nobel Museum (Stortorget 2) closes 18:00 in June & isn't free Tuesdays — exterior only tonight."},
+  {id:8, lat:59.3256, lng:18.0732, e:"🍽️", n:"Dinner at Tradition ✅", t:"19:45 – 21:30", c:"food", ph:3, d:"✅ Booked — Tue 30 Jun, 19:45, 3 guests. Traditional Swedish home cooking at Österlånggatan 1."},
+  {id:9, lat:59.3251, lng:18.0709, e:"🌃", n:"Gamla Stan Farewell", t:"21:30 – 22:30", c:"eve", ph:3, d:"Final lamplit Old Town wander after dinner, sunset ~22:00 — goodbye to Stockholm. (Fotografiska dropped: its top-floor view restaurant/bar is closed for the summer.)"}
+];
+
+// Initialize Map
+const map = L.map('map').setView([59.325, 18.085], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+const markers = {};
+const cc_colors = {hotel:'#C9A84C', food:'#E07B39', sight:'#5BAD6F', museum:'#27AE60', transit:'#2E75B6', eve:'#1a2a3a', opt:'#8E44AD'};
+
+// Add Markers
+stops.forEach(s => {
+  const marker = L.circleMarker([s.lat, s.lng], {
+    radius: 8,
+    fillColor: cc_colors[s.c],
+    color: "#fff",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.9
+  }).addTo(map);
+  
+  marker.bindPopup(`<b>${s.e} ${s.n}</b><br>${s.t}<br><small>${s.d}</small>`);
+  markers[s.id] = marker;
+
+  marker.on('click', () => {
+    highlightTimeline(s.id);
+  });
+});
+
+// Draw Routes
+const walkPath = [ [59.3266, 18.1053], [59.3220, 18.1080], [59.3202, 18.1146], [59.3210, 18.1145], [59.3240, 18.1050], [59.3269, 18.0935] ];
+L.polyline(walkPath, {color: '#E07B39', weight: 3, opacity: 0.7, dashArray: '5, 10'}).addTo(map);
+
+const ferryPath = [ [59.3245, 18.0960], [59.3210, 18.0850], [59.3200, 18.0720] ];
+L.polyline(ferryPath, {color: '#2E75B6', weight: 4, opacity: 0.8}).addTo(map);
+
+// Build Timeline
+const tl=document.getElementById('tl');
+const stopClassMap={hotel:'cat-hotel',food:'cat-food',sight:'cat-sight',museum:'cat-museum',transit:'cat-transit',eve:'cat-eve',opt:'cat-opt'};
+let curPh=-1;
+
+stops.forEach(s=>{
+  if(s.ph!==curPh){
+    curPh=s.ph;
+    const p=document.createElement('div');
+    p.className='phase-label '+phases[s.ph].cls;
+    p.textContent=phases[s.ph].label;
+    tl.appendChild(p);
+  }
+  const d=document.createElement('div');
+  d.className='tl-item '+stopClassMap[s.c];
+  d.dataset.id=s.id;
+  d.innerHTML=`<div class="tl-em">${s.e}</div><div class="tl-body"><div class="tl-name">${s.n}</div><div class="tl-time">${s.t}</div><div class="tl-desc">${s.d}</div></div>`;
+  d.addEventListener('click', () => {
+    map.flyTo([s.lat, s.lng], 15);
+    markers[s.id].openPopup();
+    highlightTimeline(s.id);
+  });
+  tl.appendChild(d);
+});
+
+function highlightTimeline(id) {
+  document.querySelectorAll('.tl-item').forEach(el=>el.classList.remove('active'));
+  const el=document.querySelector(`.tl-item[data-id="${id}"]`);
+  if(el){
+    el.classList.add('active');
+    el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+}
+</script>
+</body>
+</html>

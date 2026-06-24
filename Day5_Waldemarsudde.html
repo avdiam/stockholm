@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prince Eugen's Waldemarsudde — Stockholm 2026 Museum Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090e1a;
+      --bg-card: rgba(18, 26, 47, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --sweden-blue: #006aa7;
+      --sweden-yellow: #fecc00;
+      --gold: #d4af37;
+      --gradient-sweden: linear-gradient(135deg, #006aa7 0%, #0093e9 100%);
+      --gradient-gold: linear-gradient(135deg, #f0c75e 0%, #c9962a 100%);
+      --accent-color: #38bdf8;
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 8% 12%, rgba(212, 175, 55, 0.10) 0px, transparent 45%),
+        radial-gradient(at 92% 88%, rgba(0, 106, 167, 0.18) 0px, transparent 50%);
+      color: var(--text-main); font-family: var(--font-body); line-height: 1.65;
+      -webkit-font-smoothing: antialiased; padding: 0 0 60px;
+    }
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 20px; }
+    .topbar { max-width: 820px; margin: 0 auto; padding: 18px 20px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: var(--accent-color); text-decoration: none; padding: 8px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); transition: all 0.2s ease; }
+    .back-link:hover { background: rgba(56, 189, 248, 0.18); transform: translateX(-2px); }
+    .daytag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); padding: 7px 13px; border-radius: 50px; background: rgba(0,0,0,0.3); border: 1px solid rgba(254,204,0,0.25); }
+    .hero { position: relative; overflow: hidden; border-radius: 22px; margin-top: 8px; padding: 44px 34px 38px; background: linear-gradient(160deg, rgba(40,30,8,0.55) 0%, rgba(12,18,34,0.85) 60%), var(--gradient-sweden); border: 1px solid rgba(212,175,55,0.25); box-shadow: var(--shadow-lg); }
+    .hero::before { content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 180%; background: radial-gradient(circle, rgba(240,199,94,0.25) 0%, transparent 60%); pointer-events: none; }
+    .hero-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; position: relative; }
+    .hero h1 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(32px, 6.5vw, 50px); line-height: 1.05; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; position: relative; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+    .hero-sub { font-size: 15.5px; color: #e8eef6; max-width: 56ch; position: relative; line-height: 1.6; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; position: relative; font-size: 13px; color: #dbe6f2; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta .ic { font-size: 15px; }
+    section { margin-top: 30px; }
+    .eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); margin-bottom: 10px; }
+    h2 { font-family: var(--font-serif); font-weight: 600; font-size: 26px; color: #fff; line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 6px; }
+    p { color: #d7dce4; font-size: 15px; margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: #fff; font-weight: 700; }
+    a { color: var(--accent-color); }
+    .panel { background: var(--bg-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: 18px; padding: 26px 26px; box-shadow: var(--shadow-md); }
+    figure { margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--border-color); background: rgba(255,255,255,0.02); box-shadow: var(--shadow-md); }
+    figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1424; }
+    figure.tall img { aspect-ratio: 3 / 4; }
+    figcaption { font-size: 11.5px; color: var(--text-muted); padding: 9px 14px; line-height: 1.45; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    figcaption .cap { color: #b9c2cf; }
+    figcaption .attr a { color: #7f8da0; text-decoration: none; }
+    figcaption .attr a:hover { text-decoration: underline; }
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .photo-grid { grid-template-columns: 1fr; } }
+    .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: -6px; }
+    .fact { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 16px 16px; }
+    .fact.warn { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.06); }
+    .fact.good { border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.06); }
+    .fact .lbl { font-family: var(--font-display); font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .fact .val { font-size: 14.5px; color: #fff; font-weight: 500; line-height: 1.45; }
+    .fact .val small { display:block; color: var(--text-muted); font-size: 12px; font-weight: 400; margin-top: 3px; }
+    .audio-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; background: linear-gradient(135deg, rgba(212,175,55,0.14) 0%, rgba(155,89,182,0.12) 100%); border: 1.5px solid rgba(212,175,55,0.35); border-radius: 18px; padding: 22px 24px; }
+    .audio-cta .emoji { font-size: 34px; line-height: 1; }
+    .audio-cta .txt { flex: 1; min-width: 200px; }
+    .audio-cta .txt h3 { margin-bottom: 4px; }
+    .audio-cta .txt p { font-size: 13.5px; margin: 0; color: #d7dce4; }
+    .audio-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--bg-dark); text-decoration: none; padding: 13px 22px; border-radius: 50px; background: var(--gradient-gold); box-shadow: 0 6px 18px -6px rgba(212,175,55,0.6); transition: transform 0.2s ease, box-shadow 0.2s ease; white-space: nowrap; }
+    .audio-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -6px rgba(212,175,55,0.75); }
+    .audio-btn.secondary { background: rgba(56,189,248,0.12); color: var(--accent-color); border: 1px solid rgba(56,189,248,0.3); box-shadow: none; }
+    .focus-list { list-style: none; counter-reset: f; display: grid; gap: 12px; margin-top: 4px; }
+    .focus-list li { counter-increment: f; position: relative; padding: 16px 18px 16px 58px; background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; font-size: 14.5px; color: #d7dce4; }
+    .focus-list li::before { content: counter(f); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 9px; background: var(--gradient-gold); color: var(--bg-dark); font-family: var(--font-display); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+    .focus-list li strong { color: #fff; }
+    .focus-list li .mins { color: var(--gold); font-weight: 600; font-size: 12.5px; }
+    .skip-note { margin-top: 14px; font-size: 13.5px; color: #d7dce4; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.18); border-radius: 12px; padding: 14px 16px; }
+    .skip-note strong { color: #fca5a5; }
+    .value-note { margin-top: 12px; font-size: 13.5px; color: #d7dce4; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); border-radius: 12px; padding: 14px 16px; }
+    .value-note strong { color: #34d399; }
+    .highlights { display: grid; gap: 14px; }
+    .hl { background: rgba(255,255,255,0.025); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 20px; transition: border-color 0.25s, transform 0.25s; }
+    .hl:hover { border-color: rgba(56,189,248,0.28); transform: translateY(-2px); }
+    .hl h3 { display: flex; align-items: center; gap: 9px; }
+    .hl h3 .hi { font-size: 19px; }
+    .hl p { font-size: 14px; margin: 8px 0 0; }
+    .hl .look { color: var(--gold); font-weight: 600; }
+    .hl.feature { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+    .zone { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sweden-yellow); margin: 26px 0 4px; display: flex; align-items: center; gap: 8px; }
+    .zone::before { content: ''; width: 22px; height: 2px; background: var(--sweden-yellow); border-radius: 2px; }
+    .route { position: relative; padding-left: 28px; }
+    .route::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--accent-color), rgba(56,189,248,0.1)); }
+    .stop { position: relative; padding-bottom: 20px; }
+    .stop:last-child { padding-bottom: 0; }
+    .stop::before { content: ''; position: absolute; left: -28px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-dark); border: 2.5px solid var(--accent-color); }
+    .stop .time { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--accent-color); letter-spacing: 0.5px; }
+    .stop .what { font-size: 14.5px; color: #e7ebf1; margin-top: 2px; }
+    .sources { font-size: 12.5px; color: var(--text-muted); }
+    .sources a { color: #93c5fd; word-break: break-word; }
+    .footer-back { text-align: center; margin-top: 36px; }
+    .footer-back a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 50px; background: var(--gradient-sweden); box-shadow: 0 8px 22px -8px rgba(0,147,233,0.7); transition: transform 0.2s ease; }
+    .footer-back a:hover { transform: translateY(-2px); }
+    .credit { text-align: center; color: var(--text-muted); font-size: 11.5px; margin-top: 22px; }
+    @media (max-width: 560px) { .hero { padding: 34px 22px 30px; } .panel { padding: 22px 18px; } .audio-cta { padding: 18px; } }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a class="back-link" href="index.html">← Back to portal</a>
+    <span class="daytag">Day 5 · Tue Jun 30</span>
+  </div>
+
+  <div class="wrap">
+
+    <header class="hero">
+      <div class="hero-kicker">Museum Guide · Midday</div>
+      <h1>Prince Eugen's Waldemarsudde</h1>
+      <p class="hero-sub">A royal painter's home, a world-class collection, and a sculpture garden above the water. <strong>Prince Eugen (1865–1947)</strong> was a prince who painted seriously — and collected obsessively. He left his house, studio, garden and ~7,000 works to Sweden. The same hand that painted the City Hall mural you saw yesterday is everywhere here.</p>
+      <div class="hero-meta">
+        <span><span class="ic">📍</span> <a href="https://www.google.com/maps/search/?api=1&query=Prins+Eugens+Waldemarsudde+Stockholm" target="_blank" rel="noopener" style="color:#fff;">Prins Eugens väg 6, Djurgården ↗</a></span>
+        <span><span class="ic">🕦</span> Tue 11:00–17:00</span>
+        <span><span class="ic">🎟️</span> 170 SEK (~€16) · under-19 free</span>
+      </div>
+    </header>
+
+    <!-- Photos -->
+    <section>
+      <div class="photo-grid">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Waldemarsudde_April_2006.JPG/960px-Waldemarsudde_April_2006.JPG"
+               alt="The Waldemarsudde mansion on Djurgården" loading="lazy">
+          <figcaption>
+            <span class="cap">The mansion (Ferdinand Boberg, 1905) on its promontory at the southern tip of Djurgården.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Waldemarsudde_April_2006.JPG" target="_blank" rel="noopener">Udo Schröter — CC BY-SA 2.5</a></span>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Hercules_at_Prince_Eugen%27s_Waldemarsudde.jpg"
+               alt="Bourdelle's Heracles the Archer sculpture at Waldemarsudde" loading="lazy">
+          <figcaption>
+            <span class="cap">Bourdelle's <em>Heracles the Archer</em> in the garden — one of several major sculptures Prince Eugen sited himself.</span>
+            <span class="attr"><a href="https://commons.wikimedia.org/wiki/File:Hercules_at_Prince_Eugen%27s_Waldemarsudde.jpg" target="_blank" rel="noopener">Prins Eugens Waldemarsudde — CC BY-SA 4.0</a></span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- At a glance -->
+    <section>
+      <div class="eyebrow">At a Glance</div>
+      <div class="facts">
+        <div class="fact good">
+          <div class="lbl">🎟️ Admission</div>
+          <div class="val">Pre-booked ✓<small>Adult 170 SEK (~€16) · senior/student 150 · under-19 free</small></div>
+        </div>
+        <div class="fact good">
+          <div class="lbl">👦 Free Age</div>
+          <div class="val">Under-19 free<small>Broader than most Stockholm museums — your son is free here</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🕦 Hours (Jun 30)</div>
+          <div class="val">Tue 11:00–17:00<small>Tue–Sun 11–17, Thu to 20:00, Mon closed</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">⏱️ Your Slot</div>
+          <div class="val">12:20–14:15<small>~1h 55m, then Café Ektorpet fika next door</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🚶 From Skansen</div>
+          <div class="val">15-min coastal walk<small>South on Prins Eugens Väg · or Tram 7 / Bus 67</small></div>
+        </div>
+        <div class="fact">
+          <div class="lbl">🖼️ On Now</div>
+          <div class="val">3 shows to 13 Sep<small>In Bloom · Prince Plants · Works from the Collections</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map/visit CTA -->
+    <section>
+      <div class="audio-cta">
+        <div class="emoji">🌿</div>
+        <div class="txt">
+          <h3>Gallery, house and a free-to-walk garden</h3>
+          <p>No dedicated audio guide — pick up the floor map and exhibition guides at the entrance. The 70,000 m² garden, with Rodin's <em>Thinker</em> on the terrace, is the equal of the interior in good June weather.</p>
+        </div>
+        <a class="audio-btn" href="https://waldemarsudde.se/en/current-exhibitions/" target="_blank" rel="noopener">What's on →</a>
+        <a class="audio-btn secondary" href="https://waldemarsudde.se/en/about-waldemarsudde/park-and-garden/" target="_blank" rel="noopener">The garden →</a>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="panel">
+      <div class="eyebrow">The Short Answer</div>
+      <h2>One of Stockholm's most rewarding art experiences.</h2>
+      <p>Prince Eugen, fourth son of King Oscar II, studied painting in Paris in the 1880s and became a respected landscape painter of the specifically Nordic light — grey-blue water, long summer evenings, melancholic forest. He used his royal wealth to back artists before they were famous, assembling one of the finest private collections of late-19th/early-20th-century Nordic and French art anywhere. Part gallery, part lived-in house, part sculpture park on the water — and a direct sequel to yesterday's City Hall, where his mural <em>Stockholm's Shores</em> shows the same view he painted from this terrace dozens of times.</p>
+    </section>
+
+    <!-- Where to focus -->
+    <section class="panel">
+      <div class="eyebrow">Where to Focus</div>
+      <h2>~1h 55m (12:20–14:15) — spend it like this</h2>
+      <ol class="focus-list">
+        <li><strong>The French &amp; Swedish "Opponents" in the gallery</strong> <span class="mins">~30 min · the heart</span><br>Cézanne, Pissarro, Degas, then Bergh, Nordström, Zorn, Josephson — the core of what makes this collection world-class.</li>
+        <li><strong>Prince Eugen's own landscapes</strong> <span class="mins">~20 min · the link to Day 4</span><br>His Stockholm-across-the-water paintings and Nordic forests. Hold the City Hall mural in mind — same hand, same view.</li>
+        <li><strong>The garden &amp; terrace</strong> <span class="mins">~30 min · don't skip in good weather</span><br>Rodin's <em>The Thinker</em> above the straits, Bourdelle's <em>Heracles</em>, the Nike copy, the ancient Prince's Oak. As rewarding as the interior.</li>
+        <li><strong>The mansion / private apartments</strong> <span class="mins">~20 min · the contrast</span><br>His study, books and effects — domestic scale after the gallery, and the rooms feel lived-in, not reconstructed.</li>
+        <li><strong>The current shows</strong> <span class="mins">if time</span><br>In Bloom – Art & Botany and Prince Plants pair nicely with the garden right outside.</li>
+      </ol>
+      <div class="skip-note"><strong>If you're short on time:</strong> the garden and Prince Eugen's own paintings are the irreplaceable parts — they exist only here. Trim the temporary shows before the permanent collection. <strong>In poor weather,</strong> flip it: more gallery, less garden.</div>
+      <div class="value-note"><strong>For the kid:</strong> the garden wins — Rodin's <em>Thinker</em> and Bourdelle's giant archer above the water, plus the open lawns and the path to the water's edge after a morning indoors at Skansen.</div>
+    </section>
+
+    <!-- The collection -->
+    <section>
+      <div class="eyebrow">The Collection — and What to Look For</div>
+      <h2>What hangs on these walls</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🎨</span> Prince Eugen's own paintings</h3>
+          <p>The museum's heart. <span class="look">→ Look for the recurring Stockholm skyline seen across the water from Djurgården</span>, in his grey-blue-green palette — the private twin of the public City Hall mural. His spruce-and-birch forest paintings are equally strong.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🇸🇪</span> Swedish "Opponents" &amp; National Romantics</h3>
+          <p>The same generation you met at Nationalmuseum, collected by a peer. <span class="look">→ Seek out Richard Bergh (his closest friend, most deeply represented), Karl Nordström (the most-represented artist, ~50 works), Anders Zorn, and the turbulent Ernst Josephson.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🇫🇷</span> French art</h3>
+          <p>From his Paris years and lifelong ties. <span class="look">→ Cézanne (among the most valuable works here), Pissarro, Corot, Degas, plus smaller Matisse and Gauguin pieces</span> and Bastien-Lepage, who shaped the whole Swedish generation.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🖌️</span> Munch &amp; the avant-garde</h3>
+          <p>Edvard Munch as a fellow Nordic symbolist — strong works on paper rather than the famous Oslo oils — alongside Picasso and Derain representing the early-20th-century Paris avant-garde.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The garden -->
+    <section>
+      <div class="eyebrow">The Garden — Sculpture Above the Water</div>
+      <h2>70,000 m² of grounds</h2>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🗿</span> Rodin — <em>The Thinker</em></h3>
+          <p>One of Prince Eugen's early purchases, set on the main terrace flanking the house. <span class="look">→ Stand so the figure reads against the Stockholm straits behind — the single best image of the visit.</span></p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🏹</span> Bourdelle — <em>Heracles the Archer</em></h3>
+          <p>North of the house, drawing the bow against the Stymphalian birds — by Rodin's most important student. Powerful and dynamic up close.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🪽</span> Nike of Samothrace (copy)</h3>
+          <p>Built into the stair design when the house went up in 1905 — a bronze echo of the Louvre original. Plus Swedish sculptors Carl Milles and Carl Eldh throughout the grounds.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">🌳</span> The Prince's Oak &amp; Ekotemplet</h3>
+          <p>An ancient oak among Djurgården's oldest trees, and a small garden pavilion (Ekotemplet) — a quiet spot with views. Walk to the water's edge if time allows.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Route -->
+    <section class="panel">
+      <div class="eyebrow">Suggested Route</div>
+      <h2>Fitted to the 12:20–14:15 slot</h2>
+      <div class="route">
+        <div class="stop"><div class="time">12:20 — Enter the Gallery Building</div><div class="what">Grab the floor map; check what's hung today.</div></div>
+        <div class="stop"><div class="time">12:25 — French + Swedish Opponents (~30 min)</div><div class="what">Cézanne, Pissarro, Degas; then Bergh, Nordström, Zorn, Josephson. The heart of the collection.</div></div>
+        <div class="stop"><div class="time">12:55 — Prince Eugen's own paintings (~20 min)</div><div class="what">The Stockholm-across-the-water landscapes. Hold the City Hall mural in mind.</div></div>
+        <div class="stop"><div class="time">13:15 — The Mansion / private apartments (~20 min)</div><div class="what">Domestic scale after the gallery — a useful contrast.</div></div>
+        <div class="stop"><div class="time">13:35 — Garden &amp; terrace (~30 min)</div><div class="what">Rodin's <em>Thinker</em> above the water, the Prince's Oak, the water's edge.</div></div>
+        <div class="stop"><div class="time">14:05 — To Café Ektorpet (~5 min)</div><div class="what">Just outside Waldemarsudde, for the 14:15–14:55 fika.</div></div>
+      </div>
+    </section>
+
+    <!-- Practical -->
+    <section class="panel">
+      <div class="eyebrow">Practical Notes</div>
+      <div class="highlights">
+        <div class="hl feature">
+          <h3><span class="hi">🔗</span> The Day 4 connection</h3>
+          <p>After the Prince's Gallery mural at City Hall, recognising the same hand and the same subject — Stockholm's waterfront — here is one of the trip's most satisfying moments. Same painter, public vs private.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">📸</span> Photography</h3>
+          <p>Permitted in the gallery and garden. The terrace, with Rodin and the water behind, is the best single shot.</p>
+        </div>
+        <div class="hl">
+          <h3><span class="hi">☕</span> After</h3>
+          <p>5-min walk to Café Ektorpet (14:15–14:55 fika), then ~20-min walk north along Djurgårdsstrand to Restaurant Eld for the 15:15 booking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="panel">
+      <div class="eyebrow">Sources</div>
+      <p class="sources">Verified June 2026 against the official site <strong>waldemarsudde.se</strong>: <a href="https://waldemarsudde.se/en/welcome/priser-och-oppettider/" target="_blank" rel="noopener">Admission &amp; opening hours</a> (Tue–Sun 11:00–17:00, Thu to 20:00, Mon closed; adult 170 SEK (~€16) / senior-student 150 / children up to 19 free), <a href="https://waldemarsudde.se/en/current-exhibitions/" target="_blank" rel="noopener">Current exhibitions</a> (<em>In Bloom – Art &amp; Botany</em>, <em>Prince Plants</em>, <em>Works from the Waldemarsudde Collections</em> — all to 13 Sep 2026), and <a href="https://waldemarsudde.se/en/about-waldemarsudde/park-and-garden/" target="_blank" rel="noopener">Park &amp; garden</a> (Rodin's <em>The Thinker</em> on the terrace, Bourdelle's <em>Heracles</em>, the Nike copy in the 1905 stair). Collection detail from waldemarsudde.se, corroborated by Wikipedia (Waldemarsudde) and VisitStockholm. <strong>The hang rotates — exact works on display vary; the garden sculptures are permanent.</strong></p>
+    </section>
+
+    <div class="footer-back">
+      <a href="index.html">🇸🇪 Back to Stockholm 2026 portal</a>
+    </div>
+    <p class="credit">Stockholm 2026 · Family Travel Portal · Day 5 Museum Guide</p>
+
+  </div>
+</body>
+</html>

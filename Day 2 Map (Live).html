@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 2 — Stockholm Route</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#eef3f8;color:#1a2a3a;padding:14px;min-height:100vh}
+h1{text-align:center;font-size:19px;font-weight:800;color:#1F3864;letter-spacing:.5px;margin-bottom:3px}
+.subtitle{text-align:center;font-size:12px;color:#666;margin-bottom:14px}
+.layout{display:flex;gap:12px;max-width:1100px;margin:0 auto;height: 85vh;}
+
+/* Map Panel */
+.map-panel{flex:1.3;background:white;border-radius:14px;padding:8px;border:1.5px solid #aac8e4;display:flex;flex-direction:column;box-shadow: 0 4px 12px rgba(0,0,0,0.05)}
+.map-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px;text-transform: uppercase;}
+#map { flex: 1; border-radius: 10px; z-index: 1; }
+
+.legend{display:flex;gap:9px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#444}
+.leg-dot{width:10px;height:10px;border-radius:50%;border:2px solid white;flex-shrink:0;box-shadow: 0 1px 3px rgba(0,0,0,0.2)}
+
+/* Timeline */
+.tl-panel{flex:0.7;display:flex;flex-direction:column;min-width: 320px;}
+.tl-lbl{font-size:10px;font-weight:700;color:#1F3864;letter-spacing:.9px;text-align:center;margin-bottom:6px}
+.tl-scroll{display:flex;flex-direction:column;gap:6px;overflow-y:auto;padding-right:5px}
+.tl-item{display:flex;gap:9px;background:white;border-radius:8px;padding:10px;border-left:4px solid #ccc;cursor:pointer;transition:all .2s;box-shadow: 0 2px 4px rgba(0,0,0,0.03)}
+.tl-item:hover{transform:translateX(4px);box-shadow:2px 4px 12px rgba(0,0,0,.08)}
+.tl-item.active{box-shadow:0 0 0 2px #E07B39;border-left-color:#E07B39;background: #fff9f5}
+.tl-em{font-size:16px;min-width:24px;text-align:center}
+.tl-body{flex:1}
+.tl-name{font-size:12px;font-weight:700;color:#1a2a3a}
+.tl-time{font-size:10px;color:#888;margin-top:1px;font-weight:600}
+.tl-desc{font-size:10px;color:#555;margin-top:4px;line-height:1.4}
+
+/* Category Colors */
+.cat-hotel{border-color:#C9A84C}
+.cat-food{border-color:#E07B39}
+.cat-sight{border-color:#5BAD6F}
+.cat-art{border-color:#3498DB}
+.cat-shop{border-color:#E91E8C}
+.cat-transit{border-color:#2E75B6}
+.cat-view{border-color:#E74C3C}
+
+/* Custom Marker Pulse */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.active-marker { animation: pulse 1s infinite; }
+</style>
+</head>
+<body>
+
+<h1>🇸🇪 Day 2 — Royal History, Art &amp; Södermalm Views</h1>
+<div class="subtitle">Saturday, June 27 &nbsp;·&nbsp; Palace → Armoury → Nationalmuseum → Fika → Skinnarviksberget → Maestro</div>
+
+<div class="layout">
+  <div class="map-panel">
+    <div class="map-lbl">📍 Interactive Route — Central Stockholm</div>
+    <div id="map"></div>
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#C9A84C"></div>Hotel</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#3498DB"></div>Museum</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E74C3C"></div>Viewpoint</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E07B39"></div>Food/Fika</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#E91E8C"></div>Shopping</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#5BAD6F"></div>Sight</div>
+    </div>
+  </div>
+
+  <div class="tl-panel">
+    <div class="tl-lbl">🕐 TIMELINE — Click to pan map</div>
+    <div class="tl-scroll" id="tl"></div>
+  </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+const stops = [
+  {id:0,  e:"🚇", n:"Odenplan — Depart (Transit)",    t:"10:00",         c:"transit", lat:59.3424, lng:18.0468, d:"Metro Green Line from Odenplan to Gamla Stan, or to T-Centralen + Bus 2/57 to Slottsbacken. Aim to arrive ~10:20 for the 10:30 guided tour."},
+  {id:1,  e:"🏰", n:"Royal Palace ✅ BOOKED",        t:"10:30 – 12:00", c:"sight",   lat:59.3269, lng:18.0703, d:"Booked guided tour 10:30–11:15 (State Apartments + 'Gold!' exhibition). Then 11:15–12:00 self-guided: Gustav III's Museum of Antiquities (Sleeping Endymion) + the Treasury (crown regalia). Skip Tre Kronor to keep to 90 min."},
+  {id:2,  e:"🛡️", n:"Royal Armoury ✅ BOOKED",       t:"12:15 – 13:05", c:"art",     lat:59.3271, lng:18.0716, d:"Livrustkammaren (Slottsbacken 3, palace south cellar). Ticket valid 11:00–17:00. Optional: a few minutes of the 12:15 guard first. ~45 min — Erik XIV's parade armour & shield (1562) and the horse Streiff. 180 SEK (~€17)/adult, under-18 free. Then ~15-min waterfront walk to the Nationalmuseum."},
+  {id:3,  e:"🎨", n:"Lunch + Nationalmuseum",        t:"13:30 – 16:15", c:"art",     lat:59.3285, lng:18.0781, d:"Lunch at ground-floor restaurant (13:30-14:30), then Old Masters (14:30-16:15). Under-20 free; closes 17:00 on Saturdays."},
+  {id:4,  e:"☕", n:"Fika at Café Blom",             t:"16:30 – 17:00", c:"food",    lat:59.3265, lng:18.0842, d:"Fika FIRST — Café Blom closes 17:00 on Saturdays (kitchen ~16:30, order on arrival). Relaxed garden setting at Moderna Museet, Skeppsholmen."},
+  {id:5,  e:"🎨", n:"Moderna Museet (Optional)",    t:"17:00 – 18:00", c:"art",     lat:59.3262, lng:18.0837, d:"After fika: Picasso, Dalí, Matisse, Warhol. ⚠️ Collection no longer free — general admission ~170 SEK (~€16)/adult (160 online) covers collection + temporary shows, under-18 free. Outdoor sculpture park always free. Closes 18:00 — then walk 5 min to the pier for Ferry 82 (last departure ~18:36)."},
+  {id:6,  e:"⛴️", n:"Ferry 82 to Slussen",            t:"18:15 – 18:30", c:"transit", lat:59.3258, lng:18.0792, d:"Walk 350m to the pier. Press the call button to signal the boat. Ferry 82 to Slussen (5 min, covered by SL Card)."},
+  {id:7,  e:"🚇", n:"Metro: Slussen → Zinkensdamm",  t:"18:30 – 18:40", c:"transit", lat:59.3193, lng:18.0722, d:"Red Line metro from Slussen to Zinkensdamm (2 stops, ~4 mins), then walk to the base of Skinnarviksberget."},
+  {id:8,  e:"🌄", n:"Skinnarviksberget ★",           t:"18:40 – 19:05", c:"view",    lat:59.3204, lng:18.0514, d:"Highest natural point in central Stockholm. Sweeping views."},
+  {id:9,  e:"🏞️",n:"Monteliusvägen",                 t:"19:05 – 19:25", c:"view",    lat:59.3207, lng:18.0605, d:"500m cliffside promenade overlooking City Hall."},
+  {id:10, e:"🎬", n:"Mariahissen & Millennium Tour", t:"19:25 – 19:35", c:"sight",   lat:59.3209, lng:18.0643, d:"Historic harbour elevator and Millenium filming locations."},
+  {id:11, e:"🍽️",n:"Dinner at Maestro ✅",          t:"20:30 – 21:45", c:"food",    lat:59.3074, lng:18.0692, d:"Greek/Mediterranean dinner (with Italian dishes) at Ringvägen 82, Södermalm. ✅ Booked — 20:30 seating, 3 guests (ref #66883212)."},
+  {id:12, e:"🚇", n:"Return to Odenplan",            t:"~22:00",        c:"transit", lat:59.3079, lng:18.0761, d:"Metro from Skanstull → Odenplan (~15 min)."}
+];
+
+const colors = { hotel:'#C9A84C', food:'#E07B39', sight:'#5BAD6F', art:'#3498DB', shop:'#E91E8C', transit:'#2E75B6', view:'#E74C3C' };
+
+// Initialize Map
+const map = L.map('map').setView([59.329, 18.065], 14);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+const markerLayer = L.layerGroup().addTo(map);
+const stopMarkers = {};
+
+// Create Timeline and Markers
+const tl = document.getElementById('tl');
+stops.forEach(s => {
+  // Timeline Item
+  const d = document.createElement('div');
+  d.className = `tl-item cat-${s.c}`;
+  d.dataset.id = s.id;
+  d.innerHTML = `
+    <div class="tl-em">${s.e}</div>
+    <div class="tl-body">
+      <div class="tl-name">${s.n}</div>
+      <div class="tl-time">${s.t}</div>
+      <div class="tl-desc">${s.d}</div>
+    </div>`;
+  tl.appendChild(d);
+
+  // Map Marker
+  const marker = L.circleMarker([s.lat, s.lng], {
+    radius: 8,
+    fillColor: colors[s.c],
+    color: '#fff',
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 0.9
+  }).addTo(markerLayer);
+
+  marker.bindPopup(`<b>${s.e} ${s.n}</b><br>${s.t}`);
+  stopMarkers[s.id] = marker;
+
+  // Interactions
+  d.addEventListener('click', () => setActiveStop(s.id));
+  marker.on('click', () => {
+    setActiveStop(s.id);
+    document.querySelector(`.tl-item[data-id="${s.id}"]`).scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+});
+
+// Draw simple path connecting stops
+const pathCoords = stops.map(s => [s.lat, s.lng]);
+L.polyline(pathCoords, {color: '#E07B39', weight: 3, opacity: 0.5, dashArray: '5, 10'}).addTo(map);
+
+function setActiveStop(id) {
+  // Update Timeline UI
+  document.querySelectorAll('.tl-item').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.tl-item[data-id="${id}"]`).classList.add('active');
+
+  // Map Pan
+  const s = stops.find(x => x.id === id);
+  map.flyTo([s.lat, s.lng], 15, { duration: 1.5 });
+  
+  // Flash Marker
+  const m = stopMarkers[id];
+  m.openPopup();
+}
+</script>
+</body>
+</html>
